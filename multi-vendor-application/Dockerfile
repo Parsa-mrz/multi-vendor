@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y \
   libpq-dev git unzip curl libicu-dev zlib1g-dev libzip-dev netcat-openbsd \
   && docker-php-ext-install pdo_pgsql intl zip \
   && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-  && apt-get install -y nodejs
+  && apt-get install -y nodejs \
+  && pecl install redis \
+  && docker-php-ext-enable redis
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
