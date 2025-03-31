@@ -1,0 +1,81 @@
+version: '3.8'
+
+volumes:
+  pgdata_production: {}
+  redisdata_production: {}
+  vendor_production: {}
+  pgadmin_data: {}
+  laravel_storage: {}
+  laravel_public: {}
+
+services:
+  laravel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: multi_vendor
+    container_name: multi_vendor
+    env_file:
+      - .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+    volumes:
+      - vendor_production:/var/www/html/vendor
+      - laravel_storage:/var/www/html/storage
+      - laravel_public:/var/www/html/public
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - postgres
+    expose:
+      - "9000"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - pgdata_production:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7
+    container_name: redis
+    env_file:
+      - .env
+    volumes:
+      - redisdata_production:/data
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - laravel_public:/var/www/html/public
+      - laravel_storage:/var/www/html/storage
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - laravel
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
