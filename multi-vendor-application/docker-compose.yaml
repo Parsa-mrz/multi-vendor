@@ -43,11 +43,13 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
       POSTGRES_DB: ${DB_DATABASE}
     volumes:
       - pgdata_production:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"  # Expose PostgreSQL to the host for development
     networks:
       - app-network
 
@@ -58,6 +60,8 @@ services:
       - .env
     volumes:
       - redisdata_production:/data
+    ports:
+      - "6379:6379"  # Expose Redis to the host for development
     networks:
       - app-network
 
