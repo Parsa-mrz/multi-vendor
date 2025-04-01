@@ -3,12 +3,9 @@
 namespace App\Livewire;
 
 use Livewire\Attributes\Title;
-use Livewire\Component;
 
-class HomePage extends Component
+class HomePage extends BaseComponent
 {
-    protected $layout = 'components.layouts.app';
-
     #[Title('Home')]
     public function render()
     {
