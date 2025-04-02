@@ -11,6 +11,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class UserLoggedInNotification
+ *
+ * Mailable class for user login notification.
+ * Sends a notification email to the user who logged in.
+ *
+ * @package App\Mail
+ */
 class UserLoggedInNotification extends Mailable implements ShouldQueue
 {
     use Queueable;

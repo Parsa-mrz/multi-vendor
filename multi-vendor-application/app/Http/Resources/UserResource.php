@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'role' => $this->role,
             'is_active' => $this->is_active,
-            'last_login' => $this->last_login?->toDateTimeString(),
+            'last_login' => $this->last_login,
             'store_name' => $this->when(
                 $this->role === 'vendor',
                 $this->vendor?->store_name

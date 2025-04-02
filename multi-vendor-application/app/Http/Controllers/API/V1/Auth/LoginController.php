@@ -2,64 +2,61 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
-use App\Events\UserLoggedIn;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserLoginRequest;
-use App\Http\Resources\UserResource;
-use App\Repositories\UserRepository;
-use Symfony\Component\HttpFoundation\Response;
+use App\Service\AuthService;
 
 /**
  * Class LoginController
  *
- * Handles user authentication.
+ * Handles user authentication via login.
+ * This controller processes login requests, delegates authentication to
+ * the AuthService, and returns appropriate responses.
+ *
+ * @package App\Http\Controllers\API\V1\Auth
  */
 class LoginController extends Controller
 {
     /**
-     * @var UserRepository
+     * @var AuthService
      */
-    protected $userRepository;
+    protected $authService;
+
 
     /**
      * LoginController constructor.
      *
-     * @param UserRepository $userRepository
+     * Initializes the controller with the AuthService, which is used
+     * to handle the authentication logic.
+     *
+     * @param AuthService $authService The AuthService instance used for authentication.
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(AuthService $authService)
     {
-        $this->userRepository = $userRepository;
+        $this->authService = $authService;
     }
 
+
     /**
-     * Authenticate a user and generate an access token.
+     * Handle the login request.
      *
-     * @param UserLoginRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * This method validates the provided credentials (email and password),
+     * and if they are correct, it generates an authentication token.
+     * It returns a JSON response containing the result of the authentication.
+     *
+     * @param UserLoginRequest $request The request containing the user's email and password.
+     * @return \Illuminate\Http\JsonResponse A JSON response with success or error message,
+     *                                      the authentication token if successful, and the appropriate HTTP status.
      */
     public function login(UserLoginRequest $request)
     {
-        $user = $this->userRepository->findByEmail($request->email);
+        $result = $this->authService->authenticateUser($request->email, $request->password);
 
-        if (!$user || !\password_verify($request->password, $user->password)) {
-            return ResponseHelper::error(
-                'Invalid credentials',
-                null,
-                Response::HTTP_UNAUTHORIZED
-            );
+        if (!$result['success']) {
+            return ResponseHelper::error($result['message'], null, $result['status']);
         }
 
-        $this->userRepository->updateLoginStatus($user);
-
-        event(new UserLoggedIn($user));
-
-        $token = $user->createToken('authToken')->plainTextToken;
-
-        return ResponseHelper::success(
-            'Login successful',
-            ['access_token' => $token, 'token_type' => 'Bearer', 'user' => new UserResource($user->load('profile'))],
-            Response::HTTP_OK
-        );
+        return ResponseHelper::success($result['message'], $result['data'], $result['status']);
     }
 }

@@ -5,62 +5,59 @@ namespace App\Http\Controllers\API\V1\Auth;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserRegisterRequest;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use App\Repositories\ProfileRepository;
-use App\Repositories\UserRepository;
-use Symfony\Component\HttpFoundation\Response;
+use App\Service\AuthService;
 
 /**
  * Class RegisterController
  *
  * Handles user registration.
+ * This controller processes registration requests, delegates user creation
+ * and profile setup to the AuthService, and returns appropriate responses.
+ *
+ * @package App\Http\Controllers\API\V1\Auth
  */
 class RegisterController extends Controller
 {
     /**
-    * @var UserRepository
-    */
-    protected $userRepository;
-
-   /**
-    * @var ProfileRepository
-    */
-    protected $profileRepository;
+     * @var AuthService
+     */
+    protected $authService;
 
     /**
      * RegisterController constructor.
      *
-     * @param UserRepository $userRepository
-     * @param ProfileRepository $profileRepository
+     * Initializes the controller with the AuthService, which is used
+     * to handle user registration logic.
+     *
+     * @param AuthService $authService The AuthService instance used for user registration.
      */
-    public function __construct(UserRepository $userRepository, ProfileRepository $profileRepository)
+    public function __construct(AuthService $authService)
     {
-        $this->userRepository = $userRepository;
-        $this->profileRepository = $profileRepository;
+        $this->authService = $authService;
     }
-
 
     /**
      * Register a new user.
      *
-     * @param UserRegisterRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * This method validates the input data, creates a new user and a profile,
+     * and returns a JSON response containing the result of the registration process.
+     *
+     * @param UserRegisterRequest $request The request containing the data to register the user.
+     * @return \Illuminate\Http\JsonResponse A JSON response with success or error message,
+     *                                      and the user data if successful.
      */
     public function register(UserRegisterRequest $request)
     {
-        $user = $this->userRepository->create($request->validated());
+        $result = $this->authService->registerUser($request->validated());
 
-        $this->profileRepository->create([
-            'user_id' => $user->id,
-            'profileable_id' => $user->id,
-            'profileable_type' => User::class,
-        ]);
+        if (!$result['success']) {
+            return ResponseHelper::error($result['message'], null, $result['status']);
+        }
 
         return ResponseHelper::success(
-            'User registered successfully',
-            [new UserResource($user->load('profile'))],
-            Response::HTTP_CREATED
+            $result['message'],
+            [$result['data']['user']],
+            $result['status']
         );
     }
 }

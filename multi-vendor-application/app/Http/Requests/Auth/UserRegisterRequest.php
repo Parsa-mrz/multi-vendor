@@ -3,12 +3,24 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
+/**
+ * Class UserRegisterRequest
+ *
+ * Handles the validation of user registration data.
+ * It ensures that the provided email is valid and unique, and that the password is required.
+ *
+ * @package App\Http\Requests\Auth
+ */
 class UserRegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
+     * This method determines whether the user has permission to make this registration request.
+     * By default, this returns true, allowing any user to register.
+     *
+     * @return bool True if the user is authorized to make the request, otherwise false.
      */
     public function authorize(): bool
     {
@@ -18,7 +30,11 @@ class UserRegisterRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * This method defines the validation rules that will be applied to the incoming registration data.
+     * The `email` field is required, must be a valid email format, and must be unique in the `users` table.
+     * The `password` field is required.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string> The validation rules.
      */
     public function rules(): array
     {
@@ -31,7 +47,10 @@ class UserRegisterRequest extends FormRequest
     /**
      * Get custom messages for validation errors.
      *
-     * @return array
+     * This method defines custom error messages for the validation rules.
+     * If a validation rule fails, the corresponding custom message will be returned.
+     *
+     * @return array Custom error messages for the validation rules.
      */
     public function messages(): array
     {

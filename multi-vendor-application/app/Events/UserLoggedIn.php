@@ -7,6 +7,14 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class UserLoggedIn
+ *
+ * Event triggered when a user logs in.
+ * Contains user details, IP address, and login time.
+ *
+ * @package App\Events
+ */
 class UserLoggedIn
 {
     use Dispatchable;
@@ -20,10 +28,24 @@ class UserLoggedIn
      */
     public $user;
 
+    /**
+     * The IP address of the user.
+     *
+     * @var string|null
+     */
     public $ipAddress;
+
+    /**
+     * The login timestamp.
+     *
+     * @var string
+     */
     public $loginTime;
+
     /**
      * Create a new event instance.
+     *
+     * @param User $user The authenticated user.
      */
     public function __construct(User $user)
     {

@@ -20,6 +20,7 @@ services:
       DB_PORT: ${DB_PORT}
     volumes:
       - .:/var/www/html  # Bind mount for real-time updates in development
+      - ./storage/logs:/var/www/html/storage/logs # Bind mount for real-time updates in development
       - vendor_production:/var/www/html/vendor
       - laravel_storage:/var/www/html/storage
       - laravel_public:/var/www/html/public

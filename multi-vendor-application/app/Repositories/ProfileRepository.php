@@ -6,26 +6,39 @@ use App\Interfaces\ProfileRepositoryInterface;
 use App\Models\Profile;
 
 /**
- * Repository class for managing Profile model interactions.
+ * Class ProfileRepository
+ *
+ * Repository for managing interactions with the Profile model.
+ * Implements the ProfileRepositoryInterface to ensure required methods for profile management.
+ *
+ * @package App\Repositories
  */
 class ProfileRepository implements ProfileRepositoryInterface
 {
     /**
      * Create a new profile record.
      *
-     * @param array $data The data to create the profile.
-     * @return Profile The created profile instance.
+     * This method creates a new profile in the database using the provided data.
+     *
+     * @param array $data The data to create the profile. Expected to include attributes like user_id, bio, etc.
+     *
+     * @return Profile The created Profile instance.
      */
     public function create(array $data): Profile
     {
         return Profile::create($data);
     }
 
+
     /**
      * Find a profile by user ID.
      *
-     * @param int $userId The ID of the user.
-     * @return Profile|null The found profile instance or null if not found.
+     * This method retrieves a profile associated with the given user ID.
+     * If no profile is found for that user, it returns null.
+     *
+     * @param int $userId The user ID to search for.
+     *
+     * @return Profile|null The Profile instance if found, otherwise null.
      */
     public function findByUserId(int $userId): ?Profile
     {
