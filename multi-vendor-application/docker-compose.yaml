@@ -1,5 +1,3 @@
-version: '3.8'
-
 volumes:
   pgdata_production: {}
   redisdata_production: {}
@@ -21,6 +19,7 @@ services:
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
     volumes:
+      - .:/var/www/html  # Bind mount for real-time updates in development
       - vendor_production:/var/www/html/vendor
       - laravel_storage:/var/www/html/storage
       - laravel_public:/var/www/html/public

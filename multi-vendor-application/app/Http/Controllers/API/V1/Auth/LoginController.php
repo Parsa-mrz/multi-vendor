@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
+use App\Events\UserLoggedIn;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserLoginRequest;
@@ -50,6 +51,8 @@ class LoginController extends Controller
         }
 
         $this->userRepository->updateLoginStatus($user);
+
+        event(new UserLoggedIn($user));
 
         $token = $user->createToken('authToken')->plainTextToken;
 

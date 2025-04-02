@@ -16,5 +16,8 @@ php artisan db:seed --force
 # Storage setup
 php artisan storage:link
 
+# Start the queue worker in the background
+php artisan queue:work --daemon &
+
 # Start PHP-FPM
 exec "$@"
