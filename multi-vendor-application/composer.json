@@ -7,13 +7,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "dedoc/scramble": "^0.12.16",
         "fakerphp/faker": "^1.24",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
-        "predis/predis": "^2.0",
-        "phpunit/phpunit": "^11.5.3"
+        "phpunit/phpunit": "^11.5.3",
+        "predis/predis": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
@@ -79,6 +80,9 @@
         ],
         "pint-test": [
             "./vendor/bin/pint --test"
+        ],
+        "generate-docs": [
+            "phpdocumentor -d app -t ../Document"
         ]
     },
     "extra": {

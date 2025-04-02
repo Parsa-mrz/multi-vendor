@@ -131,6 +131,9 @@
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/dedoc/scramble" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/laravel-package-tools" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

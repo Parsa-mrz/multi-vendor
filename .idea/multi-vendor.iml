@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/dedoc/scramble" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/dflydev/dot-access-data" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/doctrine/lexer" />
@@ -51,6 +52,7 @@
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/phar-io/version" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/phpstan/phpdoc-parser" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/phpunit/php-code-coverage" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/phpunit/php-file-iterator" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/phpunit/php-invoker" />
@@ -85,6 +87,7 @@
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/sebastian/recursion-context" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/sebastian/type" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/spatie/laravel-package-tools" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/staabm/side-effects-detector" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/symfony/clock" />
       <excludeFolder url="file://$MODULE_DIR$/multi-vendor-application/vendor/symfony/console" />
