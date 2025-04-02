@@ -2,43 +2,64 @@
 
 namespace Database\Factories;
 
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
+ * Factory class for generating User model instances with associated profiles
+ *
+ * This factory creates User instances and automatically generates associated
+ * Profile records through the configure method.
+ *
+ * @package Database\Factories
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
+/**
+     * The current password being used by the factory
+     *
+     * @var string|null
+     * @static
      */
     protected static ?string $password;
 
-    /**
-     * Define the model's default state.
+/**
+     * Define the model's default state
      *
-     * @return array<string, mixed>
+     * Generates default attributes for a User instance including email,
+     * password, status, login time, and role.
+     *
+     * @return array<string, mixed> Array of default attributes for User model
      */
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'is_active' => fake()->boolean(),
+            'last_login' => fake()->dateTime(),
+            'role' => fake()->randomElement(['customer', 'admin', 'vendor']),
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Configure the factory with additional actions
+     *
+     * Sets up an after-creating hook to automatically generate a Profile
+     * for each User created by this factory.
+     *
+     * @return self Returns the factory instance for method chaining
      */
-    public function unverified(): static
+    public function configure()
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->afterCreating(function (User $user) {
+            Profile::factory()->create([
+                'user_id' => $user->id
+            ]);
+        });
     }
 }
