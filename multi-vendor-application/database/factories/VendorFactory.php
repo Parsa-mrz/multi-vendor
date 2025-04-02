@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -12,12 +11,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  * This factory creates Vendor instances with automatically associated
  * User records (with 'vendor' role) and their associated Profiles.
  *
- * @package Database\Factories
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Vendor>
  */
 class VendorFactory extends Factory
 {
-/**
+    /**
      * Define the model's default state
      *
      * Generates default attributes for a Vendor instance including
@@ -30,7 +28,6 @@ class VendorFactory extends Factory
         $user = User::factory()->create([
             'role' => 'vendor',
         ]);
-
 
         return [
             'user_id' => $user->id,

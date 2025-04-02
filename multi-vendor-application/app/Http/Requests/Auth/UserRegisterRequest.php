@@ -9,8 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
  *
  * Handles the validation of user registration data.
  * It ensures that the provided email is valid and unique, and that the password is required.
- *
- * @package App\Http\Requests\Auth
  */
 class UserRegisterRequest extends FormRequest
 {

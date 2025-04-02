@@ -12,8 +12,6 @@ use Tests\TestCase;
  * Tests the functionality of the RegisterController, specifically the user registration process.
  * This class contains feature tests to verify successful registration and validation error handling
  * for the API endpoint /api/v1/register.
- *
- * @package Tests\Feature
  */
 class RegisterControllerTest extends TestCase
 {

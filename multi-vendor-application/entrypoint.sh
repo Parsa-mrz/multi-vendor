@@ -7,6 +7,7 @@ while ! nc -z "$DB_HOST" "$DB_PORT"; do
 done
 echo "PostgreSQL is ready!"
 
+composer update
 composer dump-autoload --optimize
 
 # Run migrations and seed database

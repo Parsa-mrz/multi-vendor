@@ -12,8 +12,6 @@ use Illuminate\Queue\SerializesModels;
  *
  * Event triggered when a user logs in.
  * Contains user details, IP address, and login time.
- *
- * @package App\Events
  */
 class UserLoggedIn
 {
@@ -45,7 +43,7 @@ class UserLoggedIn
     /**
      * Create a new event instance.
      *
-     * @param User $user The authenticated user.
+     * @param  User  $user  The authenticated user.
      */
     public function __construct(User $user)
     {

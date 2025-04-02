@@ -7,10 +7,10 @@ use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\VendorRegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Service\VendorService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class VendorRegisterController extends Controller
@@ -22,8 +22,6 @@ class VendorRegisterController extends Controller
 
     /**
      * RegisterController constructor.
-     *
-     * @param VendorService $vendorService
      */
     public function __construct(VendorService $vendorService)
     {
@@ -32,9 +30,6 @@ class VendorRegisterController extends Controller
 
     /**
      * Handle the registration of a new vendor.
-     *
-     * @param VendorRegisterRequest $request
-     * @return JsonResponse
      */
     public function register(VendorRegisterRequest $request): JsonResponse
     {

@@ -11,8 +11,8 @@ class VendorAlreadyRegisteredException extends Exception
     /**
      * VendorAlreadyRegisteredException constructor.
      *
-     * @param string $message The exception message.
-     * @param int $code The exception code (default to 0).
+     * @param  string  $message  The exception message.
+     * @param  int  $code  The exception code (default to 0).
      */
     public function __construct($message = 'You are already registered as a vendor.', $code = 0)
     {
@@ -22,7 +22,7 @@ class VendorAlreadyRegisteredException extends Exception
     /**
      * Render the exception as a JSON response using ResponseHelper.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function render($request)

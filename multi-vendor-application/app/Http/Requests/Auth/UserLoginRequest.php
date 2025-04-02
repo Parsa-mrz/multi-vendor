@@ -10,8 +10,6 @@ use Illuminate\Foundation\Http\FormRequest;
  * Handles the validation of user login data.
  * It ensures that the provided email exists in the `users` table and is in a valid format.
  * The password is required and should be a string.
- *
- * @package App\Http\Requests\Auth
  */
 class UserLoginRequest extends FormRequest
 {
@@ -41,7 +39,7 @@ class UserLoginRequest extends FormRequest
     {
         return [
             'email' => 'required|email|exists:users,email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ];
     }
 }

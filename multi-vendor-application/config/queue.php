@@ -106,7 +106,7 @@ return [
     'failed' => [
         'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
         'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
-        'queue' => 'failed_jobs'
+        'queue' => 'failed_jobs',
     ],
 
 ];

@@ -11,8 +11,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * Transforms the Vendor model into an API-friendly array format.
  * It includes the `store_name`, `description`, and `profile` resource,
  * with conditional loading of the profile relationship.
- *
- * @package App\Http\Resources
  */
 class VendorResource extends JsonResource
 {
@@ -23,8 +21,7 @@ class VendorResource extends JsonResource
      * such as `store_name` and `description`. It conditionally loads the `ProfileResource`
      * if the `profile` relationship is loaded.
      *
-     * @param Request $request The incoming HTTP request.
-     *
+     * @param  Request  $request  The incoming HTTP request.
      * @return array<string, mixed> The transformed array representation of the vendor.
      */
     public function toArray(Request $request): array

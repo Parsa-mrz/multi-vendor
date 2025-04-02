@@ -8,7 +8,7 @@ use App\Models\Vendor;
 class VendorRepository implements VendorRepositoryInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function create(array $data): Vendor
     {
@@ -16,14 +16,15 @@ class VendorRepository implements VendorRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function findById(int $id): Vendor
     {
         return Vendor::findOrFail($id);
     }
+
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function findByUserId(int $userId): Vendor
     {

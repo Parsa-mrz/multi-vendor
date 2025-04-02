@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
@@ -15,16 +14,14 @@ use Illuminate\Notifications\Notifiable;
  * Represents a user in the system.
  * The User model supports authentication, API tokens via Sanctum, and notifications.
  * It also has relationships with the Vendor and Profile models.
- *
- * @package App\Models
  */
 class User extends Authenticatable
 {
+    use HasApiTokens;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use Notifiable;
-    use HasApiTokens;
-
 
     /**
      * The attributes that are mass assignable.
@@ -38,9 +35,8 @@ class User extends Authenticatable
         'password',
         'is_active',
         'last_login',
-        'role'
+        'role',
     ];
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -65,28 +61,22 @@ class User extends Authenticatable
     {
         return [
             'password' => 'hashed',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
         ];
     }
 
     /**
      * Check if the user has a specific role.
-     *
-     * @param  string  $role
-     * @return bool
      */
     public function hasRole(string $role): bool
     {
         return $this->role === $role;
     }
 
-
     /**
      * Get the vendor associated with the user.
      *
      * This method defines a one-to-one relationship between the User and Vendor models.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function vendor(): HasOne
     {

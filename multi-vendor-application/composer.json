@@ -70,6 +70,15 @@
         ],
         "exec-container": [
             "docker exec -it multi_vendor bash"
+        ],
+        "test": [
+            "php artisan test"
+        ],
+        "pint": [
+            "./vendor/bin/pint"
+        ],
+        "pint-test": [
+            "./vendor/bin/pint --test"
         ]
     },
     "extra": {

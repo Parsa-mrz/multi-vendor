@@ -13,8 +13,6 @@ use App\Service\AuthService;
  * Handles user authentication via login.
  * This controller processes login requests, delegates authentication to
  * the AuthService, and returns appropriate responses.
- *
- * @package App\Http\Controllers\API\V1\Auth
  */
 class LoginController extends Controller
 {
@@ -23,20 +21,18 @@ class LoginController extends Controller
      */
     protected $authService;
 
-
     /**
      * LoginController constructor.
      *
      * Initializes the controller with the AuthService, which is used
      * to handle the authentication logic.
      *
-     * @param AuthService $authService The AuthService instance used for authentication.
+     * @param  AuthService  $authService  The AuthService instance used for authentication.
      */
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
     }
-
 
     /**
      * Handle the login request.
@@ -45,15 +41,15 @@ class LoginController extends Controller
      * and if they are correct, it generates an authentication token.
      * It returns a JSON response containing the result of the authentication.
      *
-     * @param UserLoginRequest $request The request containing the user's email and password.
+     * @param  UserLoginRequest  $request  The request containing the user's email and password.
      * @return \Illuminate\Http\JsonResponse A JSON response with success or error message,
-     *                                      the authentication token if successful, and the appropriate HTTP status.
+     *                                       the authentication token if successful, and the appropriate HTTP status.
      */
     public function login(UserLoginRequest $request)
     {
         $result = $this->authService->authenticateUser($request->email, $request->password);
 
-        if (!$result['success']) {
+        if (! $result['success']) {
             return ResponseHelper::error($result['message'], null, $result['status']);
         }
 

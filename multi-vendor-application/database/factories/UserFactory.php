@@ -6,7 +6,6 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * Factory class for generating User model instances with associated profiles
@@ -14,20 +13,18 @@ use Illuminate\Support\Str;
  * This factory creates User instances and automatically generates associated
  * Profile records through the configure method.
  *
- * @package Database\Factories
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
-/**
+    /**
      * The current password being used by the factory
      *
-     * @var string|null
      * @static
      */
     protected static ?string $password;
 
-/**
+    /**
      * Define the model's default state
      *
      * Generates default attributes for a User instance including email,
@@ -58,7 +55,7 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) {
             Profile::factory()->create([
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ]);
         });
     }

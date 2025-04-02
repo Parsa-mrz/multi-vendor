@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * Class Profile
  *
  * Represents the profile associated with a user in the system.
  * The Profile model supports polymorphic relationships through the `profileable` method.
- *
- * @package App\Models
  */
 class Profile extends Model
 {
@@ -31,8 +28,6 @@ class Profile extends Model
      * Get the user that owns the profile.
      *
      * This method defines a one-to-many inverse relationship between the Profile and User models.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {

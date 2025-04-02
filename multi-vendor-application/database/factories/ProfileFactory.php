@@ -11,12 +11,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  * This factory creates Profile instances with automatically associated
  * User records through the User factory relationship.
  *
- * @package Database\Factories
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
  */
 class ProfileFactory extends Factory
 {
-/**
+    /**
      * Define the model's default state
      *
      * Generates default attributes for a Profile instance including

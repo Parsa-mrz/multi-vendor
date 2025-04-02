@@ -18,7 +18,6 @@ class VendorService
         $this->vendorRepository = $vendorRepository;
     }
 
-
     public function registerAsVendor(User $user, array $vendorData): User
     {
         if ($user->hasRole('vendor') || $this->vendorRepository->findByUserId($user->id)) {

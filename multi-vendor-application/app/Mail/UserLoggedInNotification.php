@@ -16,8 +16,6 @@ use Illuminate\Queue\SerializesModels;
  *
  * Mailable class for user login notification.
  * Sends a notification email to the user who logged in.
- *
- * @package App\Mail
  */
 class UserLoggedInNotification extends Mailable implements ShouldQueue
 {
@@ -30,7 +28,6 @@ class UserLoggedInNotification extends Mailable implements ShouldQueue
      * @var UserLoggedIn
      */
     public $event;
-
 
     /**
      * Create a new message instance.
