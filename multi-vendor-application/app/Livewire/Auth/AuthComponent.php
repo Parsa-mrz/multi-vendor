@@ -12,8 +12,6 @@ use Livewire\Attributes\Title;
  * Class AuthComponent
  *
  * Handles user authentication, including login and automatic registration if login fails due to missing credentials.
- *
- * @package App\Livewire\Auth
  */
 class AuthComponent extends BaseComponent
 {
@@ -81,7 +79,7 @@ class AuthComponent extends BaseComponent
                     if ($loginRetryResponse->successful()) {
                         $this->handleSuccessfulLogin($loginRetryResult);
                     } else {
-                        $this->message = 'Registration succeeded, but login failed: ' . ($loginRetryResult['message'] ?? 'Unknown error.');
+                        $this->message = 'Registration succeeded, but login failed: '.($loginRetryResult['message'] ?? 'Unknown error.');
                     }
                 } else {
                     $this->message = $registerResult['message'] ?? 'Registration failed.';
@@ -95,7 +93,7 @@ class AuthComponent extends BaseComponent
     /**
      * Handles successful login by storing the authentication token and redirecting the user.
      *
-     * @param array $result The response data from the API.
+     * @param  array  $result  The response data from the API.
      * @return void
      */
     private function handleSuccessfulLogin($result)
@@ -103,7 +101,7 @@ class AuthComponent extends BaseComponent
         session(['token' => $result['data']['token'] ?? '']);
 
         $userData = $result['data']['user'] ?? null;
-        //todo: find better solution
+        // todo: find better solution
         $user = User::find($userData['id'])->first();
         Auth::login($user);
 

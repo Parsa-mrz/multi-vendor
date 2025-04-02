@@ -123,5 +123,5 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'api_url' => env ('APP_INTERNAL_API_URL', 'http://nginx'),
+    'api_url' => env('APP_INTERNAL_API_URL', 'http://nginx'),
 ];

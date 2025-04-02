@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 FilamentAuthenticate::class,
             ])
-            ->login (null)
-            ->authGuard ('web');
+            ->login(null)
+            ->authGuard('web');
     }
 }

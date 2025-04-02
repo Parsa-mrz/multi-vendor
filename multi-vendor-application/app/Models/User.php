@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasName;
 
 /**
  * Class User
@@ -24,6 +24,7 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use Notifiable;
 
     /**
@@ -68,7 +69,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         ];
     }
 
-    public function  getFilamentName(): string
+    public function getFilamentName(): string
     {
         return "{$this->profile?->first_name} {$this->profile?->last_name}";
     }
@@ -103,7 +104,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->hasOne(Profile::class);
     }
 
-    public function canAccessPanel ( Panel $panel ): bool
+    public function canAccessPanel(Panel $panel): bool
     {
         return true;
     }

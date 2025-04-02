@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+
 use function config;
 
 /**
@@ -10,8 +11,6 @@ use function config;
  *
  * This abstract class serves as a base for all Livewire components in the application.
  * It sets a default layout and initializes a configurable API URL.
- *
- * @package App\Livewire
  */
 abstract class BaseComponent extends Component
 {
@@ -27,7 +26,7 @@ abstract class BaseComponent extends Component
      *
      * @var string
      */
-    public  $apiUrl;
+    public $apiUrl;
 
     /**
      * Lifecycle hook that runs when the component is mounted.
@@ -37,7 +36,7 @@ abstract class BaseComponent extends Component
      */
     public function mount()
     {
-        $this->apiUrl = config ('app.api_url');
+        $this->apiUrl = config('app.api_url');
     }
 
     /**

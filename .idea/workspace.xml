@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":memo: update docs">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=": sparkles: Set Filament as Dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Service/AuthService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/bootstrap/providers.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/bootstrap/providers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Middleware/FilamentAuthenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Middleware/FilamentAuthenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +275,7 @@
       <updated>1743614854052</updated>
       <workItem from="1743614855552" duration="1714000" />
       <workItem from="1743616586128" duration="982000" />
-      <workItem from="1743617574713" duration="8970000" />
+      <workItem from="1743617574713" duration="9187000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -331,7 +325,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743626859449</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary=": sparkles: Set Filament as Dashboard">
+      <option name="closed" value="true" />
+      <created>1743629476442</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743629476442</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,6 +345,7 @@
     <MESSAGE value=": memo: Update documents" />
     <MESSAGE value=":sparkles: Login &amp; Register form" />
     <MESSAGE value=":memo: update docs" />
-    <option name="LAST_COMMIT_MESSAGE" value=":memo: update docs" />
+    <MESSAGE value=": sparkles: Set Filament as Dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value=": sparkles: Set Filament as Dashboard" />
   </component>
 </project>
