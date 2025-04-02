@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 
 /**
  * Class User
@@ -15,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
  * The User model supports authentication, API tokens via Sanctum, and notifications.
  * It also has relationships with the Vendor and Profile models.
  */
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens;
 
@@ -65,6 +68,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function  getFilamentName(): string
+    {
+        return "{$this->profile?->first_name} {$this->profile?->last_name}";
+    }
+
     /**
      * Check if the user has a specific role.
      */
@@ -93,5 +101,10 @@ class User extends Authenticatable
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function canAccessPanel ( Panel $panel ): bool
+    {
+        return true;
     }
 }

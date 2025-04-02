@@ -134,6 +134,30 @@
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/phpstan/phpdoc-parser" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/dedoc/scramble" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/laravel-package-tools" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/anourvalar/eloquent-serialize" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/danharrin/livewire-rate-limiting" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/league/csv" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/danharrin/date-format-converter" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/ryangjchandler/blade-capture-directive" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/tables" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/infolists" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/forms" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/support" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/filament" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/notifications" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/actions" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/filament/widgets" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/kirschbaum-development/eloquent-power-joins" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/symfony/html-sanitizer" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/openspout/openspout" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/blade-ui-kit/blade-icons" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/blade-ui-kit/blade-heroicons" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/invade" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/color" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

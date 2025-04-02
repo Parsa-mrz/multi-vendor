@@ -3,6 +3,8 @@
 namespace App\Livewire\Auth;
 
 use App\Livewire\BaseComponent;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Title;
 
@@ -99,9 +101,15 @@ class AuthComponent extends BaseComponent
     private function handleSuccessfulLogin($result)
     {
         session(['token' => $result['data']['token'] ?? '']);
+
+        $userData = $result['data']['user'] ?? null;
+        //todo: find better solution
+        $user = User::find($userData['id'])->first();
+        Auth::login($user);
+
         $this->message = $result['message'];
         $this->reset(['email', 'password']);
-        $this->redirect('/');
+        $this->redirect('/dashboard');
     }
 
     /**

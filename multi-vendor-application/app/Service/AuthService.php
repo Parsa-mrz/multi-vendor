@@ -6,6 +6,7 @@ use App\Events\UserLoggedIn;
 use App\Http\Resources\UserResource;
 use App\Repositories\ProfileRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
