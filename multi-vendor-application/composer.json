@@ -82,7 +82,7 @@
             "./vendor/bin/pint --test"
         ],
         "generate-docs": [
-            "phpdocumentor -d app -t ../Document"
+            "phpdocumentor -d app -t ./Docs"
         ]
     },
     "extra": {
