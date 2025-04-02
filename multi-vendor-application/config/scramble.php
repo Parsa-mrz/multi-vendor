@@ -96,7 +96,7 @@ return [
 
     'middleware' => [
         'web',
-//        RestrictedDocsAccess::class, Commented for development Purpose
+        //        RestrictedDocsAccess::class, Commented for development Purpose
     ],
 
     'extensions' => [],
