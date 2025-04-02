@@ -18,7 +18,6 @@ return new class extends Migration
             $table->boolean('is_active')->default(false);
             $table->timestamp('last_login')->nullable();
             $table->enum('role', ['customer','admin','vendor'])->default('customer');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique()->constrained()->onDeleteTEv('cascade');
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->boolean('is_active')->default(false);
             $table->string('store_name');
             $table->text('description');
