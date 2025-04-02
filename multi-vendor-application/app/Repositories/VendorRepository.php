@@ -20,7 +20,7 @@ class VendorRepository implements VendorRepositoryInterface
      */
     public function findById(int $id): Vendor
     {
-        return Vendor::findOrFail($id);
+        return Vendor::first($id);
     }
 
     /**
@@ -28,6 +28,6 @@ class VendorRepository implements VendorRepositoryInterface
      */
     public function findByUserId(int $userId): Vendor
     {
-        return Vendor::where('user_id', $userId)->firstOrFail();
+        return Vendor::where('user_id', $userId)->first();
     }
 }

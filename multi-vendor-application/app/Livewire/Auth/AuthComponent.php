@@ -6,7 +6,10 @@ use App\Livewire\BaseComponent;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
+use function dd;
+use function is_null;
 
 /**
  * Class AuthComponent
@@ -55,13 +58,10 @@ class AuthComponent extends BaseComponent
         ]);
 
         $loginResult = $loginResponse->json();
-
-        if ($loginResponse->successful()) {
+        if (!is_null ($loginResult)) {
             $this->handleSuccessfulLogin($loginResult);
         } else {
-            $errorMessage = $loginResult['message'] ?? 'Login failed.';
-            if (str_contains(strtolower($errorMessage), 'user not found') || str_contains(strtolower($errorMessage), 'invalid credentials')) {
-                $registerResponse = Http::post("{$this->baseUrl}/api/v1/register", [
+                $registerResponse = Http::post("{$this->apiUrl}/api/v1/register", [
                     'email' => $this->email,
                     'password' => $this->password,
                 ]);
@@ -69,7 +69,7 @@ class AuthComponent extends BaseComponent
                 $registerResult = $registerResponse->json();
 
                 if ($registerResponse->successful()) {
-                    $loginRetryResponse = Http::post("{$this->baseUrl}/api/v1/login", [
+                    $loginRetryResponse = Http::post("{$this->apiUrl}/api/v1/login", [
                         'email' => $this->email,
                         'password' => $this->password,
                     ]);
@@ -84,9 +84,6 @@ class AuthComponent extends BaseComponent
                 } else {
                     $this->message = $registerResult['message'] ?? 'Registration failed.';
                 }
-            } else {
-                $this->message = $errorMessage;
-            }
         }
     }
 

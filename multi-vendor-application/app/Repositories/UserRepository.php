@@ -38,7 +38,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function findById(int $id): User
     {
-        return User::findOrFail($id);
+        return User::first($id);
     }
 
     /**
@@ -53,7 +53,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function findByEmail(string $email): ?User
     {
-        return User::where('email', $email)->firstOrFail();
+        return User::where('email', $email)->first();
     }
 
     /**
