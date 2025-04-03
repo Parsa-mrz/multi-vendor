@@ -6,7 +6,7 @@ use App\Events\UserLoggedIn;
 use App\Http\Resources\UserResource;
 use App\Repositories\ProfileRepository;
 use App\Repositories\UserRepository;
-use App\Service\OtpSenders\EmailOtpSenderInterface;
+use App\Service\OtpSenders\EmailOtpSender;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -136,7 +136,7 @@ class AuthService
     }
 
     public function  sendEmailVerification(array $data){
-        $result = $this->otpService->sendVerificationCode ('email',$data['email'],'email_otp',new EmailOtpSenderInterface());
+        $result = $this->otpService->sendVerificationCode ('email',$data['email'],'email_otp',new EmailOtpSender());
         return [
             'success' => $result['success'],
             'message' => $result['message'],

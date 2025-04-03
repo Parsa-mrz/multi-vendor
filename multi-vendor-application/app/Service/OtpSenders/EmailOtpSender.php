@@ -7,12 +7,12 @@ use App\Mail\EmailOtp;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Class EmailOtpSenderInterface
+ * Class EmailOtpSender
  *
  * Responsible for sending OTP via email.
  * Implements the OtpSenderInterface interface to define the contract for sending OTPs.
  */
-class EmailOtpSenderInterface implements OtpSenderInterface
+class EmailOtpSender implements OtpSenderInterface
 {
     /**
      * Send the OTP to a recipient via email.

@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Interfaces\OtpSenderInterface;
 use App\Repositories\CacheRepository;
-use App\Service\OtpSenders\EmailOtpSenderInterface;
+use App\Service\OtpSenders\EmailOtpSender;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -25,7 +25,7 @@ class OtpService
      * @var array<string, string> List of OTP senders mapped by type.
      */
     protected $senders =[
-        'email' => EmailOtpSenderInterface::class
+        'email' => EmailOtpSender::class
     ];
 
     /**
@@ -49,7 +49,7 @@ class OtpService
      * @param  string  $type  The type of recipient (e.g., 'email').
      * @param  string  $value  The value (e.g., email or phone number) for which OTP is sent.
      * @param  string  $prefix  The prefix used to identify the cache keys.
-     * @param  OtpSenderInterface|null  $sender  The OTP sender instance, defaults to EmailOtpSenderInterface if null.
+     * @param  OtpSenderInterface|null  $sender  The OTP sender instance, defaults to EmailOtpSender if null.
      *
      * @return array The result of the OTP sending operation, including success status, message, and HTTP status code.
      */

@@ -16,7 +16,7 @@
                 <label class="block text-sm font-medium text-gray-700">OTP</label>
                 <input
                     type="text"
-                    wire:model="otp"
+                    wire:model="code"
                     required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="Enter the OTP from your email"
