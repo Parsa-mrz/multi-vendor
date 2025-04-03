@@ -14,25 +14,8 @@ use App\Service\AuthService;
  * This controller processes registration requests, delegates user creation
  * and profile setup to the AuthService, and returns appropriate responses.
  */
-class RegisterController extends Controller
+class RegisterController extends AuthController
 {
-    /**
-     * @var AuthService
-     */
-    protected $authService;
-
-    /**
-     * RegisterController constructor.
-     *
-     * Initializes the controller with the AuthService, which is used
-     * to handle user registration logic.
-     *
-     * @param  AuthService  $authService  The AuthService instance used for user registration.
-     */
-    public function __construct(AuthService $authService)
-    {
-        $this->authService = $authService;
-    }
 
     /**
      * Register a new user.
@@ -46,7 +29,7 @@ class RegisterController extends Controller
      */
     public function register(UserRegisterRequest $request)
     {
-        $result = $this->authService->registerUser($request->validated());
+        $result = $this->authService->sendEmailVerification($request->validated());
 
         if (! $result['success']) {
             return ResponseHelper::error($result['message'], null, $result['status']);
@@ -54,7 +37,7 @@ class RegisterController extends Controller
 
         return ResponseHelper::success(
             $result['message'],
-            [$result['data']['user']],
+            [$result['data']],
             $result['status']
         );
     }

@@ -65,4 +65,24 @@ interface UserRepositoryInterface
      * @return User The updated User instance with the new login status.
      */
     public function updateLoginStatus(User $user): User;
+
+    /**
+     * Check if a user's email is verified.
+     *
+     * Determines whether the given email address has been verified.
+     *
+     * @param  string  $email  The email address to check.
+     * @return bool True if the email is verified, false otherwise.
+     */
+    public function isEmailVerified(string $email): bool;
+
+    /**
+     * Verify a user's email.
+     *
+     * Marks the user's email as verified in the database.
+     *
+     * @param  string  $email  The email address to verify.
+     * @return User The updated User instance with the verified email status.
+     */
+    public function verifyEmail(string $email): User;
 }

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Repositories\UserRepository;
 use Livewire\Component;
 
 use function config;

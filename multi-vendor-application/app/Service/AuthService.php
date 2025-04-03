@@ -6,6 +6,7 @@ use App\Events\UserLoggedIn;
 use App\Http\Resources\UserResource;
 use App\Repositories\ProfileRepository;
 use App\Repositories\UserRepository;
+use App\Service\OtpSenders\EmailOtpSenderInterface;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,6 +30,9 @@ class AuthService
      */
     protected $profileRepository;
 
+    protected $otpService;
+
+
     /**
      * AuthService constructor.
      *
@@ -38,10 +42,11 @@ class AuthService
      * @param  UserRepository  $userRepository  Repository for managing user data.
      * @param  ProfileRepository  $profileRepository  Repository for managing profile data.
      */
-    public function __construct(UserRepository $userRepository, ProfileRepository $profileRepository)
+    public function __construct(UserRepository $userRepository, ProfileRepository $profileRepository,OtpService $otpService)
     {
         $this->userRepository = $userRepository;
         $this->profileRepository = $profileRepository;
+        $this->otpService = $otpService;
     }
 
     /**
@@ -64,6 +69,15 @@ class AuthService
                 'success' => false,
                 'message' => 'Invalid credentials',
                 'status' => Response::HTTP_UNAUTHORIZED,
+            ];
+        }
+
+        $hasVerifiedEmail = $this->userRepository->isEmailVerified ($email);
+        if(!$hasVerifiedEmail){
+            return [
+                'success' => false,
+                'message' => 'Email is not verified',
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
             ];
         }
 
@@ -120,4 +134,15 @@ class AuthService
             'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
         ];
     }
+
+    public function  sendEmailVerification(array $data){
+        $result = $this->otpService->sendVerificationCode ('email',$data['email'],'email_otp',new EmailOtpSenderInterface());
+        return [
+            'success' => $result['success'],
+            'message' => $result['message'],
+            'data' => null,
+            'status' => $result['status'],
+        ];
+    }
+
 }

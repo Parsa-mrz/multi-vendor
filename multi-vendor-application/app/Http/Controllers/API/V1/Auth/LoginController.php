@@ -14,25 +14,9 @@ use App\Service\AuthService;
  * This controller processes login requests, delegates authentication to
  * the AuthService, and returns appropriate responses.
  */
-class LoginController extends Controller
+class LoginController extends AuthController
 {
-    /**
-     * @var AuthService
-     */
-    protected $authService;
 
-    /**
-     * LoginController constructor.
-     *
-     * Initializes the controller with the AuthService, which is used
-     * to handle the authentication logic.
-     *
-     * @param  AuthService  $authService  The AuthService instance used for authentication.
-     */
-    public function __construct(AuthService $authService)
-    {
-        $this->authService = $authService;
-    }
 
     /**
      * Handle the login request.

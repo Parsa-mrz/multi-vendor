@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment="">
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=": bug:  refactor login/register component">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Interfaces/UserRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Interfaces/UserRepositoryInterface.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/BaseComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/BaseComponent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/VendorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/VendorRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Service/AuthService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/database/migrations/0001_01_01_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/database/migrations/0001_01_01_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/auth/auth-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/auth/auth-component.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,41 +202,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Composer Script.build-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.exec-container.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.generate-docs.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.pint-test.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.pint.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.run-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.stop-&amp;-remove-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.stop-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/parsa/Documents/Programming/Projects/multi-vendor&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Composer Script.build-docker.executor": "Run",
+    "Composer Script.exec-container.executor": "Run",
+    "Composer Script.generate-docs.executor": "Run",
+    "Composer Script.pint-test.executor": "Run",
+    "Composer Script.pint.executor": "Run",
+    "Composer Script.run-docker.executor": "Run",
+    "Composer Script.stop-&-remove-docker.executor": "Run",
+    "Composer Script.stop-docker.executor": "Run",
+    "Composer Script.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/parsa/Documents/Programming/Projects/multi-vendor",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "DEFAULT",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Composer Script.pint-test">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/multi-vendor-application/resources/views/emails" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Composer Script.build-docker">
     <configuration name="build-docker" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
       <option name="pathToComposerJson" value="$PROJECT_DIR$/multi-vendor-application/composer.json" />
       <option name="script" value="build-docker" />
-      <method v="2" />
-    </configuration>
-    <configuration name="exec-container" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
-      <option name="pathToComposerJson" value="$PROJECT_DIR$/multi-vendor-application/composer.json" />
-      <option name="script" value="exec-container" />
       <method v="2" />
     </configuration>
     <configuration name="pint-test" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
@@ -244,17 +254,22 @@
       <option name="script" value="stop-&amp;-remove-docker" />
       <method v="2" />
     </configuration>
+    <configuration name="stop-docker" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
+      <option name="pathToComposerJson" value="$PROJECT_DIR$/multi-vendor-application/composer.json" />
+      <option name="script" value="stop-docker" />
+      <method v="2" />
+    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/multi-vendor-application/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Composer Script.pint-test" />
-        <item itemvalue="Composer Script.pint" />
         <item itemvalue="Composer Script.build-docker" />
         <item itemvalue="Composer Script.stop-&amp;-remove-docker" />
-        <item itemvalue="Composer Script.exec-container" />
+        <item itemvalue="Composer Script.stop-docker" />
+        <item itemvalue="Composer Script.pint-test" />
+        <item itemvalue="Composer Script.pint" />
       </list>
     </recent_temporary>
   </component>
@@ -277,7 +292,8 @@
       <workItem from="1743614855552" duration="1714000" />
       <workItem from="1743616586128" duration="982000" />
       <workItem from="1743617574713" duration="9326000" />
-      <workItem from="1743629842973" duration="2034000" />
+      <workItem from="1743629842973" duration="2124000" />
+      <workItem from="1743682195542" duration="12929000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -343,7 +359,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743629723753</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary=": bug:  refactor login/register component">
+      <option name="closed" value="true" />
+      <created>1743631933013</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1743631933013</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,6 +381,7 @@
     <MESSAGE value=":memo: update docs" />
     <MESSAGE value=": sparkles: Set Filament as Dashboard" />
     <MESSAGE value=": recycle: refactor code" />
-    <option name="LAST_COMMIT_MESSAGE" value=": recycle: refactor code" />
+    <MESSAGE value=": bug:  refactor login/register component" />
+    <option name="LAST_COMMIT_MESSAGE" value=": bug:  refactor login/register component" />
   </component>
 </project>
