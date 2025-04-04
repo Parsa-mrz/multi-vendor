@@ -157,6 +157,7 @@
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/masterminds/html5" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/invade" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/color" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/rawilk/filament-password-input" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

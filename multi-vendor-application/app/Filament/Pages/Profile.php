@@ -142,6 +142,7 @@ class Profile extends Page
                       ->action('updateProfile'),
 
             ])->columnSpanFull(),
+
         ];
     }
 
