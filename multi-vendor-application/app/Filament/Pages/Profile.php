@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Repositories\ProfileRepository;
+use App\Traits\TokenManagementTrait;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Actions;
 
@@ -12,7 +13,10 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\Rule;
+use function config;
+use function dd;
 
 /**
  * Class Profile
@@ -24,6 +28,7 @@ use Illuminate\Validation\Rule;
  */
 class Profile extends Page
 {
+    use TokenManagementTrait;
     /**
      * @var string|null The icon used in the navigation for the page.
      */
@@ -54,6 +59,8 @@ class Profile extends Page
      */
     public array $formData = [];
 
+    public $apiUrl;
+
     /**
      * Boot method to initialize the profile repository.
      *
@@ -64,6 +71,7 @@ class Profile extends Page
     public function boot (ProfileRepository $profileRepository)
     {
         $this->profileRepository = $profileRepository;
+        $this->apiUrl = config ('app.api_url');
     }
 
     /**

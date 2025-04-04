@@ -28,13 +28,16 @@ class ProfileRepository implements ProfileRepositoryInterface
      */
     public function update(int $id, array $data): Profile
     {
-        // Find the profile by its ID
         $profile = $this->findById($id);
 
-        // Update the profile with the new data
         $profile->update($data);
 
         return $profile;
+    }
+
+    public function create (array $data): Profile
+    {
+        return Profile::create($data);
     }
 
     /**
@@ -46,7 +49,6 @@ class ProfileRepository implements ProfileRepositoryInterface
      */
     public function findById(int $id): ?Profile
     {
-        // Retrieve the profile by ID
         return Profile::find($id);
     }
 
@@ -59,7 +61,6 @@ class ProfileRepository implements ProfileRepositoryInterface
      */
     public function findByUserId(string $id): ?Profile
     {
-        // Retrieve the profile by the user_id
         return Profile::where('user_id', $id)->first();
     }
 }

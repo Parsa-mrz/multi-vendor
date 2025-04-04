@@ -85,7 +85,6 @@
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/laravel/tinker" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/laravel/sanctum" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/symfony/polyfill-uuid" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/laravel/pail" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/symfony/translation" />

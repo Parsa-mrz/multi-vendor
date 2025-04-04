@@ -2,13 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Responses\LogoutResponse;
 use App\Models\Profile;
 use App\Policies\ProfilePolicy;
-use App\Repositories\CacheRepository;
-use App\Repositories\UserRepository;
-use App\Services\OtpService;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,12 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(UserRepository::class, function ($app) {
-            return new UserRepository();
-        });
-        $this->app->singleton(OtpService::class, function ($app) {
-            return new OtpService($app->make(CacheRepository::class));
-        });
+        $this->app->bind (LogoutResponseContract::class, LogoutResponse::class);
     }
 
     /**

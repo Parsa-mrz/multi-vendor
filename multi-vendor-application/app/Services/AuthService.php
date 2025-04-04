@@ -53,12 +53,12 @@ class AuthService
      * Authenticate the user.
      *
      * This method validates the user's credentials (email and password).
-     * If the credentials are correct, it generates and returns an authentication token.
+     * If the credentials are correct, returns user instance.
      * Otherwise, it returns an error response.
      *
      * @param  string  $email  The email address of the user.
      * @param  string  $password  The password of the user.
-     * @return array An array containing the success status, message, and authentication token if successful.
+     * @return array An array containing the success status, message if successful.
      */
     public function authenticateUser(string $email, string $password): array
     {
@@ -85,14 +85,10 @@ class AuthService
 
         event(new UserLoggedIn($user));
 
-        $token = $user->createToken('authToken')->plainTextToken;
-
         return [
             'success' => true,
             'message' => 'Login successful',
             'data' => [
-                'access_token' => $token,
-                'token_type' => 'Bearer',
                 'user' => new UserResource($user->load('profile')),
             ],
             'status' => Response::HTTP_OK,

@@ -2,13 +2,19 @@
 
 namespace App\Livewire\Auth;
 
+use App\Helpers\ResponseHelper;
 use App\Livewire\BaseComponent;
 use App\Models\User;
+use App\Repositories\UserRepository;
+use App\Services\AuthService;
 use App\Services\OtpSenders\EmailOtpSender;
 use App\Services\OtpService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
+use function app;
+use function dd;
 use function is_null;
 use function session;
 
@@ -37,66 +43,53 @@ class AuthComponent extends BaseComponent
 
     private function loginUser()
     {
-        $response = Http::post("{$this->apiUrl}/api/v1/login", [
-            'email' => $this->originalEmail,
-            'password' => $this->password,
-        ]);
+        $result = $this->authService->authenticateUser($this->email, $this->password);
+        if (! $result['success']) {
+            return false;
+        }
 
-        return $response->successful() ? $response->json() : null;
+        return $result;
     }
 
     private function registerUser()
     {
-        $response = Http::post("{$this->apiUrl}/api/v1/register", [
-            'email' => $this->originalEmail,
-            'password' => $this->password,
-        ]);
+        $result = $this->authService->sendEmailVerification(['email' => $this->email]);
 
-        $result = $response->json();
-        if ($response->successful()) {
-            $this->sendEmailOtp($this->originalEmail);
-            $this->showOtpForm = true;
-            $this->message = 'Registration successful! Please enter the OTP sent to your email.';
-        } else {
-            $this->message = $result['message'] ?? 'Registration failed.';
+        if (! $result['success']) {
+            $this->message = $result['message'] ?? 'Verification failed.';
+            return false;
         }
+
+        $this->handleLoginOrVerification($result);
     }
 
     public function verifyOtp()
     {
-        $verificationData = [
-            'type' => 'email',
-            'value' => $this->originalEmail,
-            'code' => (int) $this->code,
-            'password' => $this->password,
-        ];
+        $otpResult = $this->otpService->verifyVerificationCode('email', $this->originalEmail, $this->code, 'email_otp');
 
-        $response = Http::post("{$this->apiUrl}/api/v1/verify", $verificationData);
-
-        if ($response->successful()) {
-            $this->reLoginUser();
-        } else {
-            $this->message = 'OTP verification failed. Please check your code.';
+        if(!$otpResult['success']){
+            $this->message = $otpResult['message'];
+            return false;
         }
-    }
 
-    private function reLoginUser()
-    {
-        $loginResponse = $this->loginUser();
-        if ($loginResponse) {
-            $this->handleSuccessfulLogin($loginResponse);
-        } else {
-            $this->message = 'Login failed after OTP verification.';
+        $result = $this->authService->registerUser([
+            "email" => $this->email,
+            "password" => $this->password
+        ]);
+
+        if (! $result['success']) {
+            $this->message = $result['message'] ?? 'Register failed.';
+            return false;
         }
+
+        $this->handleLoginOrVerification($result);
+
+        return true;
     }
 
     private function handleLoginOrVerification($result)
     {
-        $userData = $result['data']['user'] ?? null;
-        $user = User::where('email', $userData['email'])->first();
-
-        if (is_null($user->email_verified_at)) {
-            $this->sendEmailOtp($this->originalEmail);
+        if (is_null($result['data'])) {
             $this->showOtpForm = true;
             $this->message = 'Please enter the OTP sent to your email to verify your account.';
         } else {
@@ -106,20 +99,12 @@ class AuthComponent extends BaseComponent
 
     private function handleSuccessfulLogin($result)
     {
-        $userData = $result['data']['user'] ?? null;
-        $user = User::where('email', $userData['email'])->first();
+        $user = $this->userRepository->findByEmail($result['data']['user']['email']);
         Auth::login($user);
 
-        session(['token' => $result['data']['token'] ?? '']);
         $this->message = $result['message'];
         $this->reset(['email', 'password', 'code', 'showOtpForm', 'originalEmail']);
         $this->redirect('/dashboard');
-    }
-
-    private function sendEmailOtp(string $email)
-    {
-        $otpService = app(OtpService::class);
-        $otpService->sendVerificationCode('email', $email, 'email_otp', new EmailOtpSender());
     }
 
     #[Title('Login/Register')]

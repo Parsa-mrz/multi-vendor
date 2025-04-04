@@ -3,7 +3,11 @@
 namespace App\Livewire;
 
 use App\Repositories\UserRepository;
+use App\Services\AuthService;
+use App\Services\OtpService;
 use Livewire\Component;
+use App\Traits\TokenManagementTrait;
+
 
 use function config;
 
@@ -15,6 +19,8 @@ use function config;
  */
 abstract class BaseComponent extends Component
 {
+    use TokenManagementTrait;
+
     /**
      * The default layout for the component.
      *
@@ -28,6 +34,16 @@ abstract class BaseComponent extends Component
      * @var string
      */
     public $apiUrl;
+
+    protected UserRepository $userRepository;
+    protected OtpService $otpService;
+    protected AuthService $authService;
+    public function boot(UserRepository $userRepository,OtpService $otpService = null, AuthService $authService = null)
+    {
+        $this->userRepository = $userRepository;
+        $this->otpService = $otpService;
+        $this->authService = $authService;
+    }
 
     /**
      * Lifecycle hook that runs when the component is mounted.

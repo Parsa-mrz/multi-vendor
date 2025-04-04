@@ -4,10 +4,12 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\Profile;
+use App\Http\Controllers\API\V1\Auth\LogoutController;
 use App\Http\Middleware\FilamentAuthenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -36,6 +38,11 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
                 Profile::class,
+            ])
+            ->userMenuItems([
+                'logout' => MenuItem::make()
+                                    ->label('Log out')
+                                    ->icon('heroicon-o-arrow-up-on-square-stack'),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([

@@ -40,4 +40,6 @@ interface ProfileRepositoryInterface
      * @return Profile|null The profile if found, or null if not found.
      */
     public function findByUserId(string $id): ?Profile;
+
+    public function create(array $data): Profile;
 }
