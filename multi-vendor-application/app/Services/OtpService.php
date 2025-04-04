@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
 use App\Interfaces\OtpSenderInterface;
 use App\Repositories\CacheRepository;
-use App\Service\OtpSenders\EmailOtpSender;
+use App\Services\OtpSenders\EmailOtpSender;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

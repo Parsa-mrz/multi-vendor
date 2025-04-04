@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Helpers\ResponseHelper;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserRegisterRequest;
-use App\Service\AuthService;
 
 /**
  * Class RegisterController

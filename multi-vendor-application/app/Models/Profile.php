@@ -22,7 +22,7 @@ class Profile extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'profileable_id', 'profileable_type', 'first_name', 'last_name', 'phone_number'];
+    protected $fillable = ['user_id', 'first_name', 'last_name', 'phone_number'];
 
     /**
      * Get the user that owns the profile.

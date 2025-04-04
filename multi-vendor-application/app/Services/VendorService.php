@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
 use App\Exceptions\VendorAlreadyRegisteredException;
 use App\Models\User;
@@ -20,7 +20,7 @@ class VendorService
 
     public function registerAsVendor(User $user, array $vendorData): User
     {
-        if ($user->hasRole('vendor') || $this->vendorRepository->findByUserId($user->id)) {
+        if ($user->isVendor () || $this->vendorRepository->findByUserId($user->id)) {
             throw new VendorAlreadyRegisteredException('You are already registered as a vendor.');
         }
 

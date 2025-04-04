@@ -4,8 +4,8 @@ namespace App\Livewire\Auth;
 
 use App\Livewire\BaseComponent;
 use App\Models\User;
-use App\Service\OtpSenders\EmailOtpSender;
-use App\Service\OtpService;
+use App\Services\OtpSenders\EmailOtpSender;
+use App\Services\OtpService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Title;

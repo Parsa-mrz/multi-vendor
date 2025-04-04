@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=": recycle: Refactor Login / Register and add verification by email">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=": recycle: Refactor AuthComponent.php to add verification">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/ResponseHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/ResponseHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Vendor/VendorRegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Vendor/VendorRegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Interfaces/ProfileRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Interfaces/ProfileRepositoryInterface.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Service/AuthService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/OtpSenders/EmailOtpSenderInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Service/OtpSenders/EmailOtpSender.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/OtpService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Service/OtpService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/auth/auth-component.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/auth/auth-component.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/Profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/Filament/AdminPanelProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/Filament/AdminPanelProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/ProfileRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/ProfileRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/AuthService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/OtpSenders/EmailOtpSender.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/OtpSenders/EmailOtpSender.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/OtpService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/OtpService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Service/VendorService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/VendorService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/bootstrap/providers.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/bootstrap/providers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/tests/Feature/VendorRegisterControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/tests/Feature/VendorRegisterControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,32 +208,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Composer Script.build-docker.executor": "Run",
-    "Composer Script.exec-container.executor": "Run",
-    "Composer Script.generate-docs.executor": "Run",
-    "Composer Script.pint-test.executor": "Run",
-    "Composer Script.pint.executor": "Run",
-    "Composer Script.run-docker.executor": "Run",
-    "Composer Script.stop-&-remove-docker.executor": "Run",
-    "Composer Script.stop-docker.executor": "Run",
-    "Composer Script.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/parsa/Documents/Programming/Projects/multi-vendor",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "php.override.implement.member.chooser.php.doc": "DEFAULT",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Composer Script.build-docker.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.exec-container.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.generate-docs.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.pint-test.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.pint.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.run-docker.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.stop-&amp;-remove-docker.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.stop-docker.executor&quot;: &quot;Run&quot;,
+    &quot;Composer Script.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/parsa/Documents/Programming/Projects/multi-vendor&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;DEFAULT&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/multi-vendor-application/resources/views/emails" />

@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Profile;
+use App\Policies\ProfilePolicy;
 use App\Repositories\CacheRepository;
 use App\Repositories\UserRepository;
-use App\Service\OtpService;
+use App\Services\OtpService;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::policy(Profile::class, ProfilePolicy::class);
     }
 }

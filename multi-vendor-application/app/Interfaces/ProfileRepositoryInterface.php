@@ -12,24 +12,32 @@ use App\Models\Profile;
  */
 interface ProfileRepositoryInterface
 {
-    /**
-     * Create a new profile.
-     *
-     * This method accepts profile data and creates a new profile entry in the database.
-     *
-     * @param  array  $data  The profile data, typically including user-specific details.
-     * @return Profile The created Profile instance.
-     */
-    public function create(array $data): Profile;
 
     /**
-     * Find a profile by user ID.
+     * Update the profile with the given ID.
      *
-     * This method retrieves a profile associated with a specific user by their ID.
-     * If no profile is found, it returns null.
+     * @param int $id The ID of the profile to update.
+     * @param array $data The data to update the profile with.
      *
-     * @param  int  $userId  The user ID to search for.
-     * @return Profile|null The Profile instance if found, otherwise null.
+     * @return Profile The updated profile instance.
      */
-    public function findByUserId(int $userId): ?Profile;
+    public function update(int $id, array $data): Profile;
+
+    /**
+     * Find a profile by its ID.
+     *
+     * @param int $id The ID of the profile to find.
+     *
+     * @return Profile|null The profile if found, or null if not found.
+     */
+    public function findById(int $id): ?Profile;
+
+    /**
+     * Find a profile by the user's ID.
+     *
+     * @param string $id The ID of the user whose profile to find.
+     *
+     * @return Profile|null The profile if found, or null if not found.
+     */
+    public function findByUserId(string $id): ?Profile;
 }

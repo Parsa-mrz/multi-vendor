@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use function response;
 
 /**
  * Class ResponseHelper
@@ -45,5 +46,15 @@ class ResponseHelper
             'data' => null,
             'errors' => $errors,
         ], $status);
+    }
+
+    public static function unAvailable ()
+    {
+        return response()->json([
+            'success' => false,
+            'message' => 'unavailable',
+            'data' => null,
+            'errors' => 'unavailable',
+        ], Response::HTTP_BAD_REQUEST);
     }
 }

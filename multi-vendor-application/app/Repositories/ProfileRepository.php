@@ -10,33 +10,56 @@ use App\Models\Profile;
  *
  * Repository for managing interactions with the Profile model.
  * Implements the ProfileRepositoryInterface to ensure required methods for profile management.
+ *
+ * This class provides the implementation for managing user profiles, including finding profiles by ID,
+ * updating profiles, and finding profiles by user ID.
+ *
+ * @package App\Repositories
  */
 class ProfileRepository implements ProfileRepositoryInterface
 {
     /**
-     * Create a new profile record.
+     * Update the profile with the given ID.
      *
-     * This method creates a new profile in the database using the provided data.
+     * @param int $id The ID of the profile to update.
+     * @param array $data The data to update the profile with.
      *
-     * @param  array  $data  The data to create the profile. Expected to include attributes like user_id, bio, etc.
-     * @return Profile The created Profile instance.
+     * @return Profile The updated profile instance.
      */
-    public function create(array $data): Profile
+    public function update(int $id, array $data): Profile
     {
-        return Profile::create($data);
+        // Find the profile by its ID
+        $profile = $this->findById($id);
+
+        // Update the profile with the new data
+        $profile->update($data);
+
+        return $profile;
     }
 
     /**
-     * Find a profile by user ID.
+     * Find a profile by its ID.
      *
-     * This method retrieves a profile associated with the given user ID.
-     * If no profile is found for that user, it returns null.
+     * @param int $id The ID of the profile to find.
      *
-     * @param  int  $userId  The user ID to search for.
-     * @return Profile|null The Profile instance if found, otherwise null.
+     * @return Profile|null The profile if found, or null if not found.
      */
-    public function findByUserId(int $userId): ?Profile
+    public function findById(int $id): ?Profile
     {
-        return Profile::where('user_id', $userId)->first();
+        // Retrieve the profile by ID
+        return Profile::find($id);
+    }
+
+    /**
+     * Find a profile by the user's ID.
+     *
+     * @param string $id The ID of the user whose profile to find.
+     *
+     * @return Profile|null The profile if found, or null if not found.
+     */
+    public function findByUserId(string $id): ?Profile
+    {
+        // Retrieve the profile by the user_id
+        return Profile::where('user_id', $id)->first();
     }
 }

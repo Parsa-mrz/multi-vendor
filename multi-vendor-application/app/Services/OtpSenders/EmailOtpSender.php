@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\OtpSenders;
+namespace App\Services\OtpSenders;
 
 use App\Interfaces\OtpSenderInterface;
 use App\Mail\EmailOtp;

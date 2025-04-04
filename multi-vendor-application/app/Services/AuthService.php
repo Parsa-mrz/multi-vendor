@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
 use App\Events\UserLoggedIn;
 use App\Http\Resources\UserResource;
 use App\Repositories\ProfileRepository;
 use App\Repositories\UserRepository;
-use App\Service\OtpSenders\EmailOtpSender;
+use App\Services\OtpSenders\EmailOtpSender;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 

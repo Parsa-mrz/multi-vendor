@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Helpers\ResponseHelper;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserLoginRequest;
-use App\Service\AuthService;
 
 /**
  * Class LoginController

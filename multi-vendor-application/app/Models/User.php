@@ -76,12 +76,40 @@ class User extends Authenticatable implements FilamentUser, HasName
         return "{$this->profile?->first_name} {$this->profile?->last_name}";
     }
 
-    /**
-     * Check if the user has a specific role.
-     */
-    public function hasRole(string $role): bool
+    public function isAdmin(): bool
     {
-        return $this->role === $role;
+        return $this->role === 'admin';
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->role === 'customer';
+    }
+
+    public function isVendor(): bool
+    {
+        return $this->role === 'vendor';
+    }
+
+    /**
+     * Get the registration duration in days, with a minimum of 1 day.
+     *
+     * @return int
+     */
+    public function getRegisterDurationInDays(): int
+    {
+        $days = $this->created_at->diffInHours(now()) / 24;
+        return $days < 1 ? 1 : round($days);
+    }
+
+    /**
+     * Get the formatted registration date.
+     *
+     * @return string
+     */
+    public function getFormattedRegistrationDate(): string
+    {
+        return $this->created_at->format('Y-m-d');
     }
 
     /**

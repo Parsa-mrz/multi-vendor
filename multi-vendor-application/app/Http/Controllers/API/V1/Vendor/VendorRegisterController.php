@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Vendor\VendorRegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Service\VendorService;
+use App\Services\VendorService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;

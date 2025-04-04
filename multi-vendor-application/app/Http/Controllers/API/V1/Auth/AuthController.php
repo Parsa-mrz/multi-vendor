@@ -4,9 +4,8 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
-use App\Service\AuthService;
-use App\Service\OtpService;
-use Illuminate\Http\Request;
+use App\Services\AuthService;
+use App\Services\OtpService;
 
 /**
  * Class AuthController

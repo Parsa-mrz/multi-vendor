@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Vendor;
-use App\Service\VendorService;
+use App\Services\VendorService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
 use PHPUnit\Framework\Attributes\Test;
