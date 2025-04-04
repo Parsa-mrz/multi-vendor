@@ -4,25 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: Add my profile and customer state in dashboard">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":fire: remove api for auth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Pages/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Pages/Profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/AuthController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/LoginController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/RegisterController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Auth/VerificationController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Interfaces/ProfileRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Interfaces/ProfileRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Exceptions/VendorAlreadyRegisteredException.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/ResponseHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/ResponseHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Profile/ProfileController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Controllers/API/V1/Vendor/VendorRegisterController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Requests/Auth/UserLoginRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Requests/Auth/UserRegisterRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Requests/Auth/VerifyRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Requests/Profile/UpdateProfileRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Http/Requests/Vendor/VendorRegisterRequest.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/BaseComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/BaseComponent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/Filament/AdminPanelProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/Filament/AdminPanelProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/ProfileRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/ProfileRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/AuthService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/config/sanctum.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/OtpService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/OtpService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/VendorService.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,7 +293,7 @@
       <workItem from="1743617574713" duration="9326000" />
       <workItem from="1743629842973" duration="2124000" />
       <workItem from="1743682195542" duration="17421000" />
-      <workItem from="1743788183018" duration="10273000" />
+      <workItem from="1743788183018" duration="12178000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -387,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743780146196</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary=":fire: remove api for auth">
+      <option name="closed" value="true" />
+      <created>1743800013679</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743800013679</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,6 +408,7 @@
     <MESSAGE value=": bug:  refactor login/register component" />
     <MESSAGE value=": recycle: Refactor Login / Register and add verification by email" />
     <MESSAGE value=":sparkles: Add my profile and customer state in dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Add my profile and customer state in dashboard" />
+    <MESSAGE value=":fire: remove api for auth" />
+    <option name="LAST_COMMIT_MESSAGE" value=":fire: remove api for auth" />
   </component>
 </project>

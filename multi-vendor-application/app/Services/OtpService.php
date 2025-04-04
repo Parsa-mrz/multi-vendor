@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Helpers\ResponseHelper;
 use App\Interfaces\OtpSenderInterface;
 use App\Repositories\CacheRepository;
 use App\Services\OtpSenders\EmailOtpSender;
 use Symfony\Component\HttpFoundation\Response;
+use function ucfirst;
 
 /**
  * Class OtpService
@@ -58,11 +60,11 @@ class OtpService
         $cacheCooldownKey = "{$prefix}_cooldown_{$type}_{$value}";
 
         if ($this->cacheRepository->has($cacheCooldownKey)) {
-            return [
-                'success' => false,
-                'message' => 'You can request a new verification code after 2 minutes.',
-                'status' => Response::HTTP_TOO_MANY_REQUESTS,
-            ];
+            return ResponseHelper::error (
+                'You can request a new verification code after 2 minutes.',
+                null,
+                Response::HTTP_TOO_MANY_REQUESTS
+            );
         }
 
         $verificationCode = mt_rand(1000, 9999);
@@ -80,11 +82,9 @@ class OtpService
         $sender = $sender ?? app($this->senders[$type]);
         $sender->send($value, (string) $verificationCode);
 
-        return [
-            'success' => true,
-            'message' => "Verification code sent to your new {$type}.",
-            'status' => Response::HTTP_OK,
-        ];
+        return ResponseHelper::success (
+            "Verification code sent to your new {$type}."
+        );
     }
 
     /**
@@ -105,37 +105,37 @@ class OtpService
         $verificationData = $this->cacheRepository->get($cacheKey);
 
         if (!$verificationData) {
-            return [
-                'success' => false,
-                'message' => 'Verification code expired or does not exist.',
-                'status' => Response::HTTP_BAD_REQUEST,
-            ];
+            return ResponseHelper::error (
+                'Verification code expired or does not exist.'
+            );
         }
 
         if ($verificationData['attempts'] >= 3) {
             $this->cacheRepository->forget($cacheKey);
-            return [
-                'success' => false,
-                'message' => 'Maximum verification attempts reached. Please request a new code.',
-                'status' => Response::HTTP_TOO_MANY_REQUESTS,
-            ];
+
+            return ResponseHelper::error (
+                'Maximum verification attempts reached. Please request a new code.',
+                null,
+                Response::HTTP_TOO_MANY_REQUESTS
+            );
         }
 
         if ($verificationData['code'] != $code || $verificationData['value'] != $value) {
             $verificationData['attempts'] += 1;
             $this->cacheRepository->store($cacheKey, $verificationData, 300);
-            return [
-                'success' => false,
-                'message' => 'Invalid verification code. Attempts remaining: ' . (3 - $verificationData['attempts']),
-                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
-            ];
+
+            return ResponseHelper::error (
+                'Invalid verification code. Attempts remaining: ' . (3 - $verificationData['attempts']),
+                null,
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+
         }
 
         $this->cacheRepository->forget($cacheKey);
-        return [
-            'success' => true,
-            'message' => ucfirst($type) . ' Verification Passed Successfully.',
-            'status' => Response::HTTP_OK,
-        ];
+
+        return ResponseHelper::success (
+            ucfirst($type) . ' Verification Passed Successfully.'
+        );
     }
 }

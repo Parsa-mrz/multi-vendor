@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\UserLoggedIn;
+use App\Helpers\ResponseHelper;
 use App\Http\Resources\UserResource;
 use App\Repositories\ProfileRepository;
 use App\Repositories\UserRepository;
@@ -64,35 +65,39 @@ class AuthService
     {
         $user = $this->userRepository->findByEmail($email);
 
-        if (! $user || ! Hash::check($password, $user->password)) {
-            return [
-                'success' => false,
-                'message' => 'Invalid credentials',
-                'status' => Response::HTTP_UNAUTHORIZED,
-            ];
+        if(!$user){
+            return ResponseHelper::error (
+                'Email not registered.',
+                null,
+                Response::HTTP_NOT_FOUND
+            );
+        }
+
+        if (! Hash::check($password, $user->password)) {
+            return ResponseHelper::error (
+                'Invalid credentials.',
+                null,
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
 
         $hasVerifiedEmail = $this->userRepository->isEmailVerified ($email);
         if(!$hasVerifiedEmail){
-            return [
-                'success' => false,
-                'message' => 'Email is not verified',
-                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
-            ];
+            return ResponseHelper::error (
+                'Email is not verified',
+                null,
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
 
         $this->userRepository->updateLoginStatus($user);
 
         event(new UserLoggedIn($user));
 
-        return [
-            'success' => true,
-            'message' => 'Login successful',
-            'data' => [
-                'user' => new UserResource($user->load('profile')),
-            ],
-            'status' => Response::HTTP_OK,
-        ];
+        return ResponseHelper::success (
+            "Login successful",
+            ['user' => new UserResource($user->load('profile'))]
+        );
     }
 
     /**
@@ -114,31 +119,22 @@ class AuthService
         ]);
 
         if ($user && $profile) {
-            return [
-                'success' => true,
-                'message' => 'User registered successfully',
-                'data' => [
-                    'user' => new UserResource($user->load('profile')),
-                ],
-                'status' => Response::HTTP_CREATED,
-            ];
+            return ResponseHelper::success (
+                "User registered successfully",
+                ['user' => new UserResource($user->load('profile'))],
+                Response::HTTP_CREATED
+            );
         }
 
-        return [
-            'success' => false,
-            'message' => 'Registration failed',
-            'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
-        ];
+        return ResponseHelper::error (
+            'Registration failed',
+            null,
+            Response::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
 
     public function  sendEmailVerification(array $data){
-        $result = $this->otpService->sendVerificationCode ('email',$data['email'],'email_otp',new EmailOtpSender());
-        return [
-            'success' => $result['success'],
-            'message' => $result['message'],
-            'data' => null,
-            'status' => $result['status'],
-        ];
+        return $this->otpService->sendVerificationCode ('email',$data['email'],'email_otp',new EmailOtpSender());
     }
 
 }

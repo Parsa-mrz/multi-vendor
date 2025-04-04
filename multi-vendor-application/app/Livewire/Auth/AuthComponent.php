@@ -44,7 +44,7 @@ class AuthComponent extends BaseComponent
     private function loginUser()
     {
         $result = $this->authService->authenticateUser($this->email, $this->password);
-        if (! $result['success']) {
+        if (! $result['status']) {
             return false;
         }
 
@@ -89,6 +89,10 @@ class AuthComponent extends BaseComponent
 
     private function handleLoginOrVerification($result)
     {
+        if($result['status'] === 422){
+            $this->message = 'Email or password is incorrect.';
+            return false;
+        }
         if (is_null($result['data'])) {
             $this->showOtpForm = true;
             $this->message = 'Please enter the OTP sent to your email to verify your account.';
