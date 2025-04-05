@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -69,16 +70,12 @@ class UserResource extends Resource
                                  ->native(false)
                                  ->searchable()
                                  ->required()
-                                 ->default('customer'),
+                                 ->default('customer')
+                                 ->live (),
 
                            Toggle::make('is_active')
                                  ->label('Is Active')
                                  ->default(true),
-
-                           TextInput::make('last_login')
-                                    ->label('Last Login')
-                                    ->disabled()
-                                    ->visible(fn($context) => $context === 'edit'),
                        ])
                        ->columns(2),
 
@@ -86,18 +83,30 @@ class UserResource extends Resource
                        ->relationship('profile')
                        ->schema([
                         TextInput::make('first_name')
-                                 ->label('First Name')
-                                 ->required(),
-
+                                 ->label('First Name'),
                         TextInput::make('last_name')
-                                 ->label('Last Name')
-                                 ->required(),
-
+                                 ->label('Last Name'),
                         TextInput::make('phone_number')
-                                 ->label('Phone Number')
-                                 ->required(),
+                                 ->label('Phone Number'),
                     ])
                        ->columns(2),
+
+                Section::make('Vendor Info')
+                    ->relationship('vendor')
+                       ->schema([
+                           TextInput::make('store_name')
+                                    ->label('Store Name')
+                                    ->required(fn ($get) => $get('role') !== 'vendor'),
+                           TextArea::make('description')
+                                   ->label('Description')
+                                   ->required(fn ($get) => $get('role') !== 'vendor'),
+                           Toggle::make('is_active')
+                                 ->label('Is Active')
+                                 ->default(true)
+                                 ->required(fn ($get) => $get('role') !== 'vendor'),
+                       ])
+                       ->columns(2)
+                       ->visible(fn ($get) => $get('role') === 'vendor'),
             ])
             ->columns(1);
     }
@@ -143,10 +152,9 @@ class UserResource extends Resource
                                 })
                                 ->color(function ($record) {
                                     return match ($record->role) {
-                                        'admin' => 'success',
+                                        'admin' => 'gray',
                                         'customer' => 'primary',
-                                        'vendor' => 'warning',
-                                        default => 'gray'
+                                        'vendor' => 'success',
                                     };
                                 }),
                 TextColumn::make ('created_at')
@@ -162,7 +170,7 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-//                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -178,8 +186,8 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-//            'create' => Pages\CreateUser::route('/create'),
-//            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }
