@@ -2,21 +2,10 @@
 
 namespace App\Livewire\Auth;
 
-use App\Helpers\ResponseHelper;
 use App\Livewire\BaseComponent;
-use App\Models\User;
-use App\Repositories\UserRepository;
-use App\Services\AuthService;
-use App\Services\OtpSenders\EmailOtpSender;
-use App\Services\OtpService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
-use function app;
-use function dd;
 use function is_null;
-use function session;
 
 class AuthComponent extends BaseComponent
 {
@@ -27,8 +16,32 @@ class AuthComponent extends BaseComponent
     public $showOtpForm = false;
     public $originalEmail = '';
 
+    protected function rules()
+    {
+        return [
+            'email' => 'required|email:rfc,dns|max:255',
+            'password' => 'required',
+            'code' => 'nullable|digits:4',
+        ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Enter a valid email address.',
+            'password.required' => 'The password is required.',
+            'password.min' => 'Password must be at least 6 characters.',
+            'code.digits' => 'OTP must be 6 digits.',
+        ];
+    }
+
     public function submit()
     {
+        $this->email = strtolower(trim($this->email));
+        $this->validateOnly('email');
+        $this->validateOnly('password');
+
         $this->message = '';
         $this->originalEmail = $this->email;
 
@@ -65,7 +78,14 @@ class AuthComponent extends BaseComponent
 
     public function verifyOtp()
     {
-        $otpResult = $this->otpService->verifyVerificationCode('email', $this->originalEmail, $this->code, 'email_otp');
+        $this->validateOnly('code');
+
+        $otpResult = $this->otpService->verifyVerificationCode(
+            'email',
+            $this->originalEmail,
+            $this->code,
+            'email_otp'
+        );
 
         if(!$otpResult['success']){
             $this->message = $otpResult['message'];
@@ -103,7 +123,7 @@ class AuthComponent extends BaseComponent
 
     private function handleSuccessfulLogin($result)
     {
-        $user = $this->userRepository->findByEmail($result['data']['user']['email']);
+        $user = $this->userRepository->findByEmail(strtolower($result['data']['user']['email']));
         Auth::login($user);
 
         $this->message = $result['message'];
