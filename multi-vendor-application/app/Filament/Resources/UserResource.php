@@ -42,10 +42,9 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                // Email Field
                 TextInput::make('email')
                          ->required()
-                        ->unique ()
+                         ->unique ()
                          ->maxLength(255)
                          ->email(),
 
@@ -67,8 +66,6 @@ class UserResource extends Resource
                     ->searchable ()
                       ->required()
                       ->default('customer'),
-
-                // Active Field (Toggle)
                 Toggle::make('is_active')
                       ->label('Is Active')
                       ->default(true),

@@ -90,7 +90,7 @@ class AuthComponent extends BaseComponent
     private function handleLoginOrVerification($result)
     {
         if($result['status'] === 422){
-            $this->message = 'Email or password is incorrect.';
+            $this->message = $result['message'];
             return false;
         }
         if (is_null($result['data'])) {

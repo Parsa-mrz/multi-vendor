@@ -89,6 +89,11 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->role === 'vendor';
     }
 
+    public function is_active ():bool
+    {
+        return $this->is_active === true;
+    }
+
     /**
      * Get the registration duration in days, with a minimum of 1 day.
      *

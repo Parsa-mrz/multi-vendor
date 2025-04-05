@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":recycle: refactor auth components without api route">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: Add User management for admin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Pages/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Pages/Profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Auth/AuthComponent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/AuthService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +285,8 @@
       <workItem from="1743617574713" duration="9326000" />
       <workItem from="1743629842973" duration="2124000" />
       <workItem from="1743682195542" duration="17421000" />
-      <workItem from="1743788183018" duration="15582000" />
+      <workItem from="1743788183018" duration="15730000" />
+      <workItem from="1743829853712" duration="441000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -392,7 +392,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743801943423</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary=":sparkles: Add User management for admin">
+      <option name="closed" value="true" />
+      <created>1743805283927</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1743805283927</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,6 +419,7 @@
     <MESSAGE value=":sparkles: Add my profile and customer state in dashboard" />
     <MESSAGE value=":fire: remove api for auth" />
     <MESSAGE value=":recycle: refactor auth components without api route" />
-    <option name="LAST_COMMIT_MESSAGE" value=":recycle: refactor auth components without api route" />
+    <MESSAGE value=":sparkles: Add User management for admin" />
+    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Add User management for admin" />
   </component>
 </project>

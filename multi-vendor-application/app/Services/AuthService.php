@@ -73,6 +73,14 @@ class AuthService
             );
         }
 
+        if (!$user->is_active ()) {
+            return ResponseHelper::error (
+                'Your account is deactivated.please contact administrator.',
+                null,
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
+
         if (! Hash::check($password, $user->password)) {
             return ResponseHelper::error (
                 'Invalid credentials.',
