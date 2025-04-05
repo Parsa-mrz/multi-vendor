@@ -117,7 +117,7 @@ class ProductResource extends Resource
                     ->money()
                     ->sortable(),
                 TextColumn::make('quantity')
-                    ->money()
+                    ->numeric()
                     ->sortable(),
                 TextColumn::make('discount')
                     ->numeric()
@@ -137,7 +137,7 @@ class ProductResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    //                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

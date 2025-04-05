@@ -9,6 +9,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsRelationManager extends RelationManager
 {
@@ -65,7 +66,6 @@ class ProductsRelationManager extends RelationManager
                     ->searchable()
                     ->preload()
                     ->required()
-                    ->default(fn () => $this->ownerRecord->id)
                     ->disabled(),
             ]);
     }
