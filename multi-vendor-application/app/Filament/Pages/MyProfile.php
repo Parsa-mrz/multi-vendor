@@ -19,14 +19,14 @@ use function config;
 use function dd;
 
 /**
- * Class Profile
+ * Class MyProfile
  *
  * This class represents the page where users can view and update their profile information.
  * It extends the Filament Page component and integrates with the ProfileRepository to handle profile updates.
  *
  * @package App\Filament\Pages
  */
-class Profile extends Page
+class MyProfile extends Page
 {
     use TokenManagementTrait;
     /**
@@ -37,7 +37,7 @@ class Profile extends Page
     /**
      * @var string|null The label used in the navigation for the page.
      */
-    protected static ?string $navigationLabel = 'My Profile';
+    protected static ?string $navigationLabel = 'My MyProfile';
 
     /**
      * @var string The view template for the page.
@@ -115,7 +115,7 @@ class Profile extends Page
     protected function getFormSchema(): array
     {
         return [
-            Section::make('Customer Profile')
+            Section::make('Customer MyProfile')
                    ->schema([
                        TextInput::make('first_name')
                                 ->label('First Name')
@@ -165,7 +165,7 @@ class Profile extends Page
         }
 
         Notification::make()
-                    ->title('Profile Updated')
+                    ->title('MyProfile Updated')
                     ->success()
                     ->send();
     }

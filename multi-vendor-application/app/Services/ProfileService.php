@@ -28,7 +28,7 @@ class ProfileService
         if (!$profile) {
 
             return ResponseHelper::error (
-                'Profile not found.',
+                'MyProfile not found.',
                 null,
                 Response::HTTP_NOT_FOUND
             );

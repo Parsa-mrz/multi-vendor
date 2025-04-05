@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * Class ProfileResource
  *
- * Transform the Profile model data into an API-friendly array format.
+ * Transform the MyProfile model data into an API-friendly array format.
  * The ProfileResource can also include a nested Vendor resource when the profileable
  * type is 'App\Models\Vendor'.
  */

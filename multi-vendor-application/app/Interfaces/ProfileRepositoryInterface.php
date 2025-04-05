@@ -7,7 +7,7 @@ use App\Models\Profile;
 /**
  * Interface ProfileRepositoryInterface
  *
- * Defines the contract for a Profile repository.
+ * Defines the contract for a MyProfile repository.
  * This interface will be implemented by any class that manages user profiles.
  */
 interface ProfileRepositoryInterface

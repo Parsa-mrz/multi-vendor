@@ -8,7 +8,7 @@ use App\Models\Profile;
 /**
  * Class ProfileRepository
  *
- * Repository for managing interactions with the Profile model.
+ * Repository for managing interactions with the MyProfile model.
  * Implements the ProfileRepositoryInterface to ensure required methods for profile management.
  *
  * This class provides the implementation for managing user profiles, including finding profiles by ID,

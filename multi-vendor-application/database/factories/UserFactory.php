@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
  * Factory class for generating User model instances with associated profiles
  *
  * This factory creates User instances and automatically generates associated
- * Profile records through the configure method.
+ * MyProfile records through the configure method.
  *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -46,7 +46,7 @@ class UserFactory extends Factory
     /**
      * Configure the factory with additional actions
      *
-     * Sets up an after-creating hook to automatically generate a Profile
+     * Sets up an after-creating hook to automatically generate a MyProfile
      * for each User created by this factory.
      *
      * @return self Returns the factory instance for method chaining

@@ -15,7 +15,7 @@ use Illuminate\Notifications\Notifiable;
  *
  * Represents a user in the system.
  * The User model supports authentication, API tokens via Sanctum, and notifications.
- * It also has relationships with the Vendor and Profile models.
+ * It also has relationships with the Vendor and MyProfile models.
  */
 class User extends Authenticatable implements FilamentUser, HasName
 {
@@ -128,7 +128,7 @@ class User extends Authenticatable implements FilamentUser, HasName
     /**
      * Get the profile associated with the user.
      *
-     * This method defines one-to-one relationship between the User and Profile models.
+     * This method defines one-to-one relationship between the User and MyProfile models.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */

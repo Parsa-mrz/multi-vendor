@@ -3,7 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
-use App\Filament\Pages\Profile;
+use App\Filament\Pages\MyProfile;
 use App\Http\Controllers\API\V1\Auth\LogoutController;
 use App\Http\Middleware\FilamentAuthenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Dashboard::class,
-                Profile::class,
+                MyProfile::class,
             ])
             ->userMenuItems([
                 'logout' => MenuItem::make()

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Profile
+ * Class MyProfile
  *
  * Represents the profile associated with a user in the system.
- * The Profile model supports polymorphic relationships through the `profileable` method.
+ * The MyProfile model supports polymorphic relationships through the `profileable` method.
  */
 class Profile extends Model
 {
@@ -27,7 +27,7 @@ class Profile extends Model
     /**
      * Get the user that owns the profile.
      *
-     * This method defines a one-to-many inverse relationship between the Profile and User models.
+     * This method defines a one-to-many inverse relationship between the MyProfile and User models.
      */
     public function user(): BelongsTo
     {

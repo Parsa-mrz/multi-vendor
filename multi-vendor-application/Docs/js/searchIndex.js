@@ -326,17 +326,17 @@ Search.appendIndex(
             "summary": "The\u0020user\u0020instance.",
             "url": "classes/App-Mail-UserLoggedInNotification.html#property_event"
         },                {
-            "fqsen": "\\App\\Models\\Profile",
+            "fqsen": "\\App\\Models\\MyProfile",
             "name": "Profile",
             "summary": "Class\u0020Profile",
             "url": "classes/App-Models-Profile.html"
         },                {
-            "fqsen": "\\App\\Models\\Profile\u003A\u003Auser\u0028\u0029",
+            "fqsen": "\\App\\Models\\MyProfile\u003A\u003Auser\u0028\u0029",
             "name": "user",
             "summary": "Get\u0020the\u0020user\u0020that\u0020owns\u0020the\u0020profile.",
             "url": "classes/App-Models-Profile.html#method_user"
         },                {
-            "fqsen": "\\App\\Models\\Profile\u003A\u003A\u0024fillable",
+            "fqsen": "\\App\\Models\\MyProfile\u003A\u003A\u0024fillable",
             "name": "fillable",
             "summary": "The\u0020attributes\u0020that\u0020are\u0020mass\u0020assignable.",
             "url": "classes/App-Models-Profile.html#property_fillable"
