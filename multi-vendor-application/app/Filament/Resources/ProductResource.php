@@ -2,13 +2,20 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ProductCategoryResource\RelationManagers\ProductsRelationManager;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -48,10 +55,10 @@ class ProductResource extends Resource
         $user = Auth::user();
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('vendor_id')
+                Select::make('vendor_id')
                                        ->relationship('vendor', 'store_name')
                                        ->native (false)
                                        ->searchable ()
@@ -60,33 +67,33 @@ class ProductResource extends Resource
                                        ->hidden (fn () => $user->isVendor())
                                        ->default(fn() => $user->isVendor() ? $user->vendor->id : null)
                                        ->disabled(fn () => $user->isVendor()),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('price')
+                TextInput::make('price')
                     ->required()
                     ->numeric()
                     ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
                     ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
                     ->prefix('$'),
-                Forms\Components\TextInput::make('sale_price')
+                TextInput::make('sale_price')
                     ->numeric()
                     ->prefix('$')
                     ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
                     ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', '')),
-                Forms\Components\TextInput::make('quantity')
+                TextInput::make('quantity')
                     ->required()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('discount')
+                TextInput::make('discount')
                     ->required()
                     ->numeric()
                     ->prefix('$')
                     ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
                     ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', '')),
-                Forms\Components\FileUpload::make('image')
+                FileUpload::make('image')
                     ->image(),
-                Forms\Components\Select::make('product_category_id')
+                Select::make('product_category_id')
                     ->relationship('category', 'name')
                     ->label ('Category')
                     ->native (false)
@@ -100,27 +107,27 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('name')
+                ImageColumn::make('image'),
+                TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price')
+                TextColumn::make('price')
                     ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('sale_price')
+                TextColumn::make('sale_price')
                     ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('quantity')
+                TextColumn::make('quantity')
                     ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('discount')
+                TextColumn::make('discount')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('category.name')
+                TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('vendor.store_name')
+                TextColumn::make('vendor.store_name')
                     ->numeric()
                     ->sortable(),
             ])
@@ -140,7 +147,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
         ];
     }
 
