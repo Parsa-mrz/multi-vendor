@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use function dd;
 
 /**
  * Class User
@@ -97,12 +98,11 @@ class User extends Authenticatable implements FilamentUser, HasName
     /**
      * Get the registration duration in days, with a minimum of 1 day.
      *
-     * @return int
+     * @return string
      */
-    public function getRegisterDurationInDays(): int
+    public function getRegisterDurationInDays(): string
     {
-        $days = $this->created_at->diffInHours(now()) / 24;
-        return $days < 1 ? 1 : round($days);
+        return $this->created_at->diffForHumans(['parts' => 1]);
     }
 
     /**
