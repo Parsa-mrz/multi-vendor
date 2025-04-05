@@ -122,7 +122,7 @@ class User extends Authenticatable implements FilamentUser, HasName
      */
     public function vendor(): HasOne
     {
-        return $this->hasOne(Vendor::class);
+        return $this->hasOne(Vendor::class, 'user_id');
     }
 
     /**
@@ -134,7 +134,7 @@ class User extends Authenticatable implements FilamentUser, HasName
      */
     public function profile(): HasOne
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class, 'user_id');
     }
 
     public function canAccessPanel(Panel $panel): bool

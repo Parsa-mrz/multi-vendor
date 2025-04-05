@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Http\Responses\LogoutResponse;
+use App\Models\Product;
 use App\Models\Profile;
+use App\Policies\ProductPolicy;
 use App\Policies\ProfilePolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Profile::class, ProfilePolicy::class);
+        Gate::policy (Product::class, ProductPolicy::class);
     }
 }

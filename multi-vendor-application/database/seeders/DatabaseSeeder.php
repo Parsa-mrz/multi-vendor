@@ -13,6 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::firstOrCreate(
+            ['role' => 'admin'],
+            [
+                'email' => 'admin@gmail.com',
+                'password' => bcrypt('1234'),
+                'email_verified_at' => now(),
+                'is_active' => true,
+                'last_login' => fake()->dateTime(),
+                'role' => 'admin',
+            ]
+        );
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Profile;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ProfilePolicy
+class ProductPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,14 +20,11 @@ class ProfilePolicy
     }
 
     /**
-     * Determine whether the user can view their profile.
+     * Determine whether the user can view the model.
      */
-    public function view(User $user, Profile $profile): bool
+    public function view(User $user, Product $product): bool
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
-        return $user->id === $profile->user_id;
+        return $user->isAdmin() || ($user->isVendor() && $user->vendor->id === $product->vendor_id);
     }
 
     /**
@@ -35,27 +32,21 @@ class ProfilePolicy
      */
     public function create(User $user): bool
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
-        return false;
+        return $user->isAdmin() || $user->isVendor();
     }
 
     /**
-     * Determine whether the user can update their profile.
+     * Determine whether the user can update the model.
      */
-    public function update(User $user, Profile $profile): bool
+    public function update(User $user, Product $product): bool
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
-        return $user->id === $profile->user_id;
+        return $user->isAdmin() || ($user->isVendor() && $user->vendor->id === $product->vendor_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Profile $profile): bool
+    public function delete(User $user, Product $product): bool
     {
         return false;
     }
@@ -63,7 +54,7 @@ class ProfilePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Profile $profile): bool
+    public function restore(User $user, Product $product): bool
     {
         return false;
     }
@@ -71,7 +62,7 @@ class ProfilePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Profile $profile): bool
+    public function forceDelete(User $user, Product $product): bool
     {
         return false;
     }
