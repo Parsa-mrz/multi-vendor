@@ -6,7 +6,7 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use function bcrypt;
+
 use function fake;
 
 /**

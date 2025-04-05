@@ -18,7 +18,7 @@ class Product extends Model
         'discount',
         'product_category_id',
         'vendor_id',
-        'image'
+        'image',
     ];
 
     public function vendor(): BelongsTo
@@ -26,7 +26,8 @@ class Product extends Model
         return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(ProductCategory::class, 'product_category_id');
     }
 

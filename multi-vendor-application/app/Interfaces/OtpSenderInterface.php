@@ -17,7 +17,6 @@ interface OtpSenderInterface
      *
      * @param  string  $recipient  The recipient's identifier (e.g., email address or phone number).
      * @param  string  $otp  The one-time password (OTP) to be sent.
-     * @return void
      */
     public function send(string $recipient, string $otp): void;
 }

@@ -7,9 +7,9 @@ use App\Models\Product;
 use App\Models\Profile;
 use App\Policies\ProductPolicy;
 use App\Policies\ProfilePolicy;
+use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind (LogoutResponseContract::class, LogoutResponse::class);
+        $this->app->bind(LogoutResponseContract::class, LogoutResponse::class);
     }
 
     /**
@@ -27,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Profile::class, ProfilePolicy::class);
-        Gate::policy (Product::class, ProductPolicy::class);
+        Gate::policy(Product::class, ProductPolicy::class);
     }
 }

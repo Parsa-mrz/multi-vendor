@@ -2,11 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductCategoryResource\RelationManagers\ProductsRelationManager;
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -17,9 +14,8 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+
 use function number_format;
 
 class ProductResource extends Resource
@@ -28,45 +24,47 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Admin Managment';
+    protected static ?string $navigationGroup = 'Admin Management';
 
     public static function getNavigationBadge(): ?string
     {
         $user = Auth::user();
 
         if ($user->isVendor()) {
-                return $user->vendor->products()->count();
+            return $user->vendor->products()->count();
         }
 
         return static::getModel()::count();
     }
 
-    public static function  canViewAny(): bool
+    public static function canViewAny(): bool
     {
         $user = Auth::user();
-        if($user->isAdmin() || $user->isVendor ()){
+        if ($user->isAdmin() || $user->isVendor()) {
             return true;
         }
+
         return false;
     }
 
     public static function form(Form $form): Form
     {
         $user = Auth::user();
+
         return $form
             ->schema([
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 Select::make('vendor_id')
-                                       ->relationship('vendor', 'store_name')
-                                       ->native (false)
-                                       ->searchable ()
-                                       ->required()
-                                       ->preload ()
-                                       ->hidden (fn () => $user->isVendor())
-                                       ->default(fn() => $user->isVendor() ? $user->vendor->id : null)
-                                       ->disabled(fn () => $user->isVendor()),
+                    ->relationship('vendor', 'store_name')
+                    ->native(false)
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->hidden(fn () => $user->isVendor())
+                    ->default(fn () => $user->isVendor() ? $user->vendor->id : null)
+                    ->disabled(fn () => $user->isVendor()),
                 Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
@@ -95,11 +93,11 @@ class ProductResource extends Resource
                     ->image(),
                 Select::make('product_category_id')
                     ->relationship('category', 'name')
-                    ->label ('Category')
-                    ->native (false)
-                    ->searchable ()
-                    ->preload ()
-                    ->required (),
+                    ->label('Category')
+                    ->native(false)
+                    ->searchable()
+                    ->preload()
+                    ->required(),
             ]);
     }
 
@@ -139,7 +137,7 @@ class ProductResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    //                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

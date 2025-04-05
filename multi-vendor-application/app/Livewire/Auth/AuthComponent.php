@@ -5,15 +5,21 @@ namespace App\Livewire\Auth;
 use App\Livewire\BaseComponent;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
+
 use function is_null;
 
 class AuthComponent extends BaseComponent
 {
     public $email = '';
+
     public $password = '';
+
     public $message = '';
+
     public $code = '';
+
     public $showOtpForm = false;
+
     public $originalEmail = '';
 
     protected function rules()
@@ -70,6 +76,7 @@ class AuthComponent extends BaseComponent
 
         if (! $result['success']) {
             $this->message = $result['message'] ?? 'Verification failed.';
+
             return false;
         }
 
@@ -87,18 +94,20 @@ class AuthComponent extends BaseComponent
             'email_otp'
         );
 
-        if(!$otpResult['success']){
+        if (! $otpResult['success']) {
             $this->message = $otpResult['message'];
+
             return false;
         }
 
         $result = $this->authService->registerUser([
-            "email" => $this->email,
-            "password" => $this->password
+            'email' => $this->email,
+            'password' => $this->password,
         ]);
 
         if (! $result['success']) {
             $this->message = $result['message'] ?? 'Register failed.';
+
             return false;
         }
 
@@ -109,8 +118,9 @@ class AuthComponent extends BaseComponent
 
     private function handleLoginOrVerification($result)
     {
-        if($result['status'] === 422){
+        if ($result['status'] === 422) {
             $this->message = $result['message'];
+
             return false;
         }
         if (is_null($result['data'])) {

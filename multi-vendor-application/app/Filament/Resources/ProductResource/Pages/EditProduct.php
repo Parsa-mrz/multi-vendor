@@ -7,7 +7,6 @@ use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class EditProduct extends EditRecord
 {
@@ -16,7 +15,7 @@ class EditProduct extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make (),
+            Actions\DeleteAction::make(),
         ];
     }
 

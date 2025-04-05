@@ -9,8 +9,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductsRelationManager extends RelationManager
 {
@@ -19,55 +17,56 @@ class ProductsRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         $user = Auth::user();
+
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                                          ->required()
-                                          ->maxLength(255),
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\Select::make('vendor_id')
-                                       ->relationship('vendor', 'store_name')
-                                       ->native(false)
-                                       ->searchable()
-                                       ->required()
-                                       ->preload()
-                                       ->hidden(fn () => $user->isVendor())
-                                       ->default(fn () => $user->isVendor() ? $user->vendor->id : null)
-                                       ->disabled(fn () => $user->isVendor()),
+                    ->relationship('vendor', 'store_name')
+                    ->native(false)
+                    ->searchable()
+                    ->required()
+                    ->preload()
+                    ->hidden(fn () => $user->isVendor())
+                    ->default(fn () => $user->isVendor() ? $user->vendor->id : null)
+                    ->disabled(fn () => $user->isVendor()),
                 Forms\Components\Textarea::make('description')
-                                         ->required()
-                                         ->columnSpanFull(),
+                    ->required()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('price')
-                                          ->required()
-                                          ->numeric()
-                                          ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
-                                          ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
-                                          ->prefix('$'),
+                    ->required()
+                    ->numeric()
+                    ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
+                    ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
+                    ->prefix('$'),
                 Forms\Components\TextInput::make('sale_price')
-                                          ->numeric()
-                                          ->prefix('$')
-                                          ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
-                                          ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', '')),
+                    ->numeric()
+                    ->prefix('$')
+                    ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
+                    ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', '')),
                 Forms\Components\TextInput::make('quantity')
-                                          ->required()
-                                          ->numeric()
-                                          ->default(0),
+                    ->required()
+                    ->numeric()
+                    ->default(0),
                 Forms\Components\TextInput::make('discount')
-                                          ->required()
-                                          ->numeric()
-                                          ->prefix('$')
-                                          ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
-                                          ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', '')),
+                    ->required()
+                    ->numeric()
+                    ->prefix('$')
+                    ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
+                    ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', '')),
                 Forms\Components\FileUpload::make('image')
-                                           ->image(),
+                    ->image(),
                 Forms\Components\Select::make('product_category_id')
-                                       ->relationship('category', 'name')
-                                       ->label('Category')
-                                       ->native(false)
-                                       ->searchable()
-                                       ->preload()
-                                       ->required()
-                                       ->default(fn () => $this->ownerRecord->id)
-                                       ->disabled(),
+                    ->relationship('category', 'name')
+                    ->label('Category')
+                    ->native(false)
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->default(fn () => $this->ownerRecord->id)
+                    ->disabled(),
             ]);
     }
 
@@ -77,35 +76,35 @@ class ProductsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 ImageColumn::make('image')
-                           ->label('Image'),
+                    ->label('Image'),
                 TextColumn::make('name')
-                          ->searchable()
-                          ->sortable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('slug')
-                          ->searchable()
-                          ->sortable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('description')
-                          ->searchable()
-                          ->limit(50), // Limit length for display
+                    ->searchable()
+                    ->limit(50),
                 TextColumn::make('price')
-                          ->money()
-                          ->sortable(),
+                    ->money()
+                    ->sortable(),
                 TextColumn::make('sale_price')
-                          ->money()
-                          ->sortable(),
+                    ->money()
+                    ->sortable(),
                 TextColumn::make('quantity')
-                          ->sortable(),
+                    ->sortable(),
                 TextColumn::make('discount')
-                          ->money()
-                          ->sortable(),
+                    ->money()
+                    ->sortable(),
                 TextColumn::make('vendor.store_name')
-                          ->label('Vendor')
-                          ->sortable()
-                          ->toggleable(isToggledHiddenByDefault: true), // Optional: hide by default
+                    ->label('Vendor')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('category.name')
-                          ->label('Category')
-                          ->sortable()
-                          ->toggleable(isToggledHiddenByDefault: true), // Optional: hide by default
+                    ->label('Category')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -115,11 +114,10 @@ class ProductsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    //                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class UserRepository
@@ -104,9 +103,10 @@ class UserRepository implements UserRepositoryInterface
      * @param  string  $email  The email address to check.
      * @return bool True if the email is verified, false otherwise.
      */
-    public function isEmailVerified ( string $email ): bool
+    public function isEmailVerified(string $email): bool
     {
-        $user = $this->findByEmail ( $email );
+        $user = $this->findByEmail($email);
+
         return $user?->email_verified_at !== null;
     }
 
@@ -116,11 +116,11 @@ class UserRepository implements UserRepositoryInterface
      * @param  string  $email  The email address to verify.
      * @return User The updated User instance with the verified email status.
      */
-    public function verifyEmail ( string $email ):User
+    public function verifyEmail(string $email): User
     {
-        $user = $this->findByEmail ( $email );
-        $this->update ( $user->id, [ 'email_verified_at' => now () ] );
+        $user = $this->findByEmail($email);
+        $this->update($user->id, ['email_verified_at' => now()]);
+
         return $user;
     }
-
-    }
+}

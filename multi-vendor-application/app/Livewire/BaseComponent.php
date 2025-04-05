@@ -5,9 +5,8 @@ namespace App\Livewire;
 use App\Repositories\UserRepository;
 use App\Services\AuthService;
 use App\Services\OtpService;
-use Livewire\Component;
 use App\Traits\TokenManagementTrait;
-
+use Livewire\Component;
 
 use function config;
 
@@ -36,9 +35,12 @@ abstract class BaseComponent extends Component
     public $apiUrl;
 
     protected UserRepository $userRepository;
+
     protected OtpService $otpService;
+
     protected AuthService $authService;
-    public function boot(UserRepository $userRepository,OtpService $otpService = null, AuthService $authService = null)
+
+    public function boot(UserRepository $userRepository, ?OtpService $otpService = null, ?AuthService $authService = null)
     {
         $this->userRepository = $userRepository;
         $this->otpService = $otpService;

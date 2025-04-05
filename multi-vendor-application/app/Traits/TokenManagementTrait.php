@@ -2,9 +2,7 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 use Laravel\Sanctum\PersonalAccessToken;
 
 trait TokenManagementTrait
@@ -12,7 +10,6 @@ trait TokenManagementTrait
     /**
      * Set the user token in a cookie.
      *
-     * @param string $token
      * @return void
      */
     public function setUserToken(string $token)
@@ -49,13 +46,13 @@ trait TokenManagementTrait
     {
         $token = $this->getUserToken();
 
-        if (!$token) {
+        if (! $token) {
             return false;
         }
 
         $personalAccessToken = PersonalAccessToken::findToken($token);
 
-        if (!$personalAccessToken) {
+        if (! $personalAccessToken) {
             return false;
         }
 
@@ -63,5 +60,4 @@ trait TokenManagementTrait
 
         return $user !== null;
     }
-
 }

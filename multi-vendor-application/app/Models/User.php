@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use function dd;
 
 /**
  * Class User
@@ -20,7 +19,6 @@ use function dd;
  */
 class User extends Authenticatable implements FilamentUser, HasName
 {
-
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
@@ -90,15 +88,13 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->role === 'vendor';
     }
 
-    public function is_active ():bool
+    public function is_active(): bool
     {
         return $this->is_active === true;
     }
 
     /**
      * Get the registration duration in days, with a minimum of 1 day.
-     *
-     * @return string
      */
     public function getRegisterDurationInDays(): string
     {
@@ -107,8 +103,6 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     /**
      * Get the formatted registration date.
-     *
-     * @return string
      */
     public function getFormattedRegistrationDate(): string
     {

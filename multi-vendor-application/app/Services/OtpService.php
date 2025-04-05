@@ -7,6 +7,7 @@ use App\Interfaces\OtpSenderInterface;
 use App\Repositories\CacheRepository;
 use App\Services\OtpSenders\EmailOtpSender;
 use Symfony\Component\HttpFoundation\Response;
+
 use function ucfirst;
 
 /**
@@ -17,17 +18,16 @@ use function ucfirst;
  */
 class OtpService
 {
-
     /**
      * @var CacheRepository
      */
-    protected  $cacheRepository;
+    protected $cacheRepository;
 
     /**
      * @var array<string, string> List of OTP senders mapped by type.
      */
-    protected $senders =[
-        'email' => EmailOtpSender::class
+    protected $senders = [
+        'email' => EmailOtpSender::class,
     ];
 
     /**
@@ -39,7 +39,7 @@ class OtpService
      */
     public function __construct(CacheRepository $cacheRepository)
     {
-        $this->cacheRepository  = $cacheRepository;
+        $this->cacheRepository = $cacheRepository;
     }
 
     /**
@@ -52,15 +52,14 @@ class OtpService
      * @param  string  $value  The value (e.g., email or phone number) for which OTP is sent.
      * @param  string  $prefix  The prefix used to identify the cache keys.
      * @param  OtpSenderInterface|null  $sender  The OTP sender instance, defaults to EmailOtpSender if null.
-     *
      * @return array The result of the OTP sending operation, including success status, message, and HTTP status code.
      */
-    public function sendVerificationCode(string $type, string $value, string $prefix, OtpSenderInterface $sender = null): array
+    public function sendVerificationCode(string $type, string $value, string $prefix, ?OtpSenderInterface $sender = null): array
     {
         $cacheCooldownKey = "{$prefix}_cooldown_{$type}_{$value}";
 
         if ($this->cacheRepository->has($cacheCooldownKey)) {
-            return ResponseHelper::error (
+            return ResponseHelper::error(
                 'You can request a new verification code after 2 minutes.',
                 null,
                 Response::HTTP_TOO_MANY_REQUESTS
@@ -82,7 +81,7 @@ class OtpService
         $sender = $sender ?? app($this->senders[$type]);
         $sender->send($value, (string) $verificationCode);
 
-        return ResponseHelper::success (
+        return ResponseHelper::success(
             "Verification code sent to your new {$type}."
         );
     }
@@ -104,8 +103,8 @@ class OtpService
         $cacheKey = "{$prefix}_{$type}_{$value}";
         $verificationData = $this->cacheRepository->get($cacheKey);
 
-        if (!$verificationData) {
-            return ResponseHelper::error (
+        if (! $verificationData) {
+            return ResponseHelper::error(
                 'Verification code expired or does not exist.'
             );
         }
@@ -113,7 +112,7 @@ class OtpService
         if ($verificationData['attempts'] >= 3) {
             $this->cacheRepository->forget($cacheKey);
 
-            return ResponseHelper::error (
+            return ResponseHelper::error(
                 'Maximum verification attempts reached. Please request a new code.',
                 null,
                 Response::HTTP_TOO_MANY_REQUESTS
@@ -124,8 +123,8 @@ class OtpService
             $verificationData['attempts'] += 1;
             $this->cacheRepository->store($cacheKey, $verificationData, 300);
 
-            return ResponseHelper::error (
-                'Invalid verification code. Attempts remaining: ' . (3 - $verificationData['attempts']),
+            return ResponseHelper::error(
+                'Invalid verification code. Attempts remaining: '.(3 - $verificationData['attempts']),
                 null,
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
@@ -134,8 +133,8 @@ class OtpService
 
         $this->cacheRepository->forget($cacheKey);
 
-        return ResponseHelper::success (
-            ucfirst($type) . ' Verification Passed Successfully.'
+        return ResponseHelper::success(
+            ucfirst($type).' Verification Passed Successfully.'
         );
     }
 }

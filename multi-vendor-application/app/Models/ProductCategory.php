@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class ProductCategory extends Model
 {
-    protected  $fillable = [
+    protected $fillable = [
         'name',
         'slug',
     ];

@@ -21,10 +21,9 @@ class EmailOtpSender implements OtpSenderInterface
      *
      * @param  string  $recipient  The email address of the recipient.
      * @param  string  $otp  The OTP to be sent to the recipient.
-     * @return void
      */
     public function send(string $recipient, string $otp): void
     {
-        Mail::to($recipient)->send(new EmailOtp($otp,$recipient));
+        Mail::to($recipient)->send(new EmailOtp($otp, $recipient));
     }
 }

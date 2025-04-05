@@ -5,14 +5,13 @@ namespace App\Services;
 use App\Helpers\ResponseHelper;
 use App\Models\Profile;
 use App\Repositories\ProfileRepository;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProfileService
 {
-
     protected $profileRepository;
+
     /**
      * Create a new class instance.
      */
@@ -25,9 +24,9 @@ class ProfileService
     {
         $profile = $this->profileRepository->findById($id);
 
-        if (!$profile) {
+        if (! $profile) {
 
-            return ResponseHelper::error (
+            return ResponseHelper::error(
                 'MyProfile not found.',
                 null,
                 Response::HTTP_NOT_FOUND
@@ -35,7 +34,7 @@ class ProfileService
         }
 
         if (Gate::denies('update', $profile)) {
-            return ResponseHelper::error (
+            return ResponseHelper::error(
                 'You are not authorized to update this profile.',
                 null,
                 Response::HTTP_FORBIDDEN
@@ -50,7 +49,7 @@ class ProfileService
         $profile = $this->profileRepository->findById($id);
 
         if ($profile && Gate::denies('view', $profile)) {
-            return ResponseHelper::error (
+            return ResponseHelper::error(
                 'You are not authorized to update this profile.',
                 null,
                 Response::HTTP_FORBIDDEN
@@ -65,7 +64,7 @@ class ProfileService
         $profile = $this->profileRepository->findByUserId($id);
 
         if ($profile && Gate::denies('view', $profile)) {
-            return ResponseHelper::error (
+            return ResponseHelper::error(
                 'You are not authorized to update this profile.',
                 null,
                 Response::HTTP_FORBIDDEN

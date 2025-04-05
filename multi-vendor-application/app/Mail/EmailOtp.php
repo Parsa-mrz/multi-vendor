@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -45,13 +44,10 @@ class EmailOtp extends Mailable
         $this->email = $email;
     }
 
-
     /**
      * Get the message envelope.
      *
      * The envelope contains the metadata of the message, such as the subject.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
      */
     public function envelope(): Envelope
     {
@@ -60,13 +56,10 @@ class EmailOtp extends Mailable
         );
     }
 
-
     /**
      * Get the message content definition.
      *
      * This method defines the view for the email content and the data to pass to it.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
      */
     public function content(): Content
     {

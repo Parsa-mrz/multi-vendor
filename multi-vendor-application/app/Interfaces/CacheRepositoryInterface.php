@@ -3,7 +3,6 @@
 namespace App\Interfaces;
 
 use Illuminate\Support\Facades\Cache;
-use function now;
 
 /**
  * Interface CacheRepositoryInterface
@@ -23,7 +22,6 @@ interface CacheRepositoryInterface
      * @param  string  $key  The key under which the data will be stored in the cache.
      * @param  array  $data  The data to be stored in the cache.
      * @param  int  $ttl  The time-to-live (TTL) in seconds for the cache entry.
-     * @return void
      */
     public function store(string $key, array $data, int $ttl): void;
 
@@ -36,7 +34,6 @@ interface CacheRepositoryInterface
      * @param  string  $key  The key under which the flag will be stored in the cache.
      * @param  bool  $value  The value of the flag (true or false).
      * @param  int  $ttl  The time-to-live (TTL) in seconds for the cache entry.
-     * @return void
      */
     public function storeFlag(string $key, bool $value, int $ttl): void;
 
@@ -57,7 +54,6 @@ interface CacheRepositoryInterface
      * This method deletes the cache entry stored under the specified key.
      *
      * @param  string  $key  The key to remove from the cache.
-     * @return void
      */
     public function forget(string $key): void;
 
@@ -70,5 +66,4 @@ interface CacheRepositoryInterface
      * @return bool True if the key exists in the cache, false otherwise.
      */
     public function has(string $key): bool;
-
 }

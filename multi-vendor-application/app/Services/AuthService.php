@@ -33,7 +33,6 @@ class AuthService
 
     protected $otpService;
 
-
     /**
      * AuthService constructor.
      *
@@ -43,7 +42,7 @@ class AuthService
      * @param  UserRepository  $userRepository  Repository for managing user data.
      * @param  ProfileRepository  $profileRepository  Repository for managing profile data.
      */
-    public function __construct(UserRepository $userRepository, ProfileRepository $profileRepository,OtpService $otpService)
+    public function __construct(UserRepository $userRepository, ProfileRepository $profileRepository, OtpService $otpService)
     {
         $this->userRepository = $userRepository;
         $this->profileRepository = $profileRepository;
@@ -65,16 +64,16 @@ class AuthService
     {
         $user = $this->userRepository->findByEmail($email);
 
-        if(!$user){
-            return ResponseHelper::error (
+        if (! $user) {
+            return ResponseHelper::error(
                 'Email not registered.',
                 null,
                 Response::HTTP_NOT_FOUND
             );
         }
 
-        if (!$user->is_active ()) {
-            return ResponseHelper::error (
+        if (! $user->is_active()) {
+            return ResponseHelper::error(
                 'Your account is deactivated.please contact administrator.',
                 null,
                 Response::HTTP_UNPROCESSABLE_ENTITY
@@ -82,16 +81,16 @@ class AuthService
         }
 
         if (! Hash::check($password, $user->password)) {
-            return ResponseHelper::error (
+            return ResponseHelper::error(
                 'Invalid credentials.',
                 null,
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
         }
 
-        $hasVerifiedEmail = $this->userRepository->isEmailVerified ($email);
-        if(!$hasVerifiedEmail){
-            return ResponseHelper::error (
+        $hasVerifiedEmail = $this->userRepository->isEmailVerified($email);
+        if (! $hasVerifiedEmail) {
+            return ResponseHelper::error(
                 'Email is not verified',
                 null,
                 Response::HTTP_UNPROCESSABLE_ENTITY
@@ -102,8 +101,8 @@ class AuthService
 
         event(new UserLoggedIn($user));
 
-        return ResponseHelper::success (
-            "Login successful",
+        return ResponseHelper::success(
+            'Login successful',
             ['user' => new UserResource($user->load('profile'))]
         );
     }
@@ -127,22 +126,22 @@ class AuthService
         ]);
 
         if ($user && $profile) {
-            return ResponseHelper::success (
-                "User registered successfully",
+            return ResponseHelper::success(
+                'User registered successfully',
                 ['user' => new UserResource($user->load('profile'))],
                 Response::HTTP_CREATED
             );
         }
 
-        return ResponseHelper::error (
+        return ResponseHelper::error(
             'Registration failed',
             null,
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
     }
 
-    public function  sendEmailVerification(array $data){
-        return $this->otpService->sendVerificationCode ('email',$data['email'],'email_otp',new EmailOtpSender());
+    public function sendEmailVerification(array $data)
+    {
+        return $this->otpService->sendVerificationCode('email', $data['email'], 'email_otp', new EmailOtpSender);
     }
-
 }

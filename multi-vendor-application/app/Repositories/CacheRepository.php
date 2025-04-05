@@ -22,7 +22,6 @@ class CacheRepository implements CacheRepositoryInterface
      * @param  string  $key  The key under which the data will be stored.
      * @param  array  $data  The data to store in the cache.
      * @param  int  $ttl  The time-to-live (TTL) in seconds for the cache entry.
-     * @return void
      */
     public function store(string $key, array $data, int $ttl): void
     {
@@ -38,7 +37,6 @@ class CacheRepository implements CacheRepositoryInterface
      * @param  string  $key  The key under which the flag will be stored.
      * @param  bool  $value  The value of the flag (true or false).
      * @param  int  $ttl  The time-to-live (TTL) in seconds for the cache entry.
-     * @return void
      */
     public function storeFlag(string $key, bool $value, int $ttl): void
     {
@@ -65,7 +63,6 @@ class CacheRepository implements CacheRepositoryInterface
      * This method removes the cache entry stored under the specified key.
      *
      * @param  string  $key  The key to remove from the cache.
-     * @return void
      */
     public function forget(string $key): void
     {

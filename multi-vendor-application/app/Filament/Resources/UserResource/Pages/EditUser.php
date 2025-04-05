@@ -19,7 +19,7 @@ class EditUser extends EditRecord
 
     protected function afterSave(): void
     {
-        if ($this->record->role === 'vendor' && !$this->record->vendor) {
+        if ($this->record->role === 'vendor' && ! $this->record->vendor) {
             $this->record->vendor()->create([
                 'store_name' => $this->record->vendor['store_name'] ?? 'Default Store Name',
                 'description' => $this->record->vendor['description'] ?? 'Default vendor description.',

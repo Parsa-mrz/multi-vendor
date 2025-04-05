@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Profile;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ProfilePolicy
 {
@@ -16,6 +15,7 @@ class ProfilePolicy
         if ($user->isAdmin()) {
             return true;
         }
+
         return false;
     }
 
@@ -27,6 +27,7 @@ class ProfilePolicy
         if ($user->isAdmin()) {
             return true;
         }
+
         return $user->id === $profile->user_id;
     }
 
@@ -38,6 +39,7 @@ class ProfilePolicy
         if ($user->isAdmin()) {
             return true;
         }
+
         return false;
     }
 
@@ -49,6 +51,7 @@ class ProfilePolicy
         if ($user->isAdmin()) {
             return true;
         }
+
         return $user->id === $profile->user_id;
     }
 

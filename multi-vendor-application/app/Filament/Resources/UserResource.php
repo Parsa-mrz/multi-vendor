@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Rawilk\FilamentPasswordInput\Password;
 
-
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'Admin Managment';
 
     public static function getNavigationBadge(): ?string
@@ -31,12 +31,13 @@ class UserResource extends Resource
         return static::getModel()::count();
     }
 
-    public static function  canViewAny(): bool
+    public static function canViewAny(): bool
     {
         $user = Auth::user();
-        if($user->isAdmin()){
+        if ($user->isAdmin()) {
             return true;
         }
+
         return false;
     }
 
@@ -45,67 +46,67 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Section::make('User Info')
-                       ->schema([
-                           TextInput::make('email')
-                                    ->required()
-                                    ->unique(ignoreRecord: true)
-                                    ->maxLength(255)
-                                    ->email(),
+                    ->schema([
+                        TextInput::make('email')
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(255)
+                            ->email(),
 
-                           Password::make('password')
-                                   ->required(fn($context) => $context === 'create')
-                                   ->maxLength(255)
-                                   ->dehydrated(fn($state) => !empty($state) ? Hash::make($state) : null)
-                                   ->hint('Leave blank to keep the current password')
-                                   ->visible(fn($context) => $context === 'create'),
+                        Password::make('password')
+                            ->required(fn ($context) => $context === 'create')
+                            ->maxLength(255)
+                            ->dehydrated(fn ($state) => ! empty($state) ? Hash::make($state) : null)
+                            ->hint('Leave blank to keep the current password')
+                            ->visible(fn ($context) => $context === 'create'),
 
-                           Select::make('role')
-                                 ->label('Role')
-                                 ->options([
-                                     'admin' => 'Admin',
-                                     'customer' => 'Customer',
-                                     'vendor' => 'Vendor',
-                                 ])
-                                 ->native(false)
-                                 ->searchable()
-                                 ->required()
-                                 ->default('customer')
-                                 ->live (),
+                        Select::make('role')
+                            ->label('Role')
+                            ->options([
+                                'admin' => 'Admin',
+                                'customer' => 'Customer',
+                                'vendor' => 'Vendor',
+                            ])
+                            ->native(false)
+                            ->searchable()
+                            ->required()
+                            ->default('customer')
+                            ->live(),
 
-                           Toggle::make('is_active')
-                                 ->label('Is Active')
-                                 ->default(true),
-                       ])
-                       ->columns(2),
+                        Toggle::make('is_active')
+                            ->label('Is Active')
+                            ->default(true),
+                    ])
+                    ->columns(2),
 
                 Section::make('Profile Info')
-                       ->relationship('profile')
-                       ->schema([
+                    ->relationship('profile')
+                    ->schema([
                         TextInput::make('first_name')
-                                 ->label('First Name'),
+                            ->label('First Name'),
                         TextInput::make('last_name')
-                                 ->label('Last Name'),
+                            ->label('Last Name'),
                         TextInput::make('phone_number')
-                                 ->label('Phone Number'),
+                            ->label('Phone Number'),
                     ])
-                       ->columns(2),
+                    ->columns(2),
 
                 Section::make('Vendor Info')
                     ->relationship('vendor')
-                       ->schema([
-                           TextInput::make('store_name')
-                                    ->label('Store Name')
-                                    ->required(fn ($get) => $get('role') !== 'vendor'),
-                           TextArea::make('description')
-                                   ->label('Description')
-                                   ->required(fn ($get) => $get('role') !== 'vendor'),
-                           Toggle::make('is_active')
-                                 ->label('Is Active')
-                                 ->default(true)
-                                 ->required(fn ($get) => $get('role') !== 'vendor'),
-                       ])
-                       ->columns(2)
-                       ->visible(fn ($get) => $get('role') === 'vendor'),
+                    ->schema([
+                        TextInput::make('store_name')
+                            ->label('Store Name')
+                            ->required(fn ($get) => $get('role') !== 'vendor'),
+                        TextArea::make('description')
+                            ->label('Description')
+                            ->required(fn ($get) => $get('role') !== 'vendor'),
+                        Toggle::make('is_active')
+                            ->label('Is Active')
+                            ->default(true)
+                            ->required(fn ($get) => $get('role') !== 'vendor'),
+                    ])
+                    ->columns(2)
+                    ->visible(fn ($get) => $get('role') === 'vendor'),
             ])
             ->columns(1);
     }
@@ -115,51 +116,51 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('profile.first_name')
-                            ->label('First Name')
-                            ->searchable(),
+                    ->label('First Name')
+                    ->searchable(),
                 TextColumn::make('profile.last_name')
-                            ->label('Last Name')
-                            ->searchable(),
+                    ->label('Last Name')
+                    ->searchable(),
                 TextColumn::make('profile.phone_number')
-                            ->label('Phone')
-                            ->searchable(),
+                    ->label('Phone')
+                    ->searchable(),
                 TextColumn::make('email')
-                            ->searchable (),
+                    ->searchable(),
                 TextColumn::make('is_active')
-                            ->searchable ()
-                            ->label ('Status')
-                            ->badge()
-                            ->state(function ($record) {
-                                    return $record->is_active ? 'Active' : 'Inactive';
-                            })
-                            ->color(function ($record) {
-                                    return $record->is_active ? 'success' : 'danger';
-                            }),
+                    ->searchable()
+                    ->label('Status')
+                    ->badge()
+                    ->state(function ($record) {
+                        return $record->is_active ? 'Active' : 'Inactive';
+                    })
+                    ->color(function ($record) {
+                        return $record->is_active ? 'success' : 'danger';
+                    }),
                 TextColumn::make('last_login')
-                            ->label('Last Login'),
-                TextColumn::make ('role')
-                            ->searchable ()
-                            ->label ('Role')
-                            ->badge ()
-                                ->state(function ($record) {
-                                    return match ($record->role) {
-                                        'admin' => 'Admin',
-                                        'customer' => 'Customer',
-                                        'vendor' => 'Vendor',
-                                        default => 'Unknown'
-                                    };
-                                })
-                                ->color(function ($record) {
-                                    return match ($record->role) {
-                                        'admin' => 'gray',
-                                        'customer' => 'primary',
-                                        'vendor' => 'success',
-                                    };
-                                }),
-                TextColumn::make ('created_at')
-                            ->label ('Registered At')
-                            ->date('Y-m-d')
-                            ->searchable ()
+                    ->label('Last Login'),
+                TextColumn::make('role')
+                    ->searchable()
+                    ->label('Role')
+                    ->badge()
+                    ->state(function ($record) {
+                        return match ($record->role) {
+                            'admin' => 'Admin',
+                            'customer' => 'Customer',
+                            'vendor' => 'Vendor',
+                            default => 'Unknown'
+                        };
+                    })
+                    ->color(function ($record) {
+                        return match ($record->role) {
+                            'admin' => 'gray',
+                            'customer' => 'primary',
+                            'vendor' => 'success',
+                        };
+                    }),
+                TextColumn::make('created_at')
+                    ->label('Registered At')
+                    ->date('Y-m-d')
+                    ->searchable(),
             ])
             ->filters([
 

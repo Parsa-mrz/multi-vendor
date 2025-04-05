@@ -5,15 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductCategoryResource\Pages;
 use App\Filament\Resources\ProductCategoryResource\RelationManagers;
 use App\Models\ProductCategory;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
 class ProductCategoryResource extends Resource
@@ -29,12 +26,13 @@ class ProductCategoryResource extends Resource
         return static::getModel()::count();
     }
 
-    public static function  canViewAny(): bool
+    public static function canViewAny(): bool
     {
         $user = Auth::user();
-        if($user->isAdmin()){
+        if ($user->isAdmin()) {
             return true;
         }
+
         return false;
     }
 
@@ -81,7 +79,7 @@ class ProductCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ProductsRelationManager::class
+            RelationManagers\ProductsRelationManager::class,
         ];
     }
 

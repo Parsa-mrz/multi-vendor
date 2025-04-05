@@ -2,8 +2,8 @@
 
 namespace App\Helpers;
 
-use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+
 use function response;
 
 /**
@@ -49,5 +49,4 @@ class ResponseHelper
             'status' => $status,
         ];
     }
-
 }

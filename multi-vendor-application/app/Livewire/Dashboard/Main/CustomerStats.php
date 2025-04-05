@@ -13,8 +13,8 @@ class CustomerStats extends BaseWidget
         $user = Auth::user();
 
         return [
-            Stat::make('Register Duration', $user->getRegisterDurationInDays ())
-                ->description('Since: ' . $user->getFormattedRegistrationDate())
+            Stat::make('Register Duration', $user->getRegisterDurationInDays())
+                ->description('Since: '.$user->getFormattedRegistrationDate())
                 ->color('warning'),
             Stat::make('Your Orders', 10)
                 ->description('Total orders placed')
