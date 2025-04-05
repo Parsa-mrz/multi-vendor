@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":recycle: add profiles to UserResource.php">
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":recycle: add vendors to UserResource.php">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource/Pages/CreateUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource/Pages/CreateUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource/Pages/EditUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource/Pages/EditUser.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,7 +283,7 @@
       <workItem from="1743629842973" duration="2124000" />
       <workItem from="1743682195542" duration="17421000" />
       <workItem from="1743788183018" duration="15730000" />
-      <workItem from="1743829853712" duration="3839000" />
+      <workItem from="1743829853712" duration="7068000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -423,7 +421,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743831480839</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary=":recycle: add vendors to UserResource.php">
+      <option name="closed" value="true" />
+      <created>1743833793171</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1743833793171</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,6 +452,7 @@
     <MESSAGE value=":recycle: check user account be active" />
     <MESSAGE value=":recycle: add auth validation" />
     <MESSAGE value=":recycle: add profiles to UserResource.php" />
-    <option name="LAST_COMMIT_MESSAGE" value=":recycle: add profiles to UserResource.php" />
+    <MESSAGE value=":recycle: add vendors to UserResource.php" />
+    <option name="LAST_COMMIT_MESSAGE" value=":recycle: add vendors to UserResource.php" />
   </component>
 </project>

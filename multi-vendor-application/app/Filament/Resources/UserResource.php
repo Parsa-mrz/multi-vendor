@@ -14,7 +14,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Rawilk\FilamentPasswordInput\Password;
@@ -128,7 +127,7 @@ class UserResource extends Resource
                             ->searchable (),
                 TextColumn::make('is_active')
                             ->searchable ()
-                            ->label ('Active')
+                            ->label ('Status')
                             ->badge()
                             ->state(function ($record) {
                                     return $record->is_active ? 'Active' : 'Inactive';
@@ -163,7 +162,7 @@ class UserResource extends Resource
                             ->searchable ()
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
