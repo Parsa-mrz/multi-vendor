@@ -3,11 +3,13 @@
         @forelse ($products as $product)
             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 @if($product->image)
-                    <img
-                        src="{{ $product->image }}"
-                        alt="{{ $product->name }}"
-                        class="w-full h-48 object-cover"
-                    >
+                    <a href="{{ route('product.show', $product->slug) }}">
+                        <img
+                            src="{{ $product->image }}"
+                            alt="{{ $product->name }}"
+                            class="w-full h-48 object-cover"
+                        >
+                    </a>
                 @else
                     <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
                         No Image
@@ -15,7 +17,9 @@
                 @endif
 
                 <div class="p-4">
-                    <h3 class="text-lg font-semibold mb-2">{{ $product->name }}</h3>
+                    <a href="{{ route('product.show', $product->slug) }}">
+                        <h3 class="text-lg font-semibold mb-2">{{ $product->name }}</h3>
+                    </a>
                     <p class="text-gray-600 text-sm mb-2 line-clamp-2">{{ $product->description }}</p>
 
                     <div class="flex items-center justify-between">
@@ -27,14 +31,9 @@
                                 <span class="text-gray-800 font-bold">${{ number_format($product->price, 2) }}</span>
                             @endif
                         </div>
-                        <a
-                            href="{{ route('product.show', $product->slug) }}"
-                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                        >
-                            View
-                        </a>
                     </div>
                 </div>
+                    <livewire:cart.add-to-cart :productId="$product->id" :showQuantity="false" />
             </div>
         @empty
             <div class="col-span-full text-center py-8">

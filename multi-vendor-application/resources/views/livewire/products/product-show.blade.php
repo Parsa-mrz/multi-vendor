@@ -60,7 +60,7 @@
 
             <div class="space-y-4">
                 @if($product->quantity > 0)
-                    @livewire('cart.add-to-cart', ['productId' => $product->id], key($product->id))
+                    <livewire:cart.add-to-cart :productId="$product->id" />
                 @else
                     <div class="flex justify-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">

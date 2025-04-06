@@ -11,6 +11,7 @@ class AddToCart extends Component
 {
     public $productId;
     public $quantity = 1;
+    public $showQuantity = true;
     protected $cartService;
 
     protected $rules = [

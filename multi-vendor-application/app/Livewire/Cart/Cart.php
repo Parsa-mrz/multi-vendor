@@ -6,6 +6,7 @@ use App\Helpers\SweetAlertHelper;
 use App\Services\CartService;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use function dd;
 
 class Cart extends Component
 {

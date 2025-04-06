@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: add basic UI for shop products and show products">
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: add sweet alet with cart and add to cart component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/LoaderComponent.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Cart/AddToCart.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Cart/AddToCart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Cart/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Cart/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Products/ProductList.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Products/ProductList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Products/ProductShow.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Products/ProductShow.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/CartRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Repositories/CartRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/CartService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/CartService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/components/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/components/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/loader-component.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/add-to-cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/add-to-cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/products/product-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/products/product-list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/products/product-show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/products/product-show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +295,7 @@
       <workItem from="1743682195542" duration="17421000" />
       <workItem from="1743788183018" duration="15730000" />
       <workItem from="1743829853712" duration="27165000" />
-      <workItem from="1743923167935" duration="8809000" />
+      <workItem from="1743923167935" duration="14540000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -485,7 +489,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743877381117</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary=":sparkles: add sweet alet with cart and add to cart component">
+      <option name="closed" value="true" />
+      <created>1743932945989</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1743932945989</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,6 +527,7 @@
     <MESSAGE value=":recycle: add ProductsRelationManager to category" />
     <MESSAGE value=":recycle: refactor code style" />
     <MESSAGE value=":sparkles: add basic UI for shop products and show products" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: add basic UI for shop products and show products" />
+    <MESSAGE value=":sparkles: add sweet alet with cart and add to cart component" />
+    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: add sweet alet with cart and add to cart component" />
   </component>
 </project>

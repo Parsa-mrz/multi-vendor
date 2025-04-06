@@ -3,6 +3,7 @@
 namespace App\Livewire\Products;
 
 use App\Repositories\ProductRepository;
+use App\Services\ProductService;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,22 +15,11 @@ class ProductList extends Component
     protected $paginationTheme = 'tailwind';
 
     public $perPage = 12;
-    public $search = '';
-
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
 
     #[Title('Shop')]
-    public function render(ProductRepository $productRepository)
+    public function render(ProductService $product_service)
     {
-        $products = $productRepository->getProductsPaginated($this->perPage)
-                                      ->when($this->search, function ($query) {
-                                          return $query->where('name', 'like', '%' . $this->search . '%')
-                                                       ->orWhere('description', 'like', '%' . $this->search . '%');
-                                      });
+        $products = $product_service->getProducts ($this->perPage);
         return view('livewire.products.product-list',[
             'products' => $products
         ]);

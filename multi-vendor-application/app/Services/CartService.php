@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\CartRepository;
 use App\Repositories\ProductRepository;
 use Exception;
+use function dd;
 
 class CartService
 {
@@ -19,13 +20,32 @@ class CartService
         $this->productRepository = $productRepository;
     }
 
+
+    /**
+     * Cast the necessary fields to float and int
+     *
+     * @param array $item
+     * @return array
+     */
+    private function castItemFields(array $item): array
+    {
+        $item['price'] = (float) $item['price'];
+        $item['sale_price'] = $item['sale_price'] ? (float) $item['sale_price'] : null;
+        $item['discount'] = (float) $item['discount'];
+        $item['quantity'] = (int) $item['quantity'];
+
+        return $item;
+    }
+
     /**
      * Get all items in the cart
      * @return array
      */
     public function getCartItems(): array
     {
-        return $this->cartRepository->getCart();
+        $items = $this->cartRepository->getCart();
+
+        return array_map([$this, 'castItemFields'], $items);
     }
 
     /**
@@ -73,10 +93,14 @@ class CartService
     public function getTotal(): float
     {
         $items = $this->cartRepository->getCart();
-        return collect($items)->sum(function ($item) {
+        $items = array_map([$this, 'castItemFields'], $items);
+        $total = collect($items)->sum(function ($item) {
             $price = $item['discount'] ? $item['sale_price'] : $item['price'];
+
             return $price * $item['quantity'];
         });
+
+        return $total;
     }
 
     /**

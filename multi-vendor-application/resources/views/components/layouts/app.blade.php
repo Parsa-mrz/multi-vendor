@@ -47,7 +47,7 @@
                 icon: alertData.type,
                 position: 'top-right',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000
             });
         });
     </script>

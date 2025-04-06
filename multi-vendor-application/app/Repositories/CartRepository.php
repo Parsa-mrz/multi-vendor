@@ -60,7 +60,8 @@ class CartRepository implements CartRepositoryInterface
                 'sale_price' => $product->sale_price,
                 'discount' => $product->discount,
                 'quantity' => $quantity,
-                'slug' => $product->slug
+                'slug' => $product->slug,
+                'image' => $product->image,
             ];
         }
 
