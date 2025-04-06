@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\ProductRepositoryInterface;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -65,5 +66,19 @@ class ProductRepository implements ProductRepositoryInterface
     public function getProductBySlug ( string $slug ): ?Product
     {
         return Product::where('slug', $slug)->first();
+    }
+
+    /**
+     * @param  int  $productId
+     * @param  array  $data
+     *
+     * @return Product
+     */
+    public function update ( int $productId, array $data ): Product
+    {
+       $product = $this->getProduct($productId);
+       $product->update($data);
+
+       return $product;
     }
 }

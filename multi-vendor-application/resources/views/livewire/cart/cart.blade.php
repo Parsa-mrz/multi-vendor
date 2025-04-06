@@ -35,7 +35,7 @@
                             wire:model.debounce.500ms="cartItems.{{ $item['id'] }}.quantity"
                             wire:change="updateQuantity({{ $item['id'] }}, $event.target.value)"
                             min="1"
-                            class="w-20 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            class="w-20 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         >
                         <p class="text-gray-700 font-medium">
                             ${{ number_format(($item['discount'] ? $item['sale_price'] : $item['price']) * $item['quantity'], 2) }}
@@ -47,15 +47,15 @@
             <!-- Total -->
             <div class="p-4 bg-gray-50 rounded-md">
                 <div class="flex justify-between items-center">
-                    <span class="text-lg font-semibold text-gray-900">Total:</span>
-                    <span class="text-xl font-bold text-gray-900">${{ number_format($total, 2) }}</span>
+                    <span class="text-lg font-semibold text-gray-900">Subtotal:</span>
+                    <span class="text-xl font-bold text-gray-900">${{ number_format($subTotal, 2) }}</span>
                 </div>
             </div>
 
             <!-- Checkout Button (you can add this if needed) -->
             <a
                 href="{{route ('checkout')}}"
-                class="w-full block text-center py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                class="w-full block text-center py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
                 Proceed to Checkout
             </a>

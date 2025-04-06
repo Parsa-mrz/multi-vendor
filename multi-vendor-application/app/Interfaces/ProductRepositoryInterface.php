@@ -15,4 +15,5 @@ interface ProductRepositoryInterface
     public function findByCategoryId(int $categoryId): ?Collection;
 
     public function getProductBySlug(string $slug): ?Product;
+    public function update (int $productId, array $data): Product;
 }

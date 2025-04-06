@@ -11,7 +11,7 @@ use function dd;
 class Cart extends Component
 {
     public $cartItems = [];
-    public $total = 0;
+    public $subTotal = 0;
     protected $cartService;
 
     protected $listeners = [
@@ -32,7 +32,7 @@ class Cart extends Component
     {
         try {
             $this->cartItems = $this->cartService->getCartItems();
-            $this->total = $this->cartService->getTotal();
+            $this->subTotal = $this->cartService->getTotal();
         } catch (\Exception $e) {
             SweetAlertHelper::error($this, 'Operation Failed', $e->getMessage());
         }
