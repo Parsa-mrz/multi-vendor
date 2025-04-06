@@ -88,6 +88,8 @@ class UserResource extends Resource
                             ->label('Last Name'),
                         TextInput::make('phone_number')
                             ->label('Phone Number'),
+                        TextInput::make('address')
+                            ->label('Address'),
                     ])
                     ->columns(2),
 

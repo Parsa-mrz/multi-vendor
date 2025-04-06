@@ -14,9 +14,10 @@ class AdminSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    //todo: add profile
     public function run(): void
     {
-        User::firstOrCreate(
+        $user = User::firstOrCreate(
             ['role' => 'admin'],
             [
                 'email' => 'admin@gmail.com',
@@ -27,5 +28,7 @@ class AdminSeeder extends Seeder
                 'role' => 'admin',
             ]
         );
+
+        $user->profile()->create();
     }
 }

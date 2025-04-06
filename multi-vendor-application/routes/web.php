@@ -3,6 +3,7 @@
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Livewire\Auth\AuthComponent;
 use App\Livewire\Cart\Cart;
+use App\Livewire\Checkout\Checkout;
 use App\Livewire\HomePage;
 use App\Livewire\Products\ProductList;
 use App\Livewire\Products\ProductShow;
@@ -13,3 +14,4 @@ Route::get('login', AuthComponent::class)->name('login')->middleware([RedirectIf
 Route::get ('products',ProductList::class)->name('shop');
 Route::get ('products/{slug}',ProductShow::class)->name ('product.show');
 Route::get ('cart', Cart::class)->name ('cart');
+Route::get ('checkout', Checkout::class)->name ('checkout');

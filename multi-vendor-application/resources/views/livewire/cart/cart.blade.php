@@ -53,11 +53,12 @@
             </div>
 
             <!-- Checkout Button (you can add this if needed) -->
-            <button
-                class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            <a
+                href="{{route ('checkout')}}"
+                class="w-full block text-center py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
                 Proceed to Checkout
-            </button>
+            </a>
         </div>
     @else
         <div class="text-center py-8">
