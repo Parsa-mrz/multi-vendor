@@ -9,6 +9,8 @@ use App\Services\OrderService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use function dd;
+use function view;
 
 class Checkout extends Component
 {
@@ -47,6 +49,15 @@ class Checkout extends Component
     #[Title("Checkout")]
     public function render()
     {
+        if (empty($this->cartItems)) {
+            SweetAlertHelper::error (
+                $this,
+                'Cart is empty',
+                '',
+                route('cart'),
+            );
+        }
+
         return view('livewire.checkout.checkout');
     }
 }

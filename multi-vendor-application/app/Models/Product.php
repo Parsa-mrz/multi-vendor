@@ -18,7 +18,6 @@ class Product extends Model
         'price',
         'sale_price',
         'quantity',
-        'discount',
         'product_category_id',
         'vendor_id',
         'image',

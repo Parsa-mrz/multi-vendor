@@ -95,7 +95,7 @@ class CartService
         $items = $this->cartRepository->getCart();
         $items = array_map([$this, 'castItemFields'], $items);
         $total = collect($items)->sum(function ($item) {
-            $price = $item['discount'] ? $item['sale_price'] : $item['price'];
+            $price = $item['sale_price'] ?? $item['price'];
 
             return $price * $item['quantity'];
         });

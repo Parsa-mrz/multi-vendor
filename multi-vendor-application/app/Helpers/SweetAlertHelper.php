@@ -6,30 +6,38 @@ use Livewire\Component;
 
 class SweetAlertHelper
 {
-    public static function success(Component $component, string $title, string $text): void
+    private $component;
+
+    public function __construct(Component $component)
     {
-        $component->dispatch('swal', [
-            'type' => 'success',
-            'title' => $title,
-            'text' => $text
-        ]);
+        $this->component = $component;
+    }
+    public static function success(Component $component, string $title, string $text, string $redirect=null): void
+    {
+        $instance = new self($component);
+        $instance->dispatchAlert('success', $title, $text, $redirect);
     }
 
-    public static function error(Component $component, string $title, string $text): void
+    public static function error(Component $component, string $title, string $text, string $redirect=null): void
     {
-        $component->dispatch('swal', [
-            'type' => 'error',
-            'title' => $title,
-            'text' => $text
-        ]);
+        $instance = new self($component);
+        $instance->dispatchAlert('error', $title, $text, $redirect);
     }
 
-    public static function warning(Component $component, string $title, string $text): void
+    public static function warning(Component $component, string $title, string $text, string $redirect=null): void
     {
-        $component->dispatch('swal', [
-            'type' => 'warning',
+        $instance = new self($component);
+        $instance->dispatchAlert('warning', $title, $text, $redirect);
+
+    }
+
+    private function dispatchAlert(string $type, string $title, string $text, string $redirect = null): void
+    {
+        $this->component->dispatch('swal', [
+            'type' => $type,
             'title' => $title,
-            'text' => $text
+            'text' => $text,
+            'redirect' => $redirect,
         ]);
     }
 }

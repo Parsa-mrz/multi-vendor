@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: add order and display orders for each roles">
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":bug: fix product quantity reduce after checkout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/ProductResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/SweetAlertHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/SweetAlertHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Checkout/Checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Checkout/Checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/CartService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/CartService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/OrderService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/database/migrations/2025_04_05_072230_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/database/migrations/2025_04_05_072230_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/components/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/components/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/checkout/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/checkout/checkout.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +295,7 @@
       <workItem from="1743788183018" duration="15730000" />
       <workItem from="1743829853712" duration="27165000" />
       <workItem from="1743923167935" duration="33597000" />
-      <workItem from="1744040400391" duration="10623000" />
+      <workItem from="1744040400391" duration="12981000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -520,14 +529,21 @@
       <option name="project" value="LOCAL" />
       <updated>1744105611803</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary=":bug: fix product quantity reduce after checkout">
+      <option name="closed" value="true" />
+      <created>1744117905531</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1744117905531</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=":sparkles: Login &amp; Register form" />
     <MESSAGE value=":memo: update docs" />
     <MESSAGE value=": sparkles: Set Filament as Dashboard" />
     <MESSAGE value=": recycle: refactor code" />
@@ -552,6 +568,7 @@
     <MESSAGE value=":sparkles: add checkout" />
     <MESSAGE value=":sparkles: add order" />
     <MESSAGE value=":sparkles: add order and display orders for each roles" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: add order and display orders for each roles" />
+    <MESSAGE value=":bug: fix product quantity reduce after checkout" />
+    <option name="LAST_COMMIT_MESSAGE" value=":bug: fix product quantity reduce after checkout" />
   </component>
 </project>

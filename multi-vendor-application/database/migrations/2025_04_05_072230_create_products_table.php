@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('price');
             $table->decimal('sale_price')->nullable();
             $table->integer('quantity')->default(0);
-            $table->decimal('discount')->default(0);
             $table->string('image')->nullable();
             $table->foreignId('product_category_id')->constrained()->onDelete('cascade');
             $table->foreignId('vendor_id')->constrained()->onDelete('cascade');

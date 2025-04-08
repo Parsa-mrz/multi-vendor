@@ -12,15 +12,17 @@ class OrderService
     protected $orderRepository;
     protected $orderItemRepository;
     protected $productRepository;
+    protected $cartService;
 
     /**
      * Create a new class instance.
      */
-    public function __construct ( OrderRepository $orderRepository, OrderItemRepository $orderItemRepository,ProductRepository $productRepository )
+    public function __construct ( OrderRepository $orderRepository, OrderItemRepository $orderItemRepository,ProductRepository $productRepository ,CartService $cartService)
     {
         $this->orderRepository     = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->productRepository   = $productRepository;
+        $this->cartService        = $cartService;
     }
 
     public function createOrder ( array $data ): Order
@@ -32,6 +34,8 @@ class OrderService
             $this->reduceProductQuantity ( $item['id'], $item['quantity'] );
             $this->orderItemRepository->create ( $item );
         }
+
+        $this->cartService->clearCart ();
 
         return $order;
     }

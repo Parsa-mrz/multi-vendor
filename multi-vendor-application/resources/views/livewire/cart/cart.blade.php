@@ -10,7 +10,7 @@
                         <div>
                             <h3 class="text-lg font-medium text-gray-900">{{ $item['name'] }}</h3>
                             <p class="text-sm text-gray-600 mt-1">
-                                @if( ($item['discount']) && ($item['sale_price']))
+                                @if( ($item['sale_price']))
                                     <span class="line-through text-gray-400">${{ number_format($item['price'], 2) }}</span>
                                     <span class="text-red-600 font-semibold ml-2">${{ number_format($item['sale_price'], 2) }}</span>
                                 @else
@@ -38,7 +38,7 @@
                             class="w-20 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                         >
                         <p class="text-gray-700 font-medium">
-                            ${{ number_format(($item['discount'] ? $item['sale_price'] : $item['price']) * $item['quantity'], 2) }}
+                            ${{ number_format(($item['sale_price'] ? $item['sale_price']* $item['quantity'] : $item['price']) * $item['quantity'], 2) }}
                         </p>
                     </div>
                 </div>

@@ -52,7 +52,7 @@
                                 <h3 class="font-medium">{{ $item['name'] }}</h3>
                                 <p class="text-sm text-gray-500">Quantity: {{ $item['quantity'] }}</p>
                             </div>
-                            <span>${{ number_format($item['price'] * $item['quantity'], 2) }}</span>
+                            <span>${{ number_format($item['sale_price'] ? $item['sale_price']* $item['quantity']: $item['price'] * $item['quantity'], 2) }}</span>
                         </div>
                     @endforeach
                 </div>
@@ -64,11 +64,11 @@
                     </div>
                     <div class="flex justify-between">
                         <span>Tax</span>
-                        <span>$123</span>
+                        <span>$0</span>
                     </div>
                     <div class="flex justify-between">
                         <span>Shipping</span>
-                        <span>$12</span>
+                        <span>$0</span>
                     </div>
                     <div class="flex justify-between font-bold text-lg pt-2">
                         <span>Total</span>

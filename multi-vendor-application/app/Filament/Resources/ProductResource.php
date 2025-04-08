@@ -56,8 +56,7 @@ class ProductResource extends Resource
                     ->default(fn () => $user->isVendor() ? $user->vendor->id : null)
                     ->disabled(fn () => $user->isVendor()),
                 Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
+                    ->required(),
                 TextInput::make('price')
                     ->required()
                     ->numeric()
@@ -73,21 +72,16 @@ class ProductResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
-                TextInput::make('discount')
-                    ->required()
-                    ->numeric()
-                    ->prefix('$')
-                    ->dehydrateStateUsing(fn ($state) => number_format((float) $state, 2, '.', ''))
-                    ->formatStateUsing(fn ($state) => number_format((float) $state, 2, '.', '')),
-                FileUpload::make('image')
-                    ->image(),
                 Select::make('product_category_id')
-                    ->relationship('category', 'name')
-                    ->label('Category')
-                    ->native(false)
-                    ->searchable()
-                    ->preload()
-                    ->required(),
+                      ->relationship('category', 'name')
+                      ->label('Category')
+                      ->native(false)
+                      ->searchable()
+                      ->preload()
+                      ->required(),
+                FileUpload::make('image')
+                    ->image()
+                    ->columnSpanFull (),
             ]);
     }
 
@@ -107,9 +101,6 @@ class ProductResource extends Resource
                     ->money()
                     ->sortable(),
                 TextColumn::make('quantity')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('discount')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('category.name')

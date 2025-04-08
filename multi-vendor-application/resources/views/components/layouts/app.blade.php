@@ -47,7 +47,12 @@
                 icon: alertData.type,
                 position: 'top-right',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 3000,
+                didClose: () => {
+                    if (alertData.redirect) {
+                        window.location.href = alertData.redirect;
+                    }
+                }
             });
         });
     </script>
