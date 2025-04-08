@@ -37,9 +37,10 @@ class ResponseHelper
      * @param  string  $message  The error message.
      * @param  mixed|null  $errors  Additional error details (e.g., validation errors). Default is null.
      * @param  int  $status  The HTTP status code, using Symfony's Response constants. Default is Response::HTTP_BAD_REQUEST.
+     * @param  string $errorCode The Error code.
      * @return array The formatted response.
      */
-    public static function error(string $message, $errors = null, int $status = Response::HTTP_BAD_REQUEST): array
+    public static function error(string $message, $errors = null, int $status = Response::HTTP_BAD_REQUEST, string $errorCode = null): array
     {
         return [
             'success' => true,
@@ -47,6 +48,7 @@ class ResponseHelper
             'data' => null,
             'errors' => $errors,
             'status' => $status,
+            'errorCode' => $errorCode,
         ];
     }
 }

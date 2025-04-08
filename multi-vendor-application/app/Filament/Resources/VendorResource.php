@@ -28,16 +28,6 @@ class VendorResource extends Resource
         return static::getModel()::count();
     }
 
-    public static function canViewAny(): bool
-    {
-        $user = Auth::user();
-        if ($user->isAdmin()) {
-            return true;
-        }
-
-        return false;
-    }
-
     public static function form(Form $form): Form
     {
         return $form

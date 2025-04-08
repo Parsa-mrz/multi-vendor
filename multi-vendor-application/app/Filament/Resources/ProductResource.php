@@ -24,7 +24,7 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Admin Management';
+    protected static ?string $navigationGroup = 'Shop Management';
 
     public static function getNavigationBadge(): ?string
     {
@@ -35,16 +35,6 @@ class ProductResource extends Resource
         }
 
         return static::getModel()::count();
-    }
-
-    public static function canViewAny(): bool
-    {
-        $user = Auth::user();
-        if ($user->isAdmin() || $user->isVendor()) {
-            return true;
-        }
-
-        return false;
     }
 
     public static function form(Form $form): Form

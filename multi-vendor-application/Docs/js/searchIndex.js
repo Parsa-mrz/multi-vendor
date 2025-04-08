@@ -181,12 +181,12 @@ Search.appendIndex(
             "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
             "url": "classes/App-Http-Resources-ProfileResource.html#method_toArray"
         },                {
-            "fqsen": "\\App\\Http\\Resources\\UserResource",
+            "fqsen": "\\App\\Http\\Resources\\UserPolicy",
             "name": "UserResource",
             "summary": "",
             "url": "classes/App-Http-Resources-UserResource.html"
         },                {
-            "fqsen": "\\App\\Http\\Resources\\UserResource\u003A\u003AtoArray\u0028\u0029",
+            "fqsen": "\\App\\Http\\Resources\\UserPolicy\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
             "summary": "Transform\u0020the\u0020resource\u0020into\u0020an\u0020array.",
             "url": "classes/App-Http-Resources-UserResource.html#method_toArray"
