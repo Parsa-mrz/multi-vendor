@@ -38,6 +38,7 @@ class OrderService
 
     private function reduceProductQuantity ( int $productId, int $quantity )
     {
-        $this->productRepository->update ($productId,['quantity' => $quantity]);
+        $product = $this->productRepository->getProduct ( $productId );
+        $this->productRepository->update ($productId,['quantity' => $product->quantity - $quantity]);
     }
 }

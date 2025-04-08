@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: add order">
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: add order and display orders for each roles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/Docs/js/searchIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/Docs/js/searchIndex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/ProductCategoryResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/ProductCategoryResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/ProductResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/ProductResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/UserResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/VendorResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Filament/Resources/VendorResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/ResponseHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Helpers/ResponseHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Policies/OrderPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Policies/OrderPolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Policies/ProductPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Policies/ProductPolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/database/factories/ProductFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/database/factories/ProductFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Services/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Services/OrderService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,7 +286,7 @@
       <workItem from="1743788183018" duration="15730000" />
       <workItem from="1743829853712" duration="27165000" />
       <workItem from="1743923167935" duration="33597000" />
-      <workItem from="1744040400391" duration="9228000" />
+      <workItem from="1744040400391" duration="10623000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -523,14 +512,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743947645248</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary=":sparkles: add order and display orders for each roles">
+      <option name="closed" value="true" />
+      <created>1744105611803</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1744105611803</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=": memo: Update documents" />
     <MESSAGE value=":sparkles: Login &amp; Register form" />
     <MESSAGE value=":memo: update docs" />
     <MESSAGE value=": sparkles: Set Filament as Dashboard" />
@@ -555,6 +551,7 @@
     <MESSAGE value=":sparkles: finish cart" />
     <MESSAGE value=":sparkles: add checkout" />
     <MESSAGE value=":sparkles: add order" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: add order" />
+    <MESSAGE value=":sparkles: add order and display orders for each roles" />
+    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: add order and display orders for each roles" />
   </component>
 </project>
