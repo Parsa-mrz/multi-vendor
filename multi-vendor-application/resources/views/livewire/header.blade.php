@@ -4,7 +4,7 @@
         <nav class="flex-1 mx-6">
             <ul class="flex py-2 justify-start space-x-4 flex-shrink-1">
                 @foreach($menuItems as $key => $value)
-                    <li><a href="{{$value}}" class="text-blue-600 hover:text-gray-200 transition-colors duration-200">{{$key}}</a></li>
+                    <li><a href="{{ route($value) }}" class="text-blue-600 hover:text-gray-200 transition-colors duration-200">{{$key}}</a></li>
                 @endforeach
             </ul>
         </nav>

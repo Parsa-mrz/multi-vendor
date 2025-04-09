@@ -4,6 +4,7 @@ namespace App\Livewire\Cart;
 
 use App\Helpers\SweetAlertHelper;
 use App\Services\CartService;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use function dd;
@@ -14,9 +15,9 @@ class Cart extends Component
     public $subTotal = 0;
     protected $cartService;
 
-    protected $listeners = [
-        'cartUpdated' => 'refreshCart'
-    ];
+//    protected $listeners = [
+//        'cartUpdated' => 'refreshCart'
+//    ];
 
     public function boot(CartService $cartService)
     {
@@ -28,6 +29,7 @@ class Cart extends Component
         $this->refreshCart();
     }
 
+    #[On('cartUpdated')]
     public function refreshCart()
     {
         try {
