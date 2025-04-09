@@ -33,7 +33,6 @@ class ProductFactory extends Factory
             'price' => $price,
             'sale_price' => $hasSale ? $price * $this->faker->randomFloat(2, 0.5, 0.95) : null,
             'quantity' => $this->faker->numberBetween(0, 100),
-            'discount' => $hasSale ? $this->faker->numberBetween(5, 50) : 0,
             'image' => "https://picsum.photos/200/300?random=" . $this->faker->numberBetween(1, 100),
             'product_category_id' => ProductCategory::factory(),
             'vendor_id' => $vendor->id,

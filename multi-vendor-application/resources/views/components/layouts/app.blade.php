@@ -14,13 +14,8 @@
 
 <body class="min-h-screen flex flex-col bg-gray-100">
     <!-- Header -->
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <h1 class="text-2xl font-bold text-gray-900">
-                {{ $title ?? 'My Application' }}
-            </h1>
-        </div>
-    </header>
+    <livewire:header />
+
     <!-- Main Content -->
     <main class="flex-grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
