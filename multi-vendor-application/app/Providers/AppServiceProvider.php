@@ -5,10 +5,12 @@ namespace App\Providers;
 use App\Http\Responses\LogoutResponse;
 use App\Interfaces\CartRepositoryInterface;
 use App\Interfaces\ProductRepositoryInterface;
+use App\Models\Conversation;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Profile;
+use App\Policies\ConversationPolicy;
 use App\Policies\OrderItemPolicy;
 use App\Policies\OrderPolicy;
 use App\Policies\ProductPolicy;
@@ -48,5 +50,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Product::class, ProductPolicy::class);
         Gate::policy (Order::class, OrderPolicy::class);
         Gate::policy (OrderItem::class, OrderItemPolicy::class);
+        Gate::policy (Conversation::class, ConversationPolicy::class);
     }
 }

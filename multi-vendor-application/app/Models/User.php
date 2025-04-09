@@ -136,6 +136,21 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->hasMany(Order::class, 'user_id');
     }
 
+    public function sentConversations()
+    {
+        return $this->hasMany(Conversation::class, 'user_id');
+    }
+
+    public function receivedConversations()
+    {
+        return $this->hasMany(Conversation::class, 'recipient_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return true;

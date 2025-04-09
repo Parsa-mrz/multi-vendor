@@ -52,6 +52,26 @@
                         Out of Stock
                     </div>
                 @endif
+
+                <div class="flex justify-between items-center items-center text-sm text-gray-600 bg-gray-50 px-4 py-4 rounded-full mb-4">
+                    <span>
+                            Vendor : {{ $product->vendor->store_name }}
+                    </span>
+                    <span class="inline-flex items-center text-sm text-white bg-blue-500 px-3 py-1 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15H6a2.25 2.25 0 01-2.25-2.25V6.75A2.25 2.25 0 016 4.5h12a2.25 2.25 0 012.25 2.25v6A2.25 2.25 0 0118 15h-2.25M8.25 15v2.25a2.25 2.25 0 002.25 2.25h3.75a2.25 2.25 0 002.25-2.25V15M8.25 15h7.5" />
+                        </svg>
+                        @if(is_null ($user))
+                            <a href="{{route ('login')}}">
+                                Login To Chat With Vendor
+                            </a>
+                        @else
+                            <a href="#">
+                                Chat With Vendor
+                            </a>
+                        @endif
+                    </span>
+                </div>
             </div>
 
             <div class="prose max-w-none mb-8 text-gray-700">

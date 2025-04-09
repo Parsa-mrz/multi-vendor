@@ -2,7 +2,7 @@
 FROM node:18 AS node-builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN rm -rf node_modules package-lock.json && npm install --prefer-offline --no-audit
 COPY . .
 RUN npm run build
 
@@ -12,11 +12,11 @@ FROM php:8.3-fpm
 # Install dependencies
 RUN apt-get update && apt-get install -y \
   libpq-dev git unzip curl libicu-dev zlib1g-dev libzip-dev netcat-openbsd \
-  && docker-php-ext-install pdo_pgsql intl zip \
+  && docker-php-ext-install pdo_pgsql intl zip pcntl \
   && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
   && apt-get install -y nodejs \
   && pecl install redis \
-  && docker-php-ext-enable redis
+  && docker-php-ext-enable redis pcntl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html

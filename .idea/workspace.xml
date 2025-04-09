@@ -4,13 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":sparkles: Add Header">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="f94e81aa-aa31-4d50-afba-a867ec85bc99" name="Changes" comment=":recycle: add update real time cart in header.blade.php">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Cart/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Cart/Cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Header.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/add-to-cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/cart/add-to-cart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Products/ProductShow.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Livewire/Products/ProductShow.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/bootstrap/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/database/seeders/ProductSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/database/seeders/ProductSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/entrypoint.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/products/product-show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/products/product-show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/routes/console.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/routes/console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multi-vendor-application/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/multi-vendor-application/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,6 +194,20 @@
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/invade" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/spatie/color" />
       <path value="$PROJECT_DIR$/multi-vendor-application/vendor/rawilk/filament-password-input" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/clue/redis-react" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/clue/redis-protocol" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/ratchet/rfc6455" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/react/promise-timer" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/multi-vendor-application/vendor/laravel/reverb" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -194,39 +221,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Composer Script.build-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.exec-container.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.generate-docs.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.pint-test.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.pint.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.run-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.stop-&amp;-remove-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.stop-docker.executor&quot;: &quot;Run&quot;,
-    &quot;Composer Script.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/parsa/Documents/Programming/Projects/multi-vendor&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;DEFAULT&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Composer Script.build-docker.executor": "Run",
+    "Composer Script.exec-container.executor": "Run",
+    "Composer Script.generate-docs.executor": "Run",
+    "Composer Script.pint-test.executor": "Run",
+    "Composer Script.pint.executor": "Run",
+    "Composer Script.run-docker.executor": "Run",
+    "Composer Script.stop-&-remove-docker.executor": "Run",
+    "Composer Script.stop-docker.executor": "Run",
+    "Composer Script.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/parsa/Documents/Programming/Projects/multi-vendor",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "DEFAULT",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Applications/PhpStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/multi-vendor-application/resources/views" />
+      <recent name="$PROJECT_DIR$/multi-vendor-application/app/Livewire" />
       <recent name="$PROJECT_DIR$/multi-vendor-application/resources/views/livewire/products" />
       <recent name="$PROJECT_DIR$/multi-vendor-application/resources/views/emails" />
     </key>
   </component>
-  <component name="RunManager" selected="Composer Script.run-docker">
+  <component name="RunManager" selected="Composer Script.build-docker">
     <configuration name="build-docker" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
       <option name="pathToComposerJson" value="$PROJECT_DIR$/multi-vendor-application/composer.json" />
       <option name="script" value="build-docker" />
@@ -235,11 +265,6 @@
     <configuration name="pint-test" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
       <option name="pathToComposerJson" value="$PROJECT_DIR$/multi-vendor-application/composer.json" />
       <option name="script" value="pint-test" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pint" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
-      <option name="pathToComposerJson" value="$PROJECT_DIR$/multi-vendor-application/composer.json" />
-      <option name="script" value="pint" />
       <method v="2" />
     </configuration>
     <configuration name="run-docker" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
@@ -252,17 +277,22 @@
       <option name="script" value="stop-&amp;-remove-docker" />
       <method v="2" />
     </configuration>
+    <configuration name="stop-docker" type="ComposerRunConfigurationType" factoryName="Composer Script" temporary="true">
+      <option name="pathToComposerJson" value="$PROJECT_DIR$/multi-vendor-application/composer.json" />
+      <option name="script" value="stop-docker" />
+      <method v="2" />
+    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/multi-vendor-application/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Composer Script.run-docker" />
-        <item itemvalue="Composer Script.stop-&amp;-remove-docker" />
         <item itemvalue="Composer Script.build-docker" />
+        <item itemvalue="Composer Script.stop-docker" />
+        <item itemvalue="Composer Script.stop-&amp;-remove-docker" />
+        <item itemvalue="Composer Script.run-docker" />
         <item itemvalue="Composer Script.pint-test" />
-        <item itemvalue="Composer Script.pint" />
       </list>
     </recent_temporary>
   </component>
@@ -291,7 +321,7 @@
       <workItem from="1743829853712" duration="27165000" />
       <workItem from="1743923167935" duration="33597000" />
       <workItem from="1744040400391" duration="16743000" />
-      <workItem from="1744191061346" duration="2580000" />
+      <workItem from="1744191061346" duration="19188000" />
     </task>
     <task id="LOCAL-00001" summary="Add API Docs and Code Docs and readme.md">
       <option name="closed" value="true" />
@@ -549,14 +579,21 @@
       <option name="project" value="LOCAL" />
       <updated>1744192656572</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary=":recycle: add update real time cart in header.blade.php">
+      <option name="closed" value="true" />
+      <created>1744193764089</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1744193764089</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=": recycle: refactor code" />
     <MESSAGE value=": bug:  refactor login/register component" />
     <MESSAGE value=": recycle: Refactor Login / Register and add verification by email" />
     <MESSAGE value=":sparkles: Add my profile and customer state in dashboard" />
@@ -581,6 +618,7 @@
     <MESSAGE value=":bug: fix product quantity reduce after checkout" />
     <MESSAGE value=":recycle: refactor sweet alert" />
     <MESSAGE value=":sparkles: Add Header" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Add Header" />
+    <MESSAGE value=":recycle: add update real time cart in header.blade.php" />
+    <option name="LAST_COMMIT_MESSAGE" value=":recycle: add update real time cart in header.blade.php" />
   </component>
 </project>
