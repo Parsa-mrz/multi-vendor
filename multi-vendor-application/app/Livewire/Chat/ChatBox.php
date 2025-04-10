@@ -90,7 +90,6 @@ class ChatBox extends Component
     public function handleConversationStarted(): void
     {
         $this->refreshConversations();
-        $this->dispatch('conversation-added');
     }
 
     public function handleMessageReceived(array $event): void

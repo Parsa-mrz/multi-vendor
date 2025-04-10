@@ -29,6 +29,8 @@ class AdminSeeder extends Seeder
             ]
         );
 
-        $user->profile()->create();
+        if (!$user->profile) {
+            $user->profile()->create();
+        }
     }
 }
