@@ -57,8 +57,18 @@
                         </span>
                         @if($message['sender_id'] === auth()->id())
                             <span class="text-xs block mt-1 {{ $message['read'] ? 'text-green-600' : 'text-gray-600' }}">
-                                        {{ $message['read'] ? 'Seen' : 'Sent' }}
-                                </span>
+                                @if($message['read'])
+                                    <svg class="inline" width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 10.5L8.5 15L16 5" stroke="#00A8F3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 10.5L14.5 15L22 5" stroke="#00A8F3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                @else
+                                    <svg class="inline" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 10.5L8.5 15L16 5" stroke="#00A8F3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                @endif
+                                {{ $message['read'] ? 'Seen' : 'Sent' }}
+                            </span>
                         @endif
                     </div>
                 @endforeach
@@ -95,6 +105,12 @@
                     Livewire.dispatch('conversationStarted', {event:event});
                 });
 
+            window.Echo.private(`user.${@js(auth()->id())}`)
+                .listen('.conversation.updated', (event) => {
+                    console.log('Conversation updated:', event);
+                    Livewire.dispatch('conversationUpdated', { event: event });
+                });
+
             let currentConversationId = null;
             @if ($selectedConversation)
                 currentConversationId = {{ $selectedConversation->id }};
@@ -116,11 +132,11 @@
                 currentConversationId = event.detail.conversationId;
                 window.Echo.private(`conversation.${currentConversationId}`)
                     .listen('.message.sent', (event) => {
-                        console.log('New message:', event);
+                        console.log('New message2:', event);
                         Livewire.dispatch('messageReceived', {event:event});
                     })
                     .listen('.message.read', (event) => {
-                        console.log('Message read:', event);
+                        console.log('Message read2:', event);
                         Livewire.dispatch('messageRead', {event:event});
                     });
             });

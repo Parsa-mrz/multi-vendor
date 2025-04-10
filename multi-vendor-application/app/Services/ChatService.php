@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\ConversationStarted;
+use App\Events\ConversationUpdated;
 use App\Events\MessageRead;
 use App\Events\MessageSent;
 use App\Models\Conversation;
@@ -36,8 +37,7 @@ class ChatService
                 'user_id' => Auth::id(),
                 'recipient_id' => $recipientId,
             ]);
-            \Illuminate\Support\Facades\Log::info("Broadcasting ConversationStarted for user {$recipientId}");
-            ConversationStarted::dispatch($conversation);
+            broadcast (new ConversationStarted($conversation));
             return $conversation;
         }
 
@@ -66,7 +66,8 @@ class ChatService
             'body' => $messageBody,
         ]);
 
-        MessageSent::dispatch ($message);
+        broadcast (new MessageSent($message));
+        broadcast (new ConversationUpdated($conversation));
     }
 
     public function markMessagesAsRead(Conversation $conversation): void
@@ -75,7 +76,7 @@ class ChatService
         foreach ($unreadMessages as $message) {
             $message->read = true;
             $message->save();
-            MessageRead::dispatch($message);
+            broadcast (new MessageRead($message));
         }
     }
 

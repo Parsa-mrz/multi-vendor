@@ -22,6 +22,7 @@ class ChatBox extends Component
         'conversationStarted' => 'handleConversationStarted',
         'messageReceived' => 'handleMessageReceived',
         'messageRead' => 'handleMessageRead',
+        'conversationUpdated' => 'handleConversationUpdated'
     ];
 
     public function boot(ChatService $chatService)
@@ -74,6 +75,7 @@ class ChatBox extends Component
         if ($this->selectedConversation && trim($this->newMessage)) {
             $this->chatService->sendMessage($this->selectedConversation, $this->newMessage);
             $this->newMessage = '';
+            $this->refreshConversations();
         }
     }
 
@@ -81,6 +83,7 @@ class ChatBox extends Component
     {
         if ($this->selectedConversation) {
             $this->chatService->markMessagesAsRead($this->selectedConversation);
+            $this->refreshConversations();
         }
     }
 
@@ -97,6 +100,7 @@ class ChatBox extends Component
             $this->dispatch('message-updated');
             $this->markAsRead();
         }
+        $this->refreshConversations();
     }
 
     public function handleMessageRead(array $event): void
@@ -121,6 +125,12 @@ class ChatBox extends Component
             }
             $this->dispatch ( 'message-updated' );
         }
+        $this->refreshConversations();
+    }
+
+    public function handleConversationUpdated(array $event): void
+    {
+        $this->refreshConversations();
     }
 
     public function refreshConversations(): void

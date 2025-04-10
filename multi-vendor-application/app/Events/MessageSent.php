@@ -46,6 +46,7 @@ class MessageSent implements ShouldBroadcast
                 'read' => $this->message->read,
                 'conversation_id' => $this->message->conversation_id,
                 'created_at' => $this->message->created_at,
+                'updated_at' => $this->message->updated_at
         ];
     }
 
