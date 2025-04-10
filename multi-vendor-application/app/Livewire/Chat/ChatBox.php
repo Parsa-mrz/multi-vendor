@@ -5,11 +5,9 @@ namespace App\Livewire\Chat;
 use App\Services\ChatService;
 use App\Models\Conversation;
 use Illuminate\Support\Facades\Log;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Session;
-use function dd;
 
 class ChatBox extends Component
 {
@@ -18,8 +16,13 @@ class ChatBox extends Component
     public array $messages = [];
     public string $newMessage = '';
     public ?int $recipientId = null;
-
     protected ChatService $chatService;
+
+    protected $listeners = [
+        'conversationStarted' => 'handleConversationStarted',
+        'messageReceived' => 'handleMessageReceived',
+        'messageRead' => 'handleMessageRead',
+    ];
 
     public function boot(ChatService $chatService)
     {
@@ -36,6 +39,7 @@ class ChatBox extends Component
             if ($this->selectedConversation) {
                 Session::put('selected_conversation_id', $this->selectedConversation->id);
                 $this->loadMessages();
+                $this->markAsRead();
                 $this->refreshConversations();
                 $this->dispatch('conversation-selected', conversationId: $this->selectedConversation->id);
                 $this->redirectRoute('chat.index');
@@ -44,6 +48,7 @@ class ChatBox extends Component
             $this->selectedConversation = $this->chatService->selectConversation(Session::pull('selected_conversation_id'));
             if ($this->selectedConversation) {
                 $this->loadMessages();
+                $this->markAsRead();
                 $this->dispatch('conversation-selected', conversationId: $this->selectedConversation->id);
             }
         }
@@ -53,6 +58,7 @@ class ChatBox extends Component
     {
         $this->selectedConversation = $this->chatService->selectConversation($conversationId);
         $this->loadMessages();
+        $this->markAsRead();
         $this->dispatch('conversation-selected', conversationId: $conversationId);
     }
 
@@ -71,20 +77,49 @@ class ChatBox extends Component
         }
     }
 
-    #[On('conversation-started')]
-    public function handleConversationStarted(array $event): void
+    public function markAsRead(): void
+    {
+        if ($this->selectedConversation) {
+            $this->chatService->markMessagesAsRead($this->selectedConversation);
+        }
+    }
+
+    public function handleConversationStarted(): void
     {
         $this->refreshConversations();
         $this->dispatch('conversation-added');
     }
 
-    #[On('message-received')]
     public function handleMessageReceived(array $event): void
     {
-        Log::info('Message received event:', $event);
         if ($this->selectedConversation && $event['conversation_id'] === $this->selectedConversation->id) {
             $this->messages[] = $event;
             $this->dispatch('message-updated');
+            $this->markAsRead();
+        }
+    }
+
+    public function handleMessageRead(array $event): void
+    {
+        if ($this->selectedConversation && $event['conversation_id'] === $this->selectedConversation->id) {
+            foreach ( $this->messages as &$message ) {
+                if ( $message[ 'id' ] === $event[ 'id' ] ) {
+                    $message[ 'read' ]       = $event[ 'read' ];
+                    $message[ 'updated_at' ] = $event[ 'updated_at' ];
+                    break;
+                }
+            }
+            foreach ( $this->conversations as $conversation ) {
+                if ( $conversation->id === $event[ 'conversation_id' ] ) {
+                    $lastMessage = $conversation->messages->last ();
+                    if ( $lastMessage && $lastMessage->id === $event[ 'id' ] ) {
+                        $lastMessage->read       = $event[ 'read' ];
+                        $lastMessage->updated_at = $event[ 'updated_at' ];
+                    }
+                    break;
+                }
+            }
+            $this->dispatch ( 'message-updated' );
         }
     }
 

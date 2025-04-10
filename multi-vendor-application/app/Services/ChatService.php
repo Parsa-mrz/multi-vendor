@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\ConversationStarted;
+use App\Events\MessageRead;
 use App\Events\MessageSent;
 use App\Models\Conversation;
 use App\Repositories\ConversationRepository;
@@ -66,5 +67,20 @@ class ChatService
         ]);
 
         MessageSent::dispatch ($message);
+    }
+
+    public function markMessagesAsRead(Conversation $conversation): void
+    {
+        $unreadMessages = $this->messageRepository->getUnreadMessages($conversation, Auth::id());
+        foreach ($unreadMessages as $message) {
+            $message->read = true;
+            $message->save();
+            MessageRead::dispatch($message);
+        }
+    }
+
+    public function getUnreadMessages(Conversation $conversation)
+    {
+        return $this->messageRepository->getUnreadMessages($conversation, Auth::id());
     }
 }

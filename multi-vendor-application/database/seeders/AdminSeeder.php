@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    //todo: add profile
+    //
     public function run(): void
     {
         $user = User::firstOrCreate(

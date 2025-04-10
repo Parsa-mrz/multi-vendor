@@ -29,4 +29,13 @@ class MessageRepository implements MessageRepositoryInterface
     {
         return $conversation->messages ()->latest ()->get ()->reverse ()->toArray();
     }
+
+    public function getUnreadMessages(Conversation $conversation, int $userId): array
+    {
+        return Message::where('conversation_id', $conversation->id)
+                      ->where('sender_id', '!=', $userId)
+                      ->where('read', false)
+                      ->get()
+                      ->all();
+    }
 }

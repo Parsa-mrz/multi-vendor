@@ -12,6 +12,9 @@
                 >
                     <div class="flex items-center space-x-3">
                         <div class="flex-1">
+                            @if($conversation->messages->isNotEmpty() && !$conversation->messages->last()->read && $conversation->messages->last()->sender_id !== auth()->id())
+                                <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-blue-500 rounded-full"></span>
+                            @endif
                             <p class="font-medium">
                                 {{ $conversation->user_id === auth()->id()
                                     ? ($conversation->recipient?->profile?->first_name . ' ' . $conversation->recipient?->profile?->last_name ?? $conversation->recipient?->email ?? 'Unknown')
@@ -52,6 +55,11 @@
                         <span class="text-xs text-gray-500 block mt-1">
                             {{ \Carbon\Carbon::parse($message['created_at'])->format('H:i') }}
                         </span>
+                        @if($message['sender_id'] === auth()->id())
+                            <span class="text-xs block mt-1 {{ $message['read'] ? 'text-green-600' : 'text-gray-600' }}">
+                                        {{ $message['read'] ? 'Seen' : 'Sent' }}
+                                </span>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -84,7 +92,7 @@
             window.Echo.private(`user.${@js(auth()->id())}`)
                 .listen('.conversation.started', (event) => {
                     console.log('New conversation:', event);
-                    Livewire.dispatch('conversation-started', { event: event });
+                    Livewire.dispatch('conversationStarted', {event:event});
                 });
 
             let currentConversationId = null;
@@ -93,7 +101,11 @@
             window.Echo.private(`conversation.${currentConversationId}`)
                 .listen('.message.sent', (event) => {
                     console.log('New message:', event);
-                    Livewire.dispatch('message-received', { event: event });
+                    Livewire.dispatch('messageReceived', {event:event});
+                })
+                .listen('.message.read', (event) => {
+                    console.log('Message read:', event);
+                    Livewire.dispatch('messageRead', {event:event});
                 });
             @endif
 
@@ -105,7 +117,11 @@
                 window.Echo.private(`conversation.${currentConversationId}`)
                     .listen('.message.sent', (event) => {
                         console.log('New message:', event);
-                        Livewire.dispatch('message-received', { event: event });
+                        Livewire.dispatch('messageReceived', {event:event});
+                    })
+                    .listen('.message.read', (event) => {
+                        console.log('Message read:', event);
+                        Livewire.dispatch('messageRead', {event:event});
                     });
             });
 
