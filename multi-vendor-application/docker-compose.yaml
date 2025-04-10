@@ -30,6 +30,8 @@ services:
       - postgres
     expose:
       - "9000"
+    ports:
+      - "8080:8080" #expose reverb port
     networks:
       - app-network
     healthcheck:

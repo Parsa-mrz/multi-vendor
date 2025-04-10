@@ -11,15 +11,17 @@ class CustomerStats extends BaseWidget
     protected function getStats(): array
     {
         $user = Auth::user();
+        $totalOrders =  $user->orders()->count();
+        $pendingOrders =  $user->orders()->where('status', 'pending')->count();
 
         return [
             Stat::make('Register Duration', $user->getRegisterDurationInDays())
                 ->description('Since: '.$user->getFormattedRegistrationDate())
                 ->color('warning'),
-            Stat::make('Your Orders', 10)
+            Stat::make('Your Orders', $totalOrders)
                 ->description('Total orders placed')
                 ->color('primary'),
-            Stat::make('Pending Orders', 20)
+            Stat::make('Pending Orders', $pendingOrders)
                 ->description('Orders awaiting action')
                 ->color('warning'),
         ];

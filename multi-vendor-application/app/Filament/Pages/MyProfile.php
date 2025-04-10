@@ -56,8 +56,6 @@ class MyProfile extends Page
      */
     public array $formData = [];
 
-    public $apiUrl;
-
     /**
      * Boot method to initialize the profile repository.
      *
@@ -67,7 +65,6 @@ class MyProfile extends Page
     public function boot(ProfileRepository $profileRepository)
     {
         $this->profileRepository = $profileRepository;
-        $this->apiUrl = config('app.api_url');
     }
 
     /**

@@ -53,9 +53,14 @@
                     </div>
                 @endif
 
-                <div class="flex justify-between items-center items-center text-sm text-gray-600 bg-gray-50 px-4 py-4 rounded-full mb-4">
-                    <span>
-                            Vendor : {{ $product->vendor->store_name }}
+                <div class="flex flex-col justify-between items-center items-center text-sm text-gray-600 bg-gray-50 px-4 py-4 rounded-full mb-4">
+                    <span class="mb-2">
+                        <span class="">
+                             Vendor : {{ $product->vendor->store_name }}
+                        </span>
+                        <span class="block">
+                            Description : {{$product->vendor->description}}
+                        </span>
                     </span>
                     <span class="inline-flex items-center text-sm text-white bg-blue-500 px-3 py-1 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

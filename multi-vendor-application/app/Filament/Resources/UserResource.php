@@ -119,7 +119,6 @@ class UserResource extends Resource
                 TextColumn::make('email')
                     ->searchable(),
                 TextColumn::make('is_active')
-                    ->searchable()
                     ->label('Status')
                     ->badge()
                     ->state(function ($record) {
@@ -131,7 +130,6 @@ class UserResource extends Resource
                 TextColumn::make('last_login')
                     ->label('Last Login'),
                 TextColumn::make('role')
-                    ->searchable()
                     ->label('Role')
                     ->badge()
                     ->state(function ($record) {

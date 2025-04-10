@@ -1,14 +1,16 @@
 <?php
-namespace App\Livewire;
+
+namespace App\Livewire\Chat;
 
 use App\Events\MessageSent;
 use App\Models\Conversation;
 use App\Models\Message;
-use Illuminate\Support\Facades\Log;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use function broadcast;
 
-class ChatComponent extends Component
+class ChatBox extends Component
 {
     public $conversations = [];
     public $selectedConversation = null;
@@ -61,22 +63,16 @@ class ChatComponent extends Component
     public function sendMessage()
     {
         if (!$this->selectedConversation || empty($this->newMessage)) {
-            Log::warning('Send message aborted: No conversation selected or empty message');
             return;
         }
 
-        try {
             $message = Message::create([
                 'conversation_id' => $this->selectedConversation->id,
                 'sender_id' => Auth::id(),
                 'body' => $this->newMessage,
             ]);
 
-            Log::info('Message created', ['message_id' => $message->id]);
-
             broadcast(new MessageSent($message))->toOthers();
-
-            Log::info('Message broadcasted', ['message_id' => $message->id]);
 
             $this->messages[] = [
                 'id' => $message->id,
@@ -86,27 +82,19 @@ class ChatComponent extends Component
             ];
 
             $this->newMessage = '';
-        } catch (\Exception $e) {
-            Log::error('Failed to send message', [
-                'error' => $e->getMessage(),
-                'stack' => $e->getTraceAsString(),
-                'conversation_id' => $this->selectedConversation->id ?? null,
-                'user_id' => Auth::id(),
-                'message_body' => $this->newMessage,
-            ]);
-            throw $e; // Re-throw for further debugging if needed
-        }
+
+
     }
 
+    #[On('echo:conversation.1,MessageSent')]
     public function receiveMessage($message)
     {
-        Log::debug('Message received in Livewire', $message);
         $this->messages[] = $message;
         $this->dispatch('message-received');
     }
 
     public function render()
     {
-        return view('livewire.chat-component');
+        return view('livewire.chat.chat-box');
     }
 }

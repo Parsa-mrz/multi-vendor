@@ -20,5 +20,7 @@ php artisan storage:link
 # Start the queue worker in the background
 php artisan queue:work --daemon &
 
+php artisan reverb:start &
+
 # Start PHP-FPM
 exec "$@"
