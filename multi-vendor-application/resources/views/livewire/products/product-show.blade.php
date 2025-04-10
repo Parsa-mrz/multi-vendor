@@ -71,7 +71,7 @@
                                 Login To Chat With Vendor
                             </a>
                         @else
-                            <a href="#">
+                            <a href="{{route ('chat.start',[$product->vendor->user_id])}}">
                                 Chat With Vendor
                             </a>
                         @endif

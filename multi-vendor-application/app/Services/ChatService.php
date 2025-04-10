@@ -2,36 +2,69 @@
 
 namespace App\Services;
 
+use App\Events\ConversationStarted;
+use App\Events\MessageSent;
 use App\Models\Conversation;
-use App\Models\User;
+use App\Repositories\ConversationRepository;
+use App\Repositories\MessageRepository;
+use Illuminate\Support\Facades\Auth;
+use function broadcast;
 
 class ChatService
 {
-    public function canStartConversation(User $authUser, User $otherUser): bool
-    {
-        $roles = [$authUser->role, $otherUser->role];
+    protected $conversationRepository;
+    protected $messageRepository;
 
-        return
-            in_array('admin', $roles) ||
-            ($authUser->isCustomer () && $otherUser->isVendor ()) ||
-            ($authUser->isVendor () && $otherUser->isCustomer ());
+    public function __construct(ConversationRepository $conversationRepository, MessageRepository $messageRepository)
+    {
+        $this->conversationRepository = $conversationRepository;
+        $this->messageRepository = $messageRepository;
     }
 
-    public function getOrCreateConversation(User $authUser, User $otherUser): Conversation
+    public function getUserConversations()
     {
-        if (!$this->canStartConversation($authUser, $otherUser)) {
-            abort(403, 'You cannot chat with this user.');
+        return $this->conversationRepository->getConversations(Auth::user());
+    }
+
+    public function startOrSelectConversation($recipientId): Conversation
+    {
+        $existingConversation = $this->conversationRepository->getConversationByUserId(Auth::id(), $recipientId);
+
+        if (!$existingConversation) {
+            $conversation = $this->conversationRepository->create([
+                'user_id' => Auth::id(),
+                'recipient_id' => $recipientId,
+            ]);
+            \Illuminate\Support\Facades\Log::info("Broadcasting ConversationStarted for user {$recipientId}");
+            ConversationStarted::dispatch($conversation);
+            return $conversation;
         }
 
-        return Conversation::firstOrCreate(
-            [
-                ['user_one_id', '=', min($authUser->id, $otherUser->id)],
-                ['user_two_id', '=', max($authUser->id, $otherUser->id)],
-            ],
-            [
-                'user_one_id' => min($authUser->id, $otherUser->id),
-                'user_two_id' => max($authUser->id, $otherUser->id),
-            ]
-        );
+        return $existingConversation;
+    }
+
+    public function selectConversation($conversationId): Conversation
+    {
+        return $this->conversationRepository->find($conversationId);
+    }
+
+    public function getMessages(Conversation $conversation): array
+    {
+        return $this->messageRepository->getMessages($conversation);
+    }
+
+    public function sendMessage(Conversation $conversation, string $messageBody): void
+    {
+        if (empty($messageBody)) {
+            return;
+        }
+
+        $message = $this->messageRepository->create([
+            'conversation_id' => $conversation->id,
+            'sender_id' => Auth::id(),
+            'body' => $messageBody,
+        ]);
+
+        MessageSent::dispatch ($message);
     }
 }

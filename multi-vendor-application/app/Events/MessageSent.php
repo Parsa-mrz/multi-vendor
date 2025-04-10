@@ -4,8 +4,6 @@ namespace App\Events;
 
 use App\Models\Message;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -14,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class MessageSent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, SerializesModels;
 
     public $message;
     /**
@@ -32,8 +30,9 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
+        Log::info("Broadcasting message to conversation.{$this->message->conversation_id}");
         return [
-            new Channel('conversation.' . $this->message->conversation_id)
+            new PrivateChannel('conversation.' . $this->message->conversation_id)
         ];
 
     }
@@ -44,7 +43,13 @@ class MessageSent implements ShouldBroadcast
                 'id' => $this->message->id,
                 'body' => $this->message->body,
                 'sender_id' => $this->message->sender_id,
+                'conversation_id' => $this->message->conversation_id,
                 'created_at' => $this->message->created_at,
         ];
+    }
+
+    public function broadcastAs(): string
+    {
+        return 'message.sent';
     }
 }

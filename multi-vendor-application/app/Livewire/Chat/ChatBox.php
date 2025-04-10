@@ -2,95 +2,95 @@
 
 namespace App\Livewire\Chat;
 
-use App\Events\MessageSent;
+use App\Services\ChatService;
 use App\Models\Conversation;
-use App\Models\Message;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use function broadcast;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Session;
+use function dd;
 
 class ChatBox extends Component
 {
-    public $conversations = [];
-    public $selectedConversation = null;
-    public $messages = [];
-    public $newMessage = '';
-    public $recipientId = null;
+    public Collection $conversations;
+    public ?Conversation $selectedConversation = null;
+    public array $messages = [];
+    public string $newMessage = '';
+    public ?int $recipientId = null;
 
-    public function mount($recipientId = null)
+    protected ChatService $chatService;
+
+    public function boot(ChatService $chatService)
+    {
+        $this->chatService = $chatService;
+    }
+
+    public function mount(?int $recipientId = null): void
     {
         $this->recipientId = $recipientId;
-        $user = Auth::user();
-        $this->conversations = $user->sentConversations->merge($user->receivedConversations)->unique('id');
+        $this->conversations = $this->chatService->getUserConversations();
 
         if ($this->recipientId) {
-            $this->startOrSelectConversation($this->recipientId);
+            $this->selectedConversation = $this->chatService->startOrSelectConversation($this->recipientId);
+            if ($this->selectedConversation) {
+                Session::put('selected_conversation_id', $this->selectedConversation->id);
+                $this->loadMessages();
+                $this->refreshConversations();
+                $this->dispatch('conversation-selected', conversationId: $this->selectedConversation->id);
+                $this->redirectRoute('chat.index');
+            }
+        } elseif (Session::has('selected_conversation_id')) {
+            $this->selectedConversation = $this->chatService->selectConversation(Session::pull('selected_conversation_id'));
+            if ($this->selectedConversation) {
+                $this->loadMessages();
+                $this->dispatch('conversation-selected', conversationId: $this->selectedConversation->id);
+            }
         }
     }
 
-    public function startOrSelectConversation($recipientId)
+    public function selectConversation(int $conversationId): void
     {
-        $existingConversation = Conversation::where(function ($query) use ($recipientId) {
-            $query->where('user_id', Auth::id())->where('recipient_id', $recipientId);
-        })->orWhere(function ($query) use ($recipientId) {
-            $query->where('user_id', $recipientId)->where('recipient_id', Auth::id());
-        })->first();
-
-        if (!$existingConversation) {
-            $this->selectedConversation = Conversation::create([
-                'user_id' => Auth::id(),
-                'recipient_id' => $recipientId,
-            ]);
-        } else {
-            $this->selectedConversation = $existingConversation;
-        }
-
+        $this->selectedConversation = $this->chatService->selectConversation($conversationId);
         $this->loadMessages();
+        $this->dispatch('conversation-selected', conversationId: $conversationId);
     }
 
-    public function selectConversation($conversationId)
+    public function loadMessages(): void
     {
-        $this->selectedConversation = Conversation::findOrFail($conversationId);
-        $this->loadMessages();
-    }
-
-    public function loadMessages()
-    {
-        $this->messages = $this->selectedConversation->messages()->latest()->get()->reverse()->toArray();
-    }
-
-    public function sendMessage()
-    {
-        if (!$this->selectedConversation || empty($this->newMessage)) {
-            return;
+        if ($this->selectedConversation) {
+            $this->messages = $this->chatService->getMessages($this->selectedConversation);
         }
+    }
 
-            $message = Message::create([
-                'conversation_id' => $this->selectedConversation->id,
-                'sender_id' => Auth::id(),
-                'body' => $this->newMessage,
-            ]);
-
-            broadcast(new MessageSent($message))->toOthers();
-
-            $this->messages[] = [
-                'id' => $message->id,
-                'body' => $message->body,
-                'sender_id' => $message->sender_id,
-                'created_at' => $message->created_at->toDateTimeString(),
-            ];
-
+    public function sendMessage(): void
+    {
+        if ($this->selectedConversation && trim($this->newMessage)) {
+            $this->chatService->sendMessage($this->selectedConversation, $this->newMessage);
             $this->newMessage = '';
-
-
+        }
     }
 
-    #[On('echo:conversation.1,MessageSent')]
-    public function receiveMessage($message)
+    #[On('conversation-started')]
+    public function handleConversationStarted(array $event): void
     {
-        $this->messages[] = $message;
-        $this->dispatch('message-received');
+        $this->refreshConversations();
+        $this->dispatch('conversation-added');
+    }
+
+    #[On('message-received')]
+    public function handleMessageReceived(array $event): void
+    {
+        Log::info('Message received event:', $event);
+        if ($this->selectedConversation && $event['conversation_id'] === $this->selectedConversation->id) {
+            $this->messages[] = $event;
+            $this->dispatch('message-updated');
+        }
+    }
+
+    public function refreshConversations(): void
+    {
+        $this->conversations = $this->chatService->getUserConversations();
     }
 
     public function render()

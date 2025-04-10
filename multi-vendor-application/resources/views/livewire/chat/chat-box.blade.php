@@ -7,22 +7,22 @@
         <ul class="divide-y">
             @forelse ($conversations as $conversation)
                 <li
-                    wire:click="selectConversation({{ $conversation['id'] }})"
-                    class="p-4 cursor-pointer hover:bg-gray-200 transition-colors {{ $selectedConversation && $selectedConversation->id === $conversation['id'] ? 'bg-gray-200' : '' }}"
+                    wire:click="selectConversation({{ $conversation->id }})"
+                    class="p-4 cursor-pointer hover:bg-gray-200 transition-colors {{ $selectedConversation && $selectedConversation->id === $conversation->id ? 'bg-gray-200' : '' }}"
                 >
                     <div class="flex items-center space-x-3">
                         <div class="flex-1">
                             <p class="font-medium">
-                                {{ $conversation['user_id'] === auth()->id()
-                                    ? $conversation->recipient->profile->first_name . ' ' .$conversation->recipient->profile->last_name
-                                    : $conversation->recipient->email }}
+                                {{ $conversation->user_id === auth()->id()
+                                    ? ($conversation->recipient?->profile?->first_name . ' ' . $conversation->recipient?->profile?->last_name ?? $conversation->recipient?->email ?? 'Unknown')
+                                    : ($conversation->user?->profile?->first_name . ' ' . $conversation->user?->profile?->last_name ?? $conversation->user?->email ?? 'Unknown') }}
                             </p>
                             <p class="text-sm text-gray-600 truncate">
-                                {{ $conversation->messages->last()->body ?? '' }}
+                                {{ $conversation->messages->last()?->body ?? '' }}
                             </p>
                         </div>
                         <span class="text-xs text-gray-500">
-                            {{ $conversation->messages->last()->created_at->diffForHumans(['parts' => 1]) }}
+                            {{ $conversation->messages->last() ? $conversation->messages->last()->created_at->diffForHumans(['parts' => 1]) : $conversation->created_at->diffForHumans(['parts' => 4]) }}
                         </span>
                     </div>
                 </li>
@@ -38,12 +38,12 @@
             <div class="p-4 border-b bg-white">
                 <h3 class="text-lg font-medium">
                     {{ $selectedConversation->user_id === auth()->id()
-                        ? $conversation->recipient->profile->first_name . ' ' . $conversation->recipient->profile->last_name
-                        : $conversation->recipient->email }}
+                        ? ($selectedConversation->recipient?->profile?->first_name . ' ' . $conversation->recipient?->profile?->last_name ?? $selectedConversation->recipient?->email ?? 'Unknown')
+                        : ($selectedConversation->user?->profile?->first_name . ' ' . $conversation->user?->profile?->last_name ?? $selectedConversation->user?->email ?? 'Unknown') }}
                 </h3>
             </div>
 
-            <div class="flex-1 p-4 overflow-y-auto" wire:poll.500ms>
+            <div class="flex-1 p-4 overflow-y-auto">
                 @foreach ($messages as $message)
                     <div class="{{ $message['sender_id'] === auth()->id() ? 'ml-auto' : 'mr-auto' }} max-w-[70%] mb-4">
                         <div class="{{ $message['sender_id'] === auth()->id() ? 'bg-blue-500 text-white' : 'bg-gray-200' }} p-3 rounded-lg">
@@ -81,17 +81,44 @@
 
     <script>
         document.addEventListener('livewire:initialized', () => {
+            window.Echo.private(`user.${@js(auth()->id())}`)
+                .listen('.conversation.started', (event) => {
+                    console.log('New conversation:', event);
+                    Livewire.dispatch('conversation-started', { event: event });
+                });
+
+            let currentConversationId = null;
             @if ($selectedConversation)
-            window.Echo.channel(`conversation.{{ $selectedConversation->id }}`)
-                .listen('MessageSent', (event) => {
-                    Livewire.dispatch('receiveMessage', { message: event.message });
+                currentConversationId = {{ $selectedConversation->id }};
+            window.Echo.private(`conversation.${currentConversationId}`)
+                .listen('.message.sent', (event) => {
+                    console.log('New message:', event);
+                    Livewire.dispatch('message-received', { event: event });
                 });
             @endif
-        });
 
-        window.addEventListener('scroll-to-bottom', () => {
-            const chatArea = document.querySelector('.overflow-y-auto');
-            chatArea.scrollTop = chatArea.scrollHeight;
+            window.addEventListener('conversation-selected', (event) => {
+                if (currentConversationId) {
+                    window.Echo.leave(`conversation.${currentConversationId}`);
+                }
+                currentConversationId = event.detail.conversationId;
+                window.Echo.private(`conversation.${currentConversationId}`)
+                    .listen('.message.sent', (event) => {
+                        console.log('New message:', event);
+                        Livewire.dispatch('message-received', { event: event });
+                    });
+            });
+
+            window.addEventListener('message-updated', () => {
+                const chatArea = document.querySelector('.overflow-y-auto');
+                if (chatArea) {
+                    chatArea.scrollTop = chatArea.scrollHeight;
+                }
+            });
+
+            window.addEventListener('conversation-added', () => {
+                console.log('Conversation added');
+            });
         });
     </script>
 </div>

@@ -19,5 +19,5 @@ Route::get ('cart', Cart::class)->name ('cart');
 Route::get ('checkout', Checkout::class)->name ('checkout');
 
 
-Route::get('/chat', ChatBox::class)->name('chat.index');
-Route::get('/chat/user/{recipientId}', ChatBox::class)->name('chat.user');
+Route::get('chat', ChatBox::class)->name('chat.index');
+Route::get('chat/{recipientId}', ChatBox::class)->name('chat.start');
