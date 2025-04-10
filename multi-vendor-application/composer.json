@@ -7,7 +7,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "dedoc/scramble": "^0.12.16",
         "fakerphp/faker": "^1.24",
         "filament/filament": "^3.3",
         "laravel/framework": "^12.0",
