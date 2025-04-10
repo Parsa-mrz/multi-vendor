@@ -63,7 +63,7 @@ class AuthComponent extends BaseComponent
     private function loginUser()
     {
         $result = $this->authService->authenticateUser($this->email, $this->password);
-        if (! $result['status']) {
+        if (! $result['success']) {
             return false;
         }
 

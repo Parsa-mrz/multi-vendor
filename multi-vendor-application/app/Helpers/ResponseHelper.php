@@ -43,7 +43,7 @@ class ResponseHelper
     public static function error(string $message, $errors = null, int $status = Response::HTTP_BAD_REQUEST, string $errorCode = null): array
     {
         return [
-            'success' => true,
+            'success' => false,
             'message' => $message,
             'data' => null,
             'errors' => $errors,
