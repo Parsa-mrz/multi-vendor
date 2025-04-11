@@ -4,26 +4,43 @@ namespace App\Repositories;
 
 use App\Interfaces\OrderRepositoryInterface;
 use App\Models\Order;
-use App\Models\OrderItem;
 
 class OrderRepository implements OrderRepositoryInterface
 {
+    /**
+     * @var OrderItemRepository
+     */
     protected $orderItemRepository;
 
+    /**
+     * OrderRepository constructor.
+     *
+     * Inject the OrderItemRepository dependency.
+     */
     public function __construct(OrderItemRepository $orderItemRepository)
     {
         $this->orderItemRepository = $orderItemRepository;
     }
 
-
-    public function findById ( int $orderId ): Order
+    /**
+     * Find an order by its ID.
+     *
+     * This method retrieves an order by its ID. If the order is not found, it will return null.
+     *
+     * @return Order|null
+     */
+    public function findById(int $orderId): Order
     {
         return Order::find($orderId);
     }
 
-
-    public function create (array $data): Order
+    /**
+     * Create a new order.
+     *
+     * This method creates a new order in the database with the given data.
+     */
+    public function create(array $data): Order
     {
-        return Order::create ($data);
+        return Order::create($data);
     }
 }

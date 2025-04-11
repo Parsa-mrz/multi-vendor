@@ -10,12 +10,15 @@ use Livewire\Component;
 class AddToCart extends Component
 {
     public $productId;
+
     public $quantity = 1;
+
     public $showQuantity = true;
+
     protected $cartService;
 
     protected $rules = [
-        'quantity' => 'required|integer|min:1'
+        'quantity' => 'required|integer|min:1',
     ];
 
     public function boot(CartService $cartService)

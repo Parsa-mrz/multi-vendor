@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OrderItemRelationManagerResource\RelationManagers\OrderRelationManager;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
 use App\Policies\OrderPolicy;
@@ -19,20 +18,19 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use function count;
-use function dd;
 
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'Shop Management';
 
     public static function getNavigationBadge(): ?string
     {
         $user = Auth::user();
-        if($user->isAdmin ()){
+        if ($user->isAdmin()) {
             return static::getModel()::count();
         }
         if ($user->isVendor()) {
@@ -40,7 +38,7 @@ class OrderResource extends Resource
                 $q->where('vendor_id', $user->vendor->id);
             })->count();
         }
-        if($user->isCustomer ()){
+        if ($user->isCustomer()) {
             return $user->orders->count();
         }
     }
@@ -57,73 +55,73 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Section::make ('Order Details')
-                        ->schema ([
-                            TextInput::make('order_number')
-                                                      ->required()
-                                                      ->disabled ()
-                                                      ->maxLength(255),
-                            TextInput::make('status')
-                                                      ->required()
-                                                      ->disabled ()
-                                                      ->maxLength(255)
-                                                      ->default('pending'),
-                            TextInput::make('subtotal')
-                                                      ->required()
-                                                      ->disabled ()
-                                                      ->numeric(),
-                            TextInput::make('total')
-                                                      ->required()
-                                                      ->disabled ()
-                                                      ->numeric(),
-                            TextInput::make('payment_method')
-                                     ->disabled ()
-                                                      ->maxLength(255),
-                            TextInput::make('payment_status')
-                                                      ->required()
-                                                      ->disabled ()
-                                                      ->maxLength(255)
-                                                      ->default('pending'),
-                            TextInput::make('transaction_id')
-                                                      ->maxLength(255)
-                                                      ->disabled (),
-                            Textarea::make('notes')
-                                                     ->columnSpanFull()
-                                                     ->disabled (),
-                        ])
-                        ->collapsible ()
-                        ->collapsed (),
+                Section::make('Order Details')
+                    ->schema([
+                        TextInput::make('order_number')
+                            ->required()
+                            ->disabled()
+                            ->maxLength(255),
+                        TextInput::make('status')
+                            ->required()
+                            ->disabled()
+                            ->maxLength(255)
+                            ->default('pending'),
+                        TextInput::make('subtotal')
+                            ->required()
+                            ->disabled()
+                            ->numeric(),
+                        TextInput::make('total')
+                            ->required()
+                            ->disabled()
+                            ->numeric(),
+                        TextInput::make('payment_method')
+                            ->disabled()
+                            ->maxLength(255),
+                        TextInput::make('payment_status')
+                            ->required()
+                            ->disabled()
+                            ->maxLength(255)
+                            ->default('pending'),
+                        TextInput::make('transaction_id')
+                            ->maxLength(255)
+                            ->disabled(),
+                        Textarea::make('notes')
+                            ->columnSpanFull()
+                            ->disabled(),
+                    ])
+                    ->collapsible()
+                    ->collapsed(),
 
                 Section::make('Order Items')
-                       ->collapsible()
-                       ->schema([
-                           Repeater::make('items')
-                                   ->relationship('items')
-                                   ->columns(5)
-                                   ->schema([
-                                       Placeholder::make('product.name')
-                                                  ->label('Product Name')
-                                                  ->content(fn ($record) => $record->product?->name ?? 'N/A'),
-                                       Placeholder::make('quantity')
-                                                  ->label('Quantity')
-                                                  ->content(fn ($record) => $record->quantity ?? 'N/A'),
-                                       Placeholder::make('price')
-                                                  ->label('Price')
-                                                  ->content(fn ($record) => $record->price ?? 'N/A'),
-                                       Placeholder::make('vendor')
-                                                  ->label('Vendor')
-                                                  ->content(fn ($record) => $record->product?->vendor->store_name ?? 'N/A'),
-                                       Toggle::make ('options.sent')
-                                       ->label('Is Sent')
-                                       ->disabled(fn() => Auth::user()->isCustomer())
-                                   ])
-                           ->deletable (false)
-                           ->addable (false)
-                           ->reorderable(false)
-                       ])
-                    ->collapsible ()
-                    ->collapsed (),
-                ]);
+                    ->collapsible()
+                    ->schema([
+                        Repeater::make('items')
+                            ->relationship('items')
+                            ->columns(5)
+                            ->schema([
+                                Placeholder::make('product.name')
+                                    ->label('Product Name')
+                                    ->content(fn ($record) => $record->product?->name ?? 'N/A'),
+                                Placeholder::make('quantity')
+                                    ->label('Quantity')
+                                    ->content(fn ($record) => $record->quantity ?? 'N/A'),
+                                Placeholder::make('price')
+                                    ->label('Price')
+                                    ->content(fn ($record) => $record->price ?? 'N/A'),
+                                Placeholder::make('vendor')
+                                    ->label('Vendor')
+                                    ->content(fn ($record) => $record->product?->vendor->store_name ?? 'N/A'),
+                                Toggle::make('options.sent')
+                                    ->label('Is Sent')
+                                    ->disabled(fn () => Auth::user()->isCustomer()),
+                            ])
+                            ->deletable(false)
+                            ->addable(false)
+                            ->reorderable(false),
+                    ])
+                    ->collapsible()
+                    ->collapsed(),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -132,10 +130,10 @@ class OrderResource extends Resource
             ->columns([
                 TextColumn::make('order_number')
                     ->searchable(),
-                TextColumn::make ('customer')
-                ->label ('Customer')
-                ->searchable ()
-                ->default (fn ($record) => $record?->user?->profile?->first_name . ' ' . $record?->user?->profile?->last_name ?? 'N/A'),
+                TextColumn::make('customer')
+                    ->label('Customer')
+                    ->searchable()
+                    ->default(fn ($record) => $record?->user?->profile?->first_name.' '.$record?->user?->profile?->last_name ?? 'N/A'),
                 TextColumn::make('status')
                     ->searchable(),
                 TextColumn::make('subtotal')

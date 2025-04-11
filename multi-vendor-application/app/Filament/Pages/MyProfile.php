@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Repositories\ProfileRepository;
-use App\Traits\TokenManagementTrait;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Section;
@@ -14,8 +13,6 @@ use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-use function config;
-
 /**
  * Class MyProfile
  *
@@ -24,8 +21,6 @@ use function config;
  */
 class MyProfile extends Page
 {
-    use TokenManagementTrait;
-
     /**
      * @var string|null The icon used in the navigation for the page.
      */

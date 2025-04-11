@@ -7,17 +7,18 @@ use App\Services\CartService;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use function dd;
 
 class Cart extends Component
 {
     public $cartItems = [];
+
     public $subTotal = 0;
+
     protected $cartService;
 
-//    protected $listeners = [
-//        'cartUpdated' => 'refreshCart'
-//    ];
+    //    protected $listeners = [
+    //        'cartUpdated' => 'refreshCart'
+    //    ];
 
     public function boot(CartService $cartService)
     {
@@ -46,7 +47,7 @@ class Cart extends Component
             $this->cartService->removeFromCart($productId);
             $this->refreshCart();
             $this->dispatch('cartUpdated');
-            SweetAlertHelper::success($this,'Cart Updated','Item removed from cart!');
+            SweetAlertHelper::success($this, 'Cart Updated', 'Item removed from cart!');
         } catch (\Exception $e) {
             SweetAlertHelper::error($this, 'Operation Failed', $e->getMessage());
         }
@@ -58,7 +59,7 @@ class Cart extends Component
             $this->cartService->updateCartQuantity($productId, $quantity);
             $this->refreshCart();
             $this->dispatch('cartUpdated');
-            SweetAlertHelper::success($this,'Cart Updated','Quantity updated successfully!');
+            SweetAlertHelper::success($this, 'Cart Updated', 'Quantity updated successfully!');
         } catch (\Exception $e) {
             SweetAlertHelper::error($this, 'Operation Failed', $e->getMessage());
         }

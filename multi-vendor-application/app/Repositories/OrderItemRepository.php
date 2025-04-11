@@ -8,42 +8,45 @@ use App\Models\OrderItem;
 class OrderItemRepository implements OrderItemRepositoryInterface
 {
     /**
-     * @param  array  $data
+     * Create a new order item.
      *
-     * @return OrderItem
+     * This method creates a new order item in the database with the given data.
+     * It modifies the provided data to ensure the 'product_id' is correctly set.
      */
-    public function create ( array $data ): OrderItem
+    public function create(array $data): OrderItem
     {
         $data['product_id'] = $data['id'];
+
         return OrderItem::create($data);
     }
 
     /**
-     * @param  int  $orderId
+     * Get order items by the order ID.
      *
-     * @return OrderItem
+     * This method retrieves all order items associated with a specific order ID.
      */
-    public function getByOrderId ( int $orderId ): OrderItem
+    public function getByOrderId(int $orderId): OrderItem
     {
         return OrderItem::where('orderId', $orderId)->get();
     }
 
     /**
-     * @param  int  $userId
+     * Get order items by the user ID.
      *
-     * @return mixed
+     * This method retrieves all order items associated with a specific user ID.
      */
-    public function getByUserId ( int $userId ): OrderItem
+    public function getByUserId(int $userId): OrderItem
     {
         return OrderItem::where('userId', $userId)->get();
     }
 
     /**
-     * @param  int  $productId
+     * Get order items by the product ID.
      *
-     * @return mixed
+     * This method retrieves all order items associated with a specific product ID.
      */
-    public function getByProductId ( int $productId ): OrderItem
+    public function getByProductId(int $productId): OrderItem
     {
         return OrderItem::where('product_id', $productId)->get();
-}}
+    }
+}

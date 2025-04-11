@@ -3,29 +3,34 @@
 namespace App\Livewire\Chat;
 
 use App\Helpers\SweetAlertHelper;
-use App\Services\ChatService;
 use App\Models\Conversation;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Livewire\Component;
+use App\Services\ChatService;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Livewire\Component;
+
 use function route;
 
 class ChatBox extends Component
 {
     public Collection $conversations;
+
     public ?Conversation $selectedConversation = null;
+
     public array $messages = [];
+
     public string $newMessage = '';
+
     public ?int $recipientId = null;
+
     protected ChatService $chatService;
 
     protected $listeners = [
         'conversationStarted' => 'handleConversationStarted',
         'messageReceived' => 'handleMessageReceived',
         'messageRead' => 'handleMessageRead',
-        'conversationUpdated' => 'handleConversationUpdated'
+        'conversationUpdated' => 'handleConversationUpdated',
     ];
 
     public function boot(ChatService $chatService)
@@ -38,14 +43,15 @@ class ChatBox extends Component
         $this->recipientId = $recipientId;
         $this->conversations = $this->chatService->getUserConversations();
 
-        if(Auth::id () === $this->recipientId) {
-             SweetAlertHelper::error (
+        if (Auth::id() === $this->recipientId) {
+            SweetAlertHelper::error(
                 $this,
                 "You can't send a message to yourself",
                 '',
-                route ('chat.index')
-             );
-             return;
+                route('chat.index')
+            );
+
+            return;
         }
 
         if ($this->recipientId) {
@@ -118,24 +124,24 @@ class ChatBox extends Component
     public function handleMessageRead(array $event): void
     {
         if ($this->selectedConversation && $event['conversation_id'] === $this->selectedConversation->id) {
-            foreach ( $this->messages as &$message ) {
-                if ( $message[ 'id' ] === $event[ 'id' ] ) {
-                    $message[ 'read' ]       = $event[ 'read' ];
-                    $message[ 'updated_at' ] = $event[ 'updated_at' ];
+            foreach ($this->messages as &$message) {
+                if ($message['id'] === $event['id']) {
+                    $message['read'] = $event['read'];
+                    $message['updated_at'] = $event['updated_at'];
                     break;
                 }
             }
-            foreach ( $this->conversations as $conversation ) {
-                if ( $conversation->id === $event[ 'conversation_id' ] ) {
-                    $lastMessage = $conversation->messages->last ();
-                    if ( $lastMessage && $lastMessage->id === $event[ 'id' ] ) {
-                        $lastMessage->read       = $event[ 'read' ];
-                        $lastMessage->updated_at = $event[ 'updated_at' ];
+            foreach ($this->conversations as $conversation) {
+                if ($conversation->id === $event['conversation_id']) {
+                    $lastMessage = $conversation->messages->last();
+                    if ($lastMessage && $lastMessage->id === $event['id']) {
+                        $lastMessage->read = $event['read'];
+                        $lastMessage->updated_at = $event['updated_at'];
                     }
                     break;
                 }
             }
-            $this->dispatch ( 'message-updated' );
+            $this->dispatch('message-updated');
         }
         $this->refreshConversations();
     }

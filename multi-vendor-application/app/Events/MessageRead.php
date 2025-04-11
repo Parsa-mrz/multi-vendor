@@ -8,12 +8,29 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Event MessageRead
+ *
+ * Triggered when a message has been marked as read.
+ * Broadcasts the message read status over a private channel.
+ */
 class MessageRead implements ShouldBroadcast
 {
     use Dispatchable, SerializesModels;
 
+    /**
+     * The message instance that was read.
+     *
+     * @var \App\Models\Message
+     */
     public $message;
 
+    /**
+     * Create a new event instance.
+     *
+     * @param  \App\Models\Message  $message  The message marked as read.
+     * @return void
+     */
     public function __construct(Message $message)
     {
         $this->message = $message;
@@ -22,15 +39,20 @@ class MessageRead implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return array<int, \Illuminate\Broadcasting\Channel> The private channel for the conversation.
      */
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('conversation.' . $this->message->conversation_id),
+            new PrivateChannel('conversation.'.$this->message->conversation_id),
         ];
     }
 
+    /**
+     * Define the data to broadcast with the event.
+     *
+     * @return array<string, mixed> The data about the read message.
+     */
     public function broadcastWith(): array
     {
         return [
@@ -41,6 +63,11 @@ class MessageRead implements ShouldBroadcast
         ];
     }
 
+    /**
+     * Customize the broadcast event name.
+     *
+     * @return string The name of the broadcasted event.
+     */
     public function broadcastAs(): string
     {
         return 'message.read';

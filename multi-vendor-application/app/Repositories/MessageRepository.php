@@ -8,34 +8,40 @@ use App\Models\Message;
 
 class MessageRepository implements MessageRepositoryInterface
 {
-
-
     /**
-     * @param  array  $data
+     * Create a new message.
      *
-     * @return Message
+     * This method creates a new message in the database with the given data.
      */
-    public function create ( array $data ): Message
+    public function create(array $data): Message
     {
         return Message::create($data);
     }
 
     /**
-     * @param  Conversation  $conversation
+     * Get all messages for a specific conversation.
      *
-     * @return array
+     * This method retrieves all messages in the given conversation,
+     * orders them by the latest first, then reverses the collection to return
+     * them in the order they were sent (oldest to newest).
      */
-    public function getMessages ( Conversation $conversation ): array
+    public function getMessages(Conversation $conversation): array
     {
-        return $conversation->messages ()->latest ()->get ()->reverse ()->toArray();
+        return $conversation->messages()->latest()->get()->reverse()->toArray();
     }
 
+    /**
+     * Get unread messages for a specific user in a conversation.
+     *
+     * This method retrieves all unread messages for a user in the given conversation,
+     * excluding messages that were sent by the user themselves.
+     */
     public function getUnreadMessages(Conversation $conversation, int $userId): array
     {
         return Message::where('conversation_id', $conversation->id)
-                      ->where('sender_id', '!=', $userId)
-                      ->where('read', false)
-                      ->get()
-                      ->all();
+            ->where('sender_id', '!=', $userId)
+            ->where('read', false)
+            ->get()
+            ->all();
     }
 }

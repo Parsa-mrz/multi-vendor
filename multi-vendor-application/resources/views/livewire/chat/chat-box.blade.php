@@ -82,8 +82,8 @@
                 <div>
                     <h3 class="font-medium text-gray-900">
                         {{ $selectedConversation->user_id === auth()->id()
-                            ? ($selectedConversation->recipient?->profile?->first_name . ' ' . $conversation->recipient?->profile?->last_name ?? $selectedConversation->recipient?->email ?? 'Unknown')
-                            : ($selectedConversation->user?->profile?->first_name . ' ' . $conversation->user?->profile?->last_name ?? $selectedConversation->user?->email ?? 'Unknown') }}
+                            ? ($selectedConversation->recipient?->profile?->first_name . ' ' . $selectedConversation->recipient?->profile?->last_name ?? $selectedConversation->recipient?->email)
+                            : ($selectedConversation->user?->profile?->first_name . ' ' . $selectedConversation->user?->profile?->last_name ?? $selectedConversation->user?->email) }}
                     </h3>
                     <p class="text-xs text-gray-500">last seen recently</p>
                 </div>

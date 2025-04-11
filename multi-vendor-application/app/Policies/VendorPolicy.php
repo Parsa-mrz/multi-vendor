@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Vendor;
-use Illuminate\Auth\Access\Response;
 
 class VendorPolicy
 {

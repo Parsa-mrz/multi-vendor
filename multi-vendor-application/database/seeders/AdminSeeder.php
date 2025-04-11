@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 use function bcrypt;
 use function fake;
 use function now;
@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
             ]
         );
 
-        if (!$user->profile) {
+        if (! $user->profile) {
             $user->profile()->create();
         }
     }

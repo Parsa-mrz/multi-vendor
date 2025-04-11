@@ -6,51 +6,52 @@ use App\Interfaces\ConversationRepositoryInterface;
 use App\Models\Conversation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use function array_merge;
-use function dd;
 
 class ConversationRepository implements ConversationRepositoryInterface
 {
     /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * @param  array  $data
+     * Create a new conversation.
      *
-     * @return Conversation
+     * This method creates a new conversation in the database with the given data.
      */
-    public function create ( array $data ): Conversation
+    public function create(array $data): Conversation
     {
         return Conversation::create($data);
     }
 
     /**
-     * @return Collection
+     * Get all conversations for a user.
+     *
+     * This method retrieves all conversations for a user, combining both sent and received conversations,
+     * and returns them as a unique collection of conversations based on the conversation ID.
      */
-    public function getConversations (User $user): Collection
+    public function getConversations(User $user): Collection
     {
         return $user->sentConversations->merge($user->receivedConversations)->unique('id');
     }
 
-    public function getConversationByUserId (int $userId,int $recipientId){
-        return Conversation::where(function ($query) use ($recipientId,$userId) {
+    /**
+     * Get a conversation between two users by their IDs.
+     *
+     * This method checks if a conversation exists between the specified user and recipient.
+     * It will return the first conversation it finds where the user and recipient match in either order.
+     */
+    public function getConversationByUserId(int $userId, int $recipientId): ?Conversation
+    {
+        return Conversation::where(function ($query) use ($recipientId, $userId) {
             $query->where('user_id', $userId)->where('recipient_id', $recipientId);
-        })->orWhere(function ($query) use ($recipientId,$userId) {
+        })->orWhere(function ($query) use ($recipientId, $userId) {
             $query->where('user_id', $recipientId)->where('recipient_id', $userId);
         })->first();
     }
 
     /**
-     * @param  int  $conversationId
+     * Find a conversation by its ID.
      *
-     * @return Conversation|null
+     * This method retrieves a conversation based on the given conversation ID.
+     * If the conversation is not found, it returns null.
      */
-    public function find ( int $conversationId ): ?Conversation
+    public function find(int $conversationId): ?Conversation
     {
         return Conversation::find($conversationId);
     }

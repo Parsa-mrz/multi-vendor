@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Repositories\UserRepository;
 use App\Services\AuthService;
 use App\Services\OtpService;
-use App\Traits\TokenManagementTrait;
 use Livewire\Component;
 
 use function config;
@@ -18,8 +17,6 @@ use function config;
  */
 abstract class BaseComponent extends Component
 {
-    use TokenManagementTrait;
-
     /**
      * The default layout for the component.
      *

@@ -73,15 +73,15 @@ class ProductResource extends Resource
                     ->numeric()
                     ->default(0),
                 Select::make('product_category_id')
-                      ->relationship('category', 'name')
-                      ->label('Category')
-                      ->native(false)
-                      ->searchable()
-                      ->preload()
-                      ->required(),
+                    ->relationship('category', 'name')
+                    ->label('Category')
+                    ->native(false)
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 FileUpload::make('image')
                     ->image()
-                    ->columnSpanFull (),
+                    ->columnSpanFull(),
             ]);
     }
 

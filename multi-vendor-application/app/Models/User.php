@@ -14,9 +14,19 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class User
  *
- * Represents a user in the system.
- * The User model supports authentication, API tokens via Sanctum, and notifications.
- * It also has relationships with the Vendor and MyProfile models.
+ * Represents a user in the system. The User model supports authentication, API tokens via Sanctum, and notifications.
+ * It also has relationships with the Vendor, Profile, and other models like Order, Message, and Conversation.
+ *
+ *
+ * @property int $id The unique identifier for the user.
+ * @property string $email The user's email address.
+ * @property string|null $email_verified_at The timestamp when the user's email was verified.
+ * @property string $password The user's hashed password.
+ * @property bool $is_active Whether the user is active or not.
+ * @property string|null $last_login The last login timestamp.
+ * @property string $role The user's role (admin, customer, or vendor).
+ * @property \Illuminate\Support\Carbon $created_at The timestamp when the user was created.
+ * @property \Illuminate\Support\Carbon $updated_at The timestamp when the user was last updated.
  */
 class User extends Authenticatable implements FilamentUser, HasName
 {
@@ -27,8 +37,6 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     /**
      * The attributes that are mass assignable.
-     *
-     * These attributes can be set using mass assignment.
      *
      * @var list<string>
      */
@@ -44,8 +52,6 @@ class User extends Authenticatable implements FilamentUser, HasName
     /**
      * The attributes that should be hidden for serialization.
      *
-     * These attributes will not be included when the model is serialized.
-     *
      * @var list<string>
      */
     protected $hidden = [
@@ -55,8 +61,6 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     /**
      * Get the attributes that should be cast.
-     *
-     * These attributes will be cast to the specified types.
      *
      * @return array<string, string>
      */
@@ -69,26 +73,41 @@ class User extends Authenticatable implements FilamentUser, HasName
         ];
     }
 
+    /**
+     * Get the full name of the user for Filament panel display.
+     */
     public function getFilamentName(): string
     {
         return "{$this->profile?->first_name} {$this->profile?->last_name}";
     }
 
+    /**
+     * Check if the user is an admin.
+     */
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
 
+    /**
+     * Check if the user is a customer.
+     */
     public function isCustomer(): bool
     {
         return $this->role === 'customer';
     }
 
+    /**
+     * Check if the user is a vendor.
+     */
     public function isVendor(): bool
     {
         return $this->role === 'vendor';
     }
 
+    /**
+     * Check if the user is active.
+     */
     public function is_active(): bool
     {
         return $this->is_active === true;
@@ -123,34 +142,62 @@ class User extends Authenticatable implements FilamentUser, HasName
     /**
      * Get the profile associated with the user.
      *
-     * This method defines one-to-one relationship between the User and MyProfile models.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * This method defines a one-to-one relationship between the User and Profile models.
      */
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class, 'user_id');
     }
-    public function orders (): HasMany
+
+    /**
+     * Get all the orders associated with the user.
+     *
+     * This method defines a one-to-many relationship between the User and Order models.
+     */
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'user_id');
     }
 
+    /**
+     * Get all the conversations sent by the user.
+     *
+     * This method defines a one-to-many relationship between the User and Conversation models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function sentConversations()
     {
         return $this->hasMany(Conversation::class, 'user_id');
     }
 
+    /**
+     * Get all the conversations received by the user.
+     *
+     * This method defines a one-to-many relationship between the User and Conversation models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function receivedConversations()
     {
         return $this->hasMany(Conversation::class, 'recipient_id');
     }
 
+    /**
+     * Get all the messages sent by the user.
+     *
+     * This method defines a one-to-many relationship between the User and Message models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function messages()
     {
         return $this->hasMany(Message::class, 'sender_id');
     }
 
+    /**
+     * Determine if the user can access a specific Filament panel.
+     */
     public function canAccessPanel(Panel $panel): bool
     {
         return true;

@@ -23,8 +23,7 @@ class ProductFactory extends Factory
         $price = $this->faker->randomFloat(2, 9.99, 999.99);
         $hasSale = $this->faker->boolean(30);
 
-        $vendor = Vendor::factory ()->create ();
-
+        $vendor = Vendor::factory()->create();
 
         return [
             'name' => $name,
@@ -33,7 +32,7 @@ class ProductFactory extends Factory
             'price' => $price,
             'sale_price' => $hasSale ? $price * $this->faker->randomFloat(2, 0.5, 0.95) : null,
             'quantity' => $this->faker->numberBetween(0, 100),
-            'image' => "https://picsum.photos/200/300?random=" . $this->faker->numberBetween(1, 100),
+            'image' => 'https://picsum.photos/200/300?random='.$this->faker->numberBetween(1, 100),
             'product_category_id' => ProductCategory::factory(),
             'vendor_id' => $vendor->id,
             'created_at' => now(),

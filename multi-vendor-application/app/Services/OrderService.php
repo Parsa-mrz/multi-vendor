@@ -10,39 +10,42 @@ use App\Repositories\ProductRepository;
 class OrderService
 {
     protected $orderRepository;
+
     protected $orderItemRepository;
+
     protected $productRepository;
+
     protected $cartService;
 
     /**
      * Create a new class instance.
      */
-    public function __construct ( OrderRepository $orderRepository, OrderItemRepository $orderItemRepository,ProductRepository $productRepository ,CartService $cartService)
+    public function __construct(OrderRepository $orderRepository, OrderItemRepository $orderItemRepository, ProductRepository $productRepository, CartService $cartService)
     {
-        $this->orderRepository     = $orderRepository;
+        $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
-        $this->productRepository   = $productRepository;
-        $this->cartService        = $cartService;
+        $this->productRepository = $productRepository;
+        $this->cartService = $cartService;
     }
 
-    public function createOrder ( array $data ): Order
+    public function createOrder(array $data): Order
     {
-        $order = $this->orderRepository->create ( $data['order'] );
+        $order = $this->orderRepository->create($data['order']);
 
-        foreach ( $data[ 'items' ] as $item ) {
+        foreach ($data['items'] as $item) {
             $item['order_id'] = $order->id;
-            $this->reduceProductQuantity ( $item['id'], $item['quantity'] );
-            $this->orderItemRepository->create ( $item );
+            $this->reduceProductQuantity($item['id'], $item['quantity']);
+            $this->orderItemRepository->create($item);
         }
 
-        $this->cartService->clearCart ();
+        $this->cartService->clearCart();
 
         return $order;
     }
 
-    private function reduceProductQuantity ( int $productId, int $quantity )
+    private function reduceProductQuantity(int $productId, int $quantity)
     {
-        $product = $this->productRepository->getProduct ( $productId );
-        $this->productRepository->update ($productId,['quantity' => $product->quantity - $quantity]);
+        $product = $this->productRepository->getProduct($productId);
+        $this->productRepository->update($productId, ['quantity' => $product->quantity - $quantity]);
     }
 }

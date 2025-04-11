@@ -15,12 +15,10 @@ use App\Policies\OrderItemPolicy;
 use App\Policies\OrderPolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\ProfilePolicy;
-use App\Repositories\ProductRepository;
 use App\Repositories\CartRepository;
+use App\Repositories\ProductRepository;
 use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
-use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Js;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -39,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Bind ProductRepositoryInterface to ProductRepository
         $this->app->singleton(ProductRepositoryInterface::class, function ($app) {
-            return new ProductRepository();
+            return new ProductRepository;
         });
     }
 
@@ -50,8 +48,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::policy(Profile::class, ProfilePolicy::class);
         Gate::policy(Product::class, ProductPolicy::class);
-        Gate::policy (Order::class, OrderPolicy::class);
-        Gate::policy (OrderItem::class, OrderItemPolicy::class);
-        Gate::policy (Conversation::class, ConversationPolicy::class);
+        Gate::policy(Order::class, OrderPolicy::class);
+        Gate::policy(OrderItem::class, OrderItemPolicy::class);
+        Gate::policy(Conversation::class, ConversationPolicy::class);
     }
 }

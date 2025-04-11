@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Products;
 
-use App\Repositories\ProductRepository;
 use App\Services\ProductService;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -19,9 +18,10 @@ class ProductList extends Component
     #[Title('Shop')]
     public function render(ProductService $product_service)
     {
-        $products = $product_service->getProducts ($this->perPage);
-        return view('livewire.products.product-list',[
-            'products' => $products
+        $products = $product_service->getProducts($this->perPage);
+
+        return view('livewire.products.product-list', [
+            'products' => $products,
         ]);
     }
 }
