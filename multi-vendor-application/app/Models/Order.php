@@ -42,6 +42,7 @@ class Order extends Model
         'payment_status',
         'notes',
         'transaction_id',
+        'address',
     ];
 
     /**

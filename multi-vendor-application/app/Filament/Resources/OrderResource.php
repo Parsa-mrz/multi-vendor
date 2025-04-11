@@ -41,6 +41,7 @@ class OrderResource extends Resource
         if ($user->isCustomer()) {
             return $user->orders->count();
         }
+        return '';
     }
 
     public static function getEloquentQuery(): Builder
@@ -85,6 +86,8 @@ class OrderResource extends Resource
                         TextInput::make('transaction_id')
                             ->maxLength(255)
                             ->disabled(),
+                        Textarea::make ('address')
+                            ->disabled (),
                         Textarea::make('notes')
                             ->columnSpanFull()
                             ->disabled(),

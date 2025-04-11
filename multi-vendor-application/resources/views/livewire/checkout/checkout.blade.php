@@ -9,32 +9,38 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
                             <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
-                            <input type="text" id="firstName" wire:model="firstName" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2" value="{{$user->profile->first_name}}">
+                            <input type="text" id="firstName" wire:model="first_name" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2">
                             @error('firstName') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                         <div>
                             <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
-                            <input type="text" id="lastName" wire:model="lastName" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2" value="{{$user->profile->last_name}}">
+                            <input type="text" id="lastName" wire:model="last_name" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2">
                             @error('lastName') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" id="email" wire:model="email" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2" value="{{$user->email}}">
+                        <input type="email" id="email" disabled wire:model="email" class="mt-1 block w-full bg-gray-100 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2">
                         @error('email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                        <input type="text" id="phone" wire:model="phone" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2" value="{{$user->profile->phone_number}}">
+                        <input type="text" id="phone" wire:model="phone_number" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2">
                         @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                        <input type="text" id="address" wire:model="address" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2" value="{{$user->profile->address}}">
+                        <input type="text" id="address" wire:model="address" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2">
                         @error('address') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                        <textarea type="text" id="notes" wire:model="notes" class="mt-1 block w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2">
+                        </textarea>
+                        @error('note') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
                 </form>
             </div>
