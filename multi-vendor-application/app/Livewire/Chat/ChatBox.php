@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Chat;
 
+use App\Helpers\SweetAlertHelper;
 use App\Services\ChatService;
 use App\Models\Conversation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Session;
+use function route;
 
 class ChatBox extends Component
 {
@@ -30,10 +33,20 @@ class ChatBox extends Component
         $this->chatService = $chatService;
     }
 
-    public function mount(?int $recipientId = null): void
+    public function mount(?int $recipientId = null)
     {
         $this->recipientId = $recipientId;
         $this->conversations = $this->chatService->getUserConversations();
+
+        if(Auth::id () === $this->recipientId) {
+             SweetAlertHelper::error (
+                $this,
+                "You can't send a message to yourself",
+                '',
+                route ('chat.index')
+             );
+             return;
+        }
 
         if ($this->recipientId) {
             $this->selectedConversation = $this->chatService->startOrSelectConversation($this->recipientId);

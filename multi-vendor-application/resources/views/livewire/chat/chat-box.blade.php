@@ -4,11 +4,12 @@
         <!-- Sidebar Header -->
         <div class="p-4 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
             <h2 class="text-xl font-semibold text-gray-800">Messages</h2>
-            <button class="text-blue-500 hover:text-blue-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href="{{route ('chat.start',[1])}}" class="text-blue-500 hover:text-blue-700 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
-            </button>
+                Chat With Admin
+            </a>
         </div>
 
         <!-- Conversation List -->
@@ -16,7 +17,7 @@
             @forelse ($conversations as $conversation)
                 <li
                     wire:click="selectConversation({{ $conversation->id }})"
-                    class="p-4 mb-4 cursor-pointer hover:bg-gray-100 transition-colors {{ $selectedConversation && $selectedConversation->id === $conversation->id ? 'bg-gray-300' : '' }}"
+                    class="p-4 mb-4 cursor-pointer  transition-colors {{ $selectedConversation && $selectedConversation->id === $conversation->id ? 'bg-gray-300' : 'hover:bg-gray-100' }}"
                 >
                     <div class="flex items-center space-x-3">
                         <!-- Avatar -->
@@ -87,17 +88,17 @@
                     <p class="text-xs text-gray-500">last seen recently</p>
                 </div>
                 <div class="ml-auto flex space-x-3">
-                    <button class="text-gray-500 hover:text-gray-700">
+                    <button class="text-gray-500 hover:text-gray-700 cursor-not-allowed">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
                     </button>
-                    <button class="text-gray-500 hover:text-gray-700">
+                    <button class="text-gray-500 hover:text-gray-700 cursor-not-allowed">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                     </button>
-                    <button class="text-gray-500 hover:text-gray-700">
+                    <button class="text-gray-500 hover:text-gray-700 cursor-not-allowed">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
@@ -138,7 +139,7 @@
             <!-- Message Input -->
             <div class="p-4 border-t border-gray-200 bg-white">
                 <form wire:submit.prevent="sendMessage" class="flex items-center space-x-2">
-                    <button type="button" class="text-gray-500 hover:text-gray-700">
+                    <button type="button" class="text-gray-500 hover:text-gray-700 cursor-not-allowed">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                         </svg>
@@ -151,7 +152,7 @@
                     >
                     <button
                         type="submit"
-                        class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors"
+                        class="bg-blue-500 text-white p-2 rounded-full cursor-pointer hover:bg-blue-600 transition-colors"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="send-icon" viewBox="0 0 24 24">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>

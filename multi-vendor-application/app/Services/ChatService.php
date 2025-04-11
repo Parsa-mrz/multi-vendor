@@ -6,10 +6,13 @@ use App\Events\ConversationStarted;
 use App\Events\ConversationUpdated;
 use App\Events\MessageRead;
 use App\Events\MessageSent;
+use App\Helpers\ResponseHelper;
+use App\Helpers\SweetAlertHelper;
 use App\Models\Conversation;
 use App\Repositories\ConversationRepository;
 use App\Repositories\MessageRepository;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 use function broadcast;
 
 class ChatService
