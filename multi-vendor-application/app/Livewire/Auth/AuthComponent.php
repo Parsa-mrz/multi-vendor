@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Auth;
 
+use App\Helpers\SweetAlertHelper;
 use App\Livewire\BaseComponent;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Title;
 
 use function is_null;
@@ -138,12 +140,20 @@ class AuthComponent extends BaseComponent
 
         $this->message = $result['message'];
         $this->reset(['email', 'password', 'code', 'showOtpForm', 'originalEmail']);
-        $this->redirect('/dashboard');
+        if(Session::has ('login')){
+            $this->redirect (Session::pull('login.route'));
+            Session::forget('login');
+        }else{
+            $this->redirect('/dashboard');
+        }
     }
 
     #[Title('Login/Register')]
     public function render()
     {
+        if(Session::has('login')){
+            SweetAlertHelper::warning($this, session('login.message'),'');
+        }
         return view('livewire.auth.auth-component');
     }
 }

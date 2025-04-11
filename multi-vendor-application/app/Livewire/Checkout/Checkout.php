@@ -6,9 +6,11 @@ use App\Helpers\SweetAlertHelper;
 use App\Services\CartService;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
+use function route;
 use function view;
 
 class Checkout extends Component
@@ -21,6 +23,14 @@ class Checkout extends Component
 
     public function mount(CartService $cartService)
     {
+        if(!Auth::check()){
+            Session::put ('login',[
+                'message' => 'You must be logged in to checkout',
+                'route' => route('checkout')
+            ]);
+            $this->redirect (route ('login'));
+            return;
+        }
         $this->user = Auth::user();
         $this->subtotal = $cartService->getTotal();
         $this->cartItems = $cartService->getCartItems();
