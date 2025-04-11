@@ -2,15 +2,19 @@
 
 namespace App\Livewire\Checkout;
 
+use App\Enums\PaymentStatus;
 use App\Helpers\SweetAlertHelper;
 use App\Services\CartService;
 use App\Services\OrderService;
+use App\Services\Payment\PaymentGatewayFactory;
+use App\Services\Payment\PaymentService;
 use App\Services\ProfileService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
+use function dd;
 use function route;
 use function view;
 
@@ -27,6 +31,7 @@ class Checkout extends Component
     public $subtotal;
     public $isThankYou = false;
     public $order;
+    public $payment_method = 'paypal';
 
     public function mount(CartService $cartService)
     {
@@ -45,17 +50,29 @@ class Checkout extends Component
         $this->setProfileData ();
     }
 
-    public function placeOrder(OrderService $orderService,ProfileService $profileService)
+    public function placeOrder(OrderService $orderService,ProfileService $profileService,PaymentService $paymentService)
     {
+        $paymentResult = $paymentService->charge ($this->payment_method, $this->subtotal);
+
+        if (!$paymentService->isPaymentSuccessful($paymentResult)) {
+            SweetAlertHelper::error(
+                $this,
+                'Payment Failed',
+                'There was an issue processing your payment. Please try again.',
+            );
+            return;
+        }
+
         $data = [
             'order' => [
                 'user_id' => $this->user->id,
                 'total' => $this->subtotal,
                 'subtotal' => $this->subtotal,
-                'payment_method' => 'PayPal',
-                'transaction_id' => 12312312,
+                'payment_method' => $this->payment_method,
+                'transaction_id' => $paymentResult->getTransactionReference(),
                 'address' => $this->address,
                 'notes' => $this->notes,
+                'payment_status' =>PaymentStatus::PAID->value,
             ],
             'items' => $this->cartItems,
         ];

@@ -133,6 +133,49 @@
                         </div>
                     </div>
 
+                    <div class="border-t border-gray-200 pt-4 space-y-4">
+                        <p class="block text-sm font-medium text-gray-700">Select Payment Method :</p>
+                        <!-- PayPal -->
+                        <div class="flex items-center space-x-3">
+                            <input
+                                type="radio"
+                                id="paypal"
+                                name="payment_method"
+                                value="paypal"
+                                class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                                wire:model="payment_method"
+                                checked
+                            />
+                            <label for="paypal" class="text-sm font-medium text-gray-700">PayPal</label>
+                        </div>
+
+                        <!-- Stripe -->
+                        <div class="flex items-center space-x-3">
+                            <input
+                                type="radio"
+                                id="stripe"
+                                name="payment_method"
+                                value="stripe"
+                                class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                                wire:model="payment_method"
+                            />
+                            <label for="stripe" class="text-sm font-medium text-gray-700">Stripe</label>
+                        </div>
+
+                        <!-- Cash on Delivery -->
+                        <div class="flex items-center space-x-3">
+                            <input
+                                type="radio"
+                                id="cod"
+                                name="payment_method"
+                                value="cod"
+                                class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                                wire:model="payment_method"
+                            />
+                            <label for="cod" class="text-sm font-medium text-gray-700">Cash on Delivery</label>
+                        </div>
+                    </div>
+
                     <button wire:click="placeOrder" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                         Place Order
                     </button>
