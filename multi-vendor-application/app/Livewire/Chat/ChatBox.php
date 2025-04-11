@@ -8,6 +8,7 @@ use App\Services\ChatService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 use function route;
@@ -156,6 +157,7 @@ class ChatBox extends Component
         $this->conversations = $this->chatService->getUserConversations();
     }
 
+    #[Title('Chat')]
     public function render()
     {
         return view('livewire.chat.chat-box');

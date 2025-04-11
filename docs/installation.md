@@ -1,4 +1,3 @@
-# Multi Vendor Laravel Project
 
 ## 📥 Clone the Repository
 ```sh
@@ -20,10 +19,10 @@ Once the project is running, you can access it on your local machine at:
 http://localhost
 ```
 
-## 📜 API Documentation
-Once the project is running, access the API documentation at:
+## 📜 Access the Mail Service on Localhost
+Once the project is running, access the Mail Service Panel at:
 ``` 
-http://localhost/docs/api
+http://localhost:8025
 ```
 
 ## 📂 Full Code Documentation
