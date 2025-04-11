@@ -25,6 +25,8 @@ class Checkout extends Component
     public $notes;
     public $cartItems;
     public $subtotal;
+    public $isThankYou = false;
+    public $order;
 
     public function mount(CartService $cartService)
     {
@@ -57,7 +59,7 @@ class Checkout extends Component
             ],
             'items' => $this->cartItems,
         ];
-        $orderService->createOrder($data);
+        $this->order = $orderService->createOrder($data);
 
         $profileData = [
             'first_name' => $this->first_name,
@@ -70,8 +72,9 @@ class Checkout extends Component
         SweetAlertHelper::success(
             $this,
             'Order placed',
-            'Your order has been placed'
+            'Your order has been placed',
         );
+        $this->isThankYou = true;
     }
 
     private function setProfileData ()
