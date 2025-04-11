@@ -41,7 +41,7 @@
                                         : ($conversation->user?->profile?->first_name . ' ' . $conversation->user?->profile?->last_name ?? $conversation->user?->email) }}
                                 </p>
                                 <span class="text-xs text-gray-500 whitespace-nowrap">
-                                    {{ $conversation->messages->last() ? $conversation->messages->last()->created_at->diffForHumans(['parts' => 1]) : $conversation->created_at->diffForHumans(['parts' => 4]) }}
+                                    {{ $conversation->messages->last() ? $conversation->messages->last()->created_at : $conversation->created_at }}
                                 </span>
                             </div>
                             <div class="flex justify-between items-baseline">
