@@ -17,5 +17,5 @@ Route::get('products/{slug}', ProductShow::class)->name('product.show');
 Route::get('cart', Cart::class)->name('cart');
 Route::get('checkout', Checkout::class)->name('checkout');
 
-Route::get('chat', ChatBox::class)->name('chat.index');
-Route::get('chat/{recipientId}', ChatBox::class)->name('chat.start');
+Route::get('chat', ChatBox::class)->name('chat.index')->middleware ('auth');
+Route::get('chat/{recipientId}', ChatBox::class)->name('chat.start')->middleware ('auth');
