@@ -44,4 +44,17 @@ class MessageRepository implements MessageRepositoryInterface
             ->get()
             ->all();
     }
-}
+
+    /**
+     * Get all unread messages for a specific user.
+     *
+     * This method retrieves all unread messages for a user,
+     * excluding messages that were sent by the user themselves.
+     */
+    public function getAllUnreadMessages ( int $userId ): array
+    {
+        return Message::where('sender_id', '!=', $userId)
+                      ->where('read', false)
+                      ->get()
+                      ->all();
+    }}

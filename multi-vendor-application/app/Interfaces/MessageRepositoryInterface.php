@@ -38,4 +38,6 @@ interface MessageRepositoryInterface
      * @return array An array of unread messages for the specified user in the given conversation.
      */
     public function getUnreadMessages(Conversation $conversation, int $userId): array;
+
+    public function getAllUnreadMessages(int $userId): array;
 }
