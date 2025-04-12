@@ -133,9 +133,8 @@ class OrderResource extends Resource
             ->columns([
                 TextColumn::make('order_number')
                     ->searchable(),
-                TextColumn::make('user_id')
+                TextColumn::make('customer')
                     ->label('Customer')
-                    ->searchable()
                     ->default(fn ($record) => $record?->user?->profile?->first_name.' '.$record?->user?->profile?->last_name ?? 'N/A'),
                 TextColumn::make('status')
                     ->searchable(),
