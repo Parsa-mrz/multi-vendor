@@ -25,4 +25,7 @@ Customers can shop from multiple vendors, vendors can manage their own storefron
 
 - [Installation](docs/installation.md)
 - [Chat Page](docs/chat.md)
+- [Admin Dashboard](docs/adminDashboard.md)
+- [Customer Dashboard](docs/customerDashboard.md)
+- [Vendor Dashboard](docs/vendorDashboard.md)
 ---
