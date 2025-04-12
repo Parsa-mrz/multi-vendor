@@ -6,7 +6,7 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\Auth;
 
-class CustomerStats extends BaseWidget
+class CustomerStates extends BaseWidget
 {
     protected function getStats(): array
     {

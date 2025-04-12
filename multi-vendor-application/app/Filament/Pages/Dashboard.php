@@ -2,7 +2,9 @@
 
 namespace App\Filament\Pages;
 
-use App\Livewire\Dashboard\Main\CustomerStats;
+use App\Livewire\Dashboard\Main\CustomerStates;
+use App\Livewire\Dashboard\Main\TopProducts;
+use App\Livewire\Dashboard\Main\VendorOrderChart;
 use Dotswan\FilamentLaravelPulse\Widgets\PulseCache;
 use Dotswan\FilamentLaravelPulse\Widgets\PulseExceptions;
 use Dotswan\FilamentLaravelPulse\Widgets\PulseQueues;
@@ -20,7 +22,13 @@ class Dashboard extends BaseDashboard
 
     public function getColumns(): int|string|array
     {
-        return 12;
+        $user = Auth::user();
+        if($user->isAdmin ()){
+            return 12;
+        }
+
+        return 2;
+
     }
     public function getWidgets(): array
     {
@@ -39,11 +47,12 @@ class Dashboard extends BaseDashboard
             ];
         } elseif ($user->isCustomer()) {
             return [
-                CustomerStats::class,
+                CustomerStates::class,
             ];
         } elseif ($user->isVendor()) {
             return [
-                CustomerStats::class,
+                TopProducts::class,
+                VendorOrderChart::class,
             ];
         }
 
