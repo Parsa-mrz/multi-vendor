@@ -18,8 +18,18 @@ Customers can shop from multiple vendors, vendors can manage their own storefron
 - ✅ Vendor-specific order tracking
 - ✅ Guest-friendly checkout (with auto-login + redirect)
 - ✅ Multiple payment gateway support
+- ✅ Admin monitoring with real-time insights via Laravel Pulse
 
 ---
+
+🧰 Tech Stack
+ - Framework: Laravel
+ - Frontend Interactivity: Livewire
+ - Admin Panel: Filament
+ - Real-time Communication: Laravel Reverb
+ - Monitoring & Metrics: Laravel Pulse
+ - Database: PostgreSQL
+ - Queue & Pub/Sub: Redis
 
 ## 📖 Documentation
 
