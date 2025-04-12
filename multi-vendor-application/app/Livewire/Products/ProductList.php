@@ -11,9 +11,7 @@ class ProductList extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme = 'tailwind';
-
-    public $perPage = 12;
+    public $perPage = 8;
 
     #[Title('Shop')]
     public function render(ProductService $product_service)

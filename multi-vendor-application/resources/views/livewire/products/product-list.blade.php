@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                    <livewire:cart.add-to-cart :productId="$product->id" :showQuantity="false" />
+                    <livewire:cart.add-to-cart :productId="$product->id" :showQuantity="false" :key="'product_' . $product->id" />
             </div>
         @empty
             <div class="col-span-full text-center py-8">
@@ -42,7 +42,7 @@
         @endforelse
     </div>
 
-{{--    <div class="mt-8">--}}
-{{--        {{ $products->links() }}--}}
-{{--    </div>--}}
+    <div class="mt-8">
+        {{ $products->links() }}
+    </div>
 </div>
